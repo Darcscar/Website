@@ -557,6 +557,31 @@
             margin-left: 1rem;
         }
 
+        /* Menu Images */
+        .menu-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .menu-image-container {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-image-container:hover {
+            transform: scale(1.02);
+        }
+
+        .menu-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         /* Reviews Section */
         .reviews {
             padding: 6rem 2rem;
@@ -996,6 +1021,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .menu-images {
+                grid-template-columns: 1fr;
+            }
+
             .reviews-grid {
                 grid-template-columns: 1fr;
             }
@@ -1321,6 +1350,21 @@
                             <p>Squid with mixed vegetables</p>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Full Menu Images -->
+            <div class="section-header animate-on-scroll" style="margin-top: 4rem;">
+                <p class="section-subtitle">Complete Menu</p>
+                <h2 class="section-title">Our Full Menu</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="menu-images animate-on-scroll">
+                <div class="menu-image-container">
+                    <img src="images/2.png" alt="Pedro's Menu - Yangchow Fried Rice Specials and Ultimate Rice Combo">
+                </div>
+                <div class="menu-image-container">
+                    <img src="images/3.png" alt="Pedro's Menu - Ultimate Combos">
                 </div>
             </div>
         </div>
