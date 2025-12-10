@@ -504,25 +504,118 @@
             background: linear-gradient(135deg, var(--cream) 0%, #fff 100%);
         }
 
-        .menu-grid {
+        .menu-categories-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
         }
 
-        .menu-category {
+        .menu-category-card {
             background: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
         }
 
-        .menu-category h3 {
-            font-size: 1.5rem;
+        .menu-category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.2);
+            border-color: var(--primary-red);
+        }
+
+        .menu-category-card h3 {
+            font-size: 1.1rem;
             color: var(--primary-red);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--light-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-category-card p {
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .menu-category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Menu Modal */
+        .menu-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .menu-modal.active {
+            display: flex;
+        }
+
+        .menu-modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-modal-header {
+            background: var(--primary-red);
+            color: white;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-modal-header h3 {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .menu-modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .menu-modal-close:hover {
+            transform: scale(1.2);
+        }
+
+        .menu-modal-body {
+            padding: 1.5rem 2rem;
         }
 
         .menu-item {
@@ -1025,6 +1118,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .menu-categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .reviews-grid {
                 grid-template-columns: 1fr;
             }
@@ -1263,421 +1360,50 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <p class="section-subtitle">Our Offerings</p>
-                <h2 class="section-title">Menu Highlights</h2>
+                <h2 class="section-title">Menu Categories</h2>
                 <div class="section-divider"></div>
+                <p style="margin-top: 1rem; color: #666;">Click a category to view items</p>
             </div>
-            <div class="menu-grid">
-                <div class="menu-category animate-on-scroll">
+            <div class="menu-categories-grid">
+                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('asian-stir-fry')">
+                    <div class="menu-category-icon">🥘</div>
                     <h3>Asian Stir Fry</h3>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Orange Chicken</h4>
-                            <p>Crispy chicken in tangy orange sauce</p>
-                        </div>
-                        <span class="menu-item-price">₱149 / ₱249</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Pad Kra Pao</h4>
-                            <p>Thai basil stir-fry with fried egg</p>
-                        </div>
-                        <span class="menu-item-price">₱149 / ₱249</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Sweet & Spicy Pork Ribs</h4>
-                            <p>Tender ribs in fiery chili glaze</p>
-                        </div>
-                        <span class="menu-item-price">₱179 / ₱289</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Squid in Bell Pepper</h4>
-                            <p>Fresh squid with colorful peppers</p>
-                        </div>
-                        <span class="menu-item-price">₱159 / ₱269</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Squid w/ Veggie</h4>
-                            <p>Squid with mixed vegetables</p>
-                        </div>
-                        <span class="menu-item-price">₱159 / ₱269</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Beef Mushroom</h4>
-                            <p>Tender beef with savory mushrooms</p>
-                        </div>
-                        <span class="menu-item-price">₱159 / ₱269</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Beef Broccoli</h4>
-                            <p>Tender beef with fresh broccoli</p>
-                        </div>
-                        <span class="menu-item-price">₱159 / ₱269</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Black Pepper Beef</h4>
-                            <p>Beef strips in bold pepper sauce</p>
-                        </div>
-                        <span class="menu-item-price">₱159 / ₱269</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Thai Pork with Cashew</h4>
-                            <p>Pork with cashews in chili sauce</p>
-                        </div>
-                        <span class="menu-item-price">₱159 / ₱259</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Kung Pao Chicken</h4>
-                            <p>Spicy chicken with peanuts & dried chilies</p>
-                        </div>
-                        <span class="menu-item-price">₱149 / ₱249</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>General Tso Chicken</h4>
-                            <p>Crispy chicken in sweet & spicy glaze</p>
-                        </div>
-                        <span class="menu-item-price">₱149 / ₱249</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Spicy Pork Strips</h4>
-                            <p>Crispy pork strips with spicy sauce</p>
-                        </div>
-                        <span class="menu-item-price">₱159 / ₱259</span>
-                    </div>
+                    <p>12 items</p>
                 </div>
-                <div class="menu-category animate-on-scroll">
+                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('sizzling')">
+                    <div class="menu-category-icon">🍳</div>
                     <h3>Sizzling</h3>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Sizzling Liempo</h4>
-                            <p>Grilled pork belly on sizzling plate</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Sizzling Porkchop</h4>
-                            <p>Juicy porkchop on sizzling plate</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Sizzling Chicken</h4>
-                            <p>Tender chicken on sizzling plate</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Sizzling Crispy Sisig</h4>
-                            <p>Crispy pork sisig on sizzling plate</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Sizzling Lechon Kawali</h4>
-                            <p>Crispy fried pork belly on sizzling plate</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
+                    <p>5 items</p>
                 </div>
-                <div class="menu-category animate-on-scroll">
-                    <h3>All Time Favorite Silog</h3>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Beef Gyuden Silog</h4>
-                            <p>Beef gyudon with egg and rice</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Chicksilog</h4>
-                            <p>Fried chicken with egg and rice</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Longsilog</h4>
-                            <p>Longganisa with egg and rice</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Spamsilog</h4>
-                            <p>Spam with egg and rice</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Dangsitilog</h4>
-                            <p>Danggit with egg and rice</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Porkchopsilog</h4>
-                            <p>Porkchop with egg and rice</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Bacon Bacon Silog</h4>
-                            <p>Bacon with egg and rice</p>
-                        </div>
-                        <span class="menu-item-price">₱99 / ₱149</span>
-                    </div>
+                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('silog')">
+                    <div class="menu-category-icon">🍚</div>
+                    <h3>Favorite Silog</h3>
+                    <p>7 items</p>
                 </div>
-                <div class="menu-category animate-on-scroll">
+                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('grill-master')">
+                    <div class="menu-category-icon">🍗</div>
                     <h3>Grill Master</h3>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Regular Bacolod</h4>
-                            <p>Bacolod-style grilled chicken</p>
-                        </div>
-                        <span class="menu-item-price">₱99</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Vietnamese Chicken</h4>
-                            <p>Vietnamese-style grilled chicken</p>
-                        </div>
-                        <span class="menu-item-price">₱125 / ₱145</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Peri-Peri Chicken</h4>
-                            <p>Spicy peri-peri style chicken</p>
-                        </div>
-                        <span class="menu-item-price">₱125 / ₱145</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Bacolod Chicken - Paa</h4>
-                            <p>Bacolod chicken leg quarter</p>
-                        </div>
-                        <span class="menu-item-price">₱145 / ₱165</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Bacolod Chicken - Pecho</h4>
-                            <p>Bacolod chicken breast</p>
-                        </div>
-                        <span class="menu-item-price">₱145 / ₱165</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Grilled Liempo</h4>
-                            <p>Grilled pork belly</p>
-                        </div>
-                        <span class="menu-item-price">₱145 / ₱175</span>
-                    </div>
+                    <p>6 items</p>
                 </div>
-                <div class="menu-category animate-on-scroll">
-                    <h3>Rice</h3>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Plain Rice</h4>
-                        </div>
-                        <span class="menu-item-price">₱25</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Egg Fried Rice</h4>
-                        </div>
-                        <span class="menu-item-price">₱50</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Yangchow Fried Rice</h4>
-                        </div>
-                        <span class="menu-item-price">₱70</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Platter Egg Fried</h4>
-                        </div>
-                        <span class="menu-item-price">₱99</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Platter Yangchow</h4>
-                        </div>
-                        <span class="menu-item-price">₱179</span>
-                    </div>
+                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('yangchow')">
+                    <div class="menu-category-icon">🍱</div>
+                    <h3>Yangchow Specials</h3>
+                    <p>7 items</p>
                 </div>
-                <div class="menu-category animate-on-scroll">
-                    <h3>Yangchow Fried Rice Specials</h3>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Orange Chicken</h4>
-                            <p>With yangchow fried rice</p>
-                        </div>
-                        <span class="menu-item-price">₱145 / ₱155</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Chicken Fillet</h4>
-                            <p>With yangchow fried rice</p>
-                        </div>
-                        <span class="menu-item-price">₱145</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Gen Tso Chicken</h4>
-                            <p>With yangchow fried rice</p>
-                        </div>
-                        <span class="menu-item-price">₱155</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Spicy Pork Strips</h4>
-                            <p>With yangchow fried rice</p>
-                        </div>
-                        <span class="menu-item-price">₱155</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Lechon Kawali</h4>
-                            <p>With yangchow fried rice</p>
-                        </div>
-                        <span class="menu-item-price">₱165 / ₱165</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Pork Tonkatsu</h4>
-                            <p>With yangchow fried rice</p>
-                        </div>
-                        <span class="menu-item-price">₱165</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Sweet & Sour Pork</h4>
-                            <p>With yangchow fried rice</p>
-                        </div>
-                        <span class="menu-item-price">₱165</span>
-                    </div>
+                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('combos')">
+                    <div class="menu-category-icon">🥡</div>
+                    <h3>Ultimate Combos</h3>
+                    <p>6 items</p>
                 </div>
-                <div class="menu-category animate-on-scroll">
-                    <h3>Ultimate Rice Combo</h3>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Tapa + Hungarian</h4>
-                            <p>Beef tapa with hungarian sausage</p>
-                        </div>
-                        <span class="menu-item-price">₱145</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Adobo + Bangus</h4>
-                            <p>Pork adobo with fried bangus</p>
-                        </div>
-                        <span class="menu-item-price">₱189</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Crispy Liempo 1 Fish</h4>
-                            <p>Crispy liempo with fish</p>
-                        </div>
-                        <span class="menu-item-price">₱189</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Porkchop + Longganisa</h4>
-                            <p>Porkchop with longganisa</p>
-                        </div>
-                        <span class="menu-item-price">₱145</span>
-                    </div>
-                </div>
-                <div class="menu-category animate-on-scroll">
-                    <h3>Ultimate Combo's</h3>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Bacon & Tocino</h4>
-                            <p>Bacon with tocino combo</p>
-                        </div>
-                        <span class="menu-item-price">₱185</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Gyudon and Crispy Sisig</h4>
-                            <p>Beef gyudon with crispy sisig</p>
-                        </div>
-                        <span class="menu-item-price">₱185</span>
-                    </div>
-                </div>
-                <div class="menu-category animate-on-scroll">
+                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('short-orders')">
+                    <div class="menu-category-icon">🍜</div>
                     <h3>Short Orders</h3>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Chami</h4>
-                            <p>Solo / Medium / Large / Bilao</p>
-                        </div>
-                        <span class="menu-item-price">₱70 - ₱750</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Niki Bihon</h4>
-                            <p>Solo / Medium / Large / Bilao</p>
-                        </div>
-                        <span class="menu-item-price">₱80 - ₱850</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Lomi</h4>
-                            <p>Solo / Medium / Large / Bilao</p>
-                        </div>
-                        <span class="menu-item-price">₱80 - ₱850</span>
-                    </div>
+                    <p>3 items</p>
                 </div>
-                <div class="menu-category animate-on-scroll">
-                    <h3>Refresher's</h3>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Cucumber Lemonade</h4>
-                        </div>
-                        <span class="menu-item-price">₱25</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Red Iced Tea</h4>
-                        </div>
-                        <span class="menu-item-price">₱25</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Blue Lemonade</h4>
-                        </div>
-                        <span class="menu-item-price">₱25</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Palamig</h4>
-                        </div>
-                        <span class="menu-item-price">₱25</span>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>Melon</h4>
-                        </div>
-                        <span class="menu-item-price">₱25</span>
-                    </div>
+                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('rice-drinks')">
+                    <div class="menu-category-icon">🥤</div>
+                    <h3>Rice & Drinks</h3>
+                    <p>10 items</p>
                 </div>
             </div>
 
@@ -1697,6 +1423,18 @@
             </div>
         </div>
     </section>
+
+    <!-- Menu Modals -->
+    <div id="menu-modal" class="menu-modal" onclick="closeMenuModal(event)">
+        <div class="menu-modal-content" onclick="event.stopPropagation()">
+            <div class="menu-modal-header">
+                <h3 id="modal-title">Menu Category</h3>
+                <button class="menu-modal-close" onclick="closeMenuModal()">&times;</button>
+            </div>
+            <div class="menu-modal-body" id="modal-body">
+            </div>
+        </div>
+    </div>
 
     <!-- Reviews Section -->
     <section id="reviews" class="reviews">
@@ -1908,6 +1646,140 @@
                     });
                 }
             });
+        });
+
+        // Menu Modal Data
+        const menuData = {
+            'asian-stir-fry': {
+                title: 'Asian Stir Fry',
+                items: [
+                    { name: 'Orange Chicken', desc: 'Crispy chicken in tangy orange sauce', price: '₱149 / ₱249' },
+                    { name: 'Pad Kra Pao', desc: 'Thai basil stir-fry with fried egg', price: '₱149 / ₱249' },
+                    { name: 'Sweet & Spicy Pork Ribs', desc: 'Tender ribs in fiery chili glaze', price: '₱179 / ₱289' },
+                    { name: 'Squid in Bell Pepper', desc: 'Fresh squid with colorful peppers', price: '₱159 / ₱269' },
+                    { name: 'Squid w/ Veggie', desc: 'Squid with mixed vegetables', price: '₱159 / ₱269' },
+                    { name: 'Beef Mushroom', desc: 'Tender beef with savory mushrooms', price: '₱159 / ₱269' },
+                    { name: 'Beef Broccoli', desc: 'Tender beef with fresh broccoli', price: '₱159 / ₱269' },
+                    { name: 'Black Pepper Beef', desc: 'Beef strips in bold pepper sauce', price: '₱159 / ₱269' },
+                    { name: 'Thai Pork with Cashew', desc: 'Pork with cashews in chili sauce', price: '₱159 / ₱259' },
+                    { name: 'Kung Pao Chicken', desc: 'Spicy chicken with peanuts & dried chilies', price: '₱149 / ₱249' },
+                    { name: 'General Tso Chicken', desc: 'Crispy chicken in sweet & spicy glaze', price: '₱149 / ₱249' },
+                    { name: 'Spicy Pork Strips', desc: 'Crispy pork strips with spicy sauce', price: '₱159 / ₱259' }
+                ]
+            },
+            'sizzling': {
+                title: 'Sizzling',
+                items: [
+                    { name: 'Sizzling Liempo', desc: 'Grilled pork belly on sizzling plate', price: '₱99 / ₱149' },
+                    { name: 'Sizzling Porkchop', desc: 'Juicy porkchop on sizzling plate', price: '₱99 / ₱149' },
+                    { name: 'Sizzling Chicken', desc: 'Tender chicken on sizzling plate', price: '₱99 / ₱149' },
+                    { name: 'Sizzling Crispy Sisig', desc: 'Crispy pork sisig on sizzling plate', price: '₱99 / ₱149' },
+                    { name: 'Sizzling Lechon Kawali', desc: 'Crispy fried pork belly on sizzling plate', price: '₱99 / ₱149' }
+                ]
+            },
+            'silog': {
+                title: 'All Time Favorite Silog',
+                items: [
+                    { name: 'Beef Gyuden Silog', desc: 'Beef gyudon with egg and rice', price: '₱99 / ₱149' },
+                    { name: 'Chicksilog', desc: 'Fried chicken with egg and rice', price: '₱99 / ₱149' },
+                    { name: 'Longsilog', desc: 'Longganisa with egg and rice', price: '₱99 / ₱149' },
+                    { name: 'Spamsilog', desc: 'Spam with egg and rice', price: '₱99 / ₱149' },
+                    { name: 'Dangsitilog', desc: 'Danggit with egg and rice', price: '₱99 / ₱149' },
+                    { name: 'Porkchopsilog', desc: 'Porkchop with egg and rice', price: '₱99 / ₱149' },
+                    { name: 'Bacon Bacon Silog', desc: 'Bacon with egg and rice', price: '₱99 / ₱149' }
+                ]
+            },
+            'grill-master': {
+                title: 'Grill Master',
+                items: [
+                    { name: 'Regular Bacolod', desc: 'Bacolod-style grilled chicken', price: '₱99' },
+                    { name: 'Vietnamese Chicken', desc: 'Vietnamese-style grilled chicken', price: '₱125 / ₱145' },
+                    { name: 'Peri-Peri Chicken', desc: 'Spicy peri-peri style chicken', price: '₱125 / ₱145' },
+                    { name: 'Bacolod Chicken - Paa', desc: 'Bacolod chicken leg quarter', price: '₱145 / ₱165' },
+                    { name: 'Bacolod Chicken - Pecho', desc: 'Bacolod chicken breast', price: '₱145 / ₱165' },
+                    { name: 'Grilled Liempo', desc: 'Grilled pork belly', price: '₱145 / ₱175' }
+                ]
+            },
+            'yangchow': {
+                title: 'Yangchow Fried Rice Specials',
+                items: [
+                    { name: 'Orange Chicken', desc: 'With yangchow fried rice', price: '₱145 / ₱155' },
+                    { name: 'Chicken Fillet', desc: 'With yangchow fried rice', price: '₱145' },
+                    { name: 'Gen Tso Chicken', desc: 'With yangchow fried rice', price: '₱155' },
+                    { name: 'Spicy Pork Strips', desc: 'With yangchow fried rice', price: '₱155' },
+                    { name: 'Lechon Kawali', desc: 'With yangchow fried rice', price: '₱165' },
+                    { name: 'Pork Tonkatsu', desc: 'With yangchow fried rice', price: '₱165' },
+                    { name: 'Sweet & Sour Pork', desc: 'With yangchow fried rice', price: '₱165' }
+                ]
+            },
+            'combos': {
+                title: 'Ultimate Combos',
+                items: [
+                    { name: 'Tapa + Hungarian', desc: 'Beef tapa with hungarian sausage', price: '₱145' },
+                    { name: 'Adobo + Bangus', desc: 'Pork adobo with fried bangus', price: '₱189' },
+                    { name: 'Crispy Liempo 1 Fish', desc: 'Crispy liempo with fish', price: '₱189' },
+                    { name: 'Porkchop + Longganisa', desc: 'Porkchop with longganisa', price: '₱145' },
+                    { name: 'Bacon & Tocino', desc: 'Bacon with tocino combo', price: '₱185' },
+                    { name: 'Gyudon and Crispy Sisig', desc: 'Beef gyudon with crispy sisig', price: '₱185' }
+                ]
+            },
+            'short-orders': {
+                title: 'Short Orders',
+                items: [
+                    { name: 'Chami', desc: 'Solo / Medium / Large / Bilao', price: '₱70 - ₱750' },
+                    { name: 'Niki Bihon', desc: 'Solo / Medium / Large / Bilao', price: '₱80 - ₱850' },
+                    { name: 'Lomi', desc: 'Solo / Medium / Large / Bilao', price: '₱80 - ₱850' }
+                ]
+            },
+            'rice-drinks': {
+                title: 'Rice & Drinks',
+                items: [
+                    { name: 'Plain Rice', desc: '', price: '₱25' },
+                    { name: 'Egg Fried Rice', desc: '', price: '₱50' },
+                    { name: 'Yangchow Fried Rice', desc: '', price: '₱70' },
+                    { name: 'Platter Egg Fried', desc: '', price: '₱99' },
+                    { name: 'Platter Yangchow', desc: '', price: '₱179' },
+                    { name: 'Cucumber Lemonade', desc: '', price: '₱25' },
+                    { name: 'Red Iced Tea', desc: '', price: '₱25' },
+                    { name: 'Blue Lemonade', desc: '', price: '₱25' },
+                    { name: 'Palamig', desc: '', price: '₱25' },
+                    { name: 'Melon', desc: '', price: '₱25' }
+                ]
+            }
+        };
+
+        function openMenuModal(category) {
+            const modal = document.getElementById('menu-modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            const data = menuData[category];
+
+            if (data) {
+                title.textContent = data.title;
+                body.innerHTML = data.items.map(item => `
+                    <div class="menu-item">
+                        <div class="menu-item-info">
+                            <h4>${item.name}</h4>
+                            ${item.desc ? `<p>${item.desc}</p>` : ''}
+                        </div>
+                        <span class="menu-item-price">${item.price}</span>
+                    </div>
+                `).join('');
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeMenuModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            const modal = document.getElementById('menu-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMenuModal();
         });
     </script>
 </body>
