@@ -23,6 +23,7 @@
             --charcoal: #2C2C2C;
             --dark-bg: #1a1a1a;
             --cream: #FFF8F0;
+            --orange: #E85D04;
         }
 
         html {
@@ -48,7 +49,7 @@
             scroll-snap-align: start;
             display: flex;
             flex-direction: column;
-            padding: 1.5rem;
+            padding: 1rem;
             background: linear-gradient(135deg, var(--dark-bg) 0%, var(--charcoal) 100%);
             position: relative;
         }
@@ -60,23 +61,23 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-red), var(--gold), var(--primary-red));
+            background: linear-gradient(90deg, var(--primary-red), var(--orange), var(--primary-red));
         }
 
         /* Header */
         .page-header {
             text-align: center;
-            padding: 1rem 0 1.5rem;
+            padding: 0.75rem 0 1rem;
             border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--gold);
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.15rem;
         }
 
         .logo span {
@@ -84,14 +85,14 @@
         }
 
         .category-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: white;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.15rem;
         }
 
         .category-subtitle {
-            color: var(--gold);
-            font-size: 0.85rem;
+            color: var(--orange);
+            font-size: 0.75rem;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -101,65 +102,58 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.5rem;
             overflow-y: auto;
-            padding-bottom: 1rem;
+            padding-bottom: 0.5rem;
         }
 
         .menu-item {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 0.75rem;
+            border-radius: 8px;
+            padding: 0.6rem 0.75rem;
             border-left: 3px solid var(--primary-red);
             transition: all 0.3s ease;
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
         }
 
         .menu-item:hover {
             background: rgba(255, 255, 255, 0.08);
-            border-left-color: var(--gold);
-        }
-
-        .menu-item-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-
-        .menu-item-content {
-            flex: 1;
-            min-width: 0;
+            border-left-color: var(--orange);
         }
 
         .menu-item-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             gap: 0.5rem;
-            margin-bottom: 0.15rem;
         }
 
         .menu-item-name {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: white;
         }
 
         .menu-item-price {
             font-weight: 700;
-            color: var(--gold);
+            color: var(--orange);
             white-space: nowrap;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .menu-item-desc {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #aaa;
             line-height: 1.3;
+            margin-top: 0.2rem;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 1rem;
+            color: var(--orange);
+            margin: 0.75rem 0 0.5rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px dashed var(--orange);
         }
 
         /* Size Labels */
@@ -167,31 +161,27 @@
             display: flex;
             justify-content: flex-end;
             gap: 0.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
             padding-right: 0.5rem;
-        }
-
-        .size-label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--gold);
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: 600;
         }
 
         /* Page Indicator */
         .page-indicator {
             text-align: center;
-            padding: 1rem 0 0.5rem;
+            padding: 0.5rem 0;
             color: #666;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .page-dots {
             display: flex;
             justify-content: center;
             gap: 0.5rem;
-            margin-top: 0.5rem;
+            margin-top: 0.25rem;
         }
 
         .page-dot {
@@ -202,15 +192,14 @@
         }
 
         .page-dot.active {
-            background: var(--gold);
+            background: var(--orange);
         }
 
         /* Scroll hint */
         .scroll-hint {
             text-align: center;
-            color: var(--gold);
-            font-size: 0.75rem;
-            padding: 0.5rem;
+            color: var(--orange);
+            font-size: 0.7rem;
             animation: bounce 2s infinite;
         }
 
@@ -223,15 +212,15 @@
         /* Back button */
         .back-btn {
             position: fixed;
-            top: 1rem;
-            left: 1rem;
+            top: 0.75rem;
+            left: 0.75rem;
             background: var(--primary-red);
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 1rem;
             cursor: pointer;
             z-index: 100;
             display: flex;
@@ -249,421 +238,469 @@
         /* Badge */
         .badge {
             display: inline-block;
-            background: var(--primary-red);
+            background: var(--orange);
             color: white;
-            font-size: 0.65rem;
-            padding: 0.15rem 0.4rem;
+            font-size: 0.55rem;
+            padding: 0.1rem 0.3rem;
             border-radius: 3px;
-            margin-left: 0.5rem;
+            margin-left: 0.4rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* Responsive */
+        /* Grid layout for larger screens */
         @media (min-width: 768px) {
             .menu-page {
-                padding: 2rem 3rem;
+                padding: 1.5rem 2rem;
             }
 
             .menu-items {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
+                gap: 0.75rem;
+            }
+
+            .section-title {
+                grid-column: span 2;
             }
 
             .category-title {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
         }
 
         @media (max-height: 700px) {
             .menu-item {
-                padding: 0.75rem;
+                padding: 0.5rem 0.6rem;
             }
 
             .menu-item-name {
-                font-size: 0.9rem;
-            }
-
-            .menu-item-desc {
-                font-size: 0.75rem;
+                font-size: 0.8rem;
             }
 
             .page-header {
-                padding: 0.75rem 0 1rem;
+                padding: 0.5rem 0 0.75rem;
+            }
+
+            .category-title {
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 <body>
     <a href="index.html" class="back-btn" title="Back to Home">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
     </a>
 
-    <!-- Page 1: Asian Stir Fry -->
+    <!-- Page 1: Best Seller, Asian, Fried Rice Meals, Drinks -->
     <section class="menu-page" id="page1">
         <div class="page-header">
             <div class="logo">Pedro's <span>Cuisine</span></div>
-            <h1 class="category-title">Asian Stir Fry</h1>
-            <p class="category-subtitle">Wok-Fired Perfection</p>
+            <h1 class="category-title">Our Menu</h1>
+            <p class="category-subtitle">Best Seller & Asian Favorites</p>
         </div>
-        <div class="size-labels">
-            <span class="size-label">Small</span>
-            <span class="size-label">/</span>
-            <span class="size-label">Double</span>
-        </div>
+
         <div class="menu-items">
+            <!-- Best Seller -->
             <div class="menu-item">
-                <img src="images/Orange Chicken.jpg" alt="Orange Chicken" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Orange Chicken</span>
-                        <span class="menu-item-price">149 / 249</span>
-                    </div>
-                    <p class="menu-item-desc">Crispy chicken in tangy orange glaze with sesame seeds</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Yangchow Lechon Kawali<span class="badge">Best Seller</span></span>
+                    <span class="menu-item-price">169</span>
                 </div>
             </div>
+
+            <!-- Asian -->
+            <h3 class="section-title">Asian</h3>
             <div class="menu-item">
-                <img src="images/General Tso.jpg" alt="General Tso Chicken" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">General Tso Chicken<span class="badge">Bestseller</span></span>
-                        <span class="menu-item-price">149 / 249</span>
-                    </div>
-                    <p class="menu-item-desc">Sweet & spicy crispy chicken, a house favorite</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Pad Thai</span>
+                    <span class="menu-item-price">179</span>
                 </div>
+                <p class="menu-item-desc">Thai stir-fried rice noodles with egg, vegetables, and peanuts</p>
             </div>
             <div class="menu-item">
-                <img src="images/Padkra Pao.jpg" alt="Pad Kra Pao" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Pad Kra Pao</span>
-                        <span class="menu-item-price">149 / 249</span>
-                    </div>
-                    <p class="menu-item-desc">Thai basil stir-fry with fried egg</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Lo Mien</span>
+                    <span class="menu-item-price">169</span>
                 </div>
+                <p class="menu-item-desc">Stir-fried noodles with savory sauce, vegetables, and meat</p>
             </div>
             <div class="menu-item">
-                <img src="images/Kung Pao.jpg" alt="Kung Pao Chicken" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Kung Pao Chicken</span>
-                        <span class="menu-item-price">149 / 249</span>
-                    </div>
-                    <p class="menu-item-desc">Spicy chicken with peanuts & dried chilies</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Beef Pho</span>
+                    <span class="menu-item-price">189</span>
                 </div>
+                <p class="menu-item-desc">Vietnamese rice noodles in aromatic beef broth with fresh herbs</p>
             </div>
             <div class="menu-item">
-                <img src="images/Beef Brocolli.jpg" alt="Beef Broccoli" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Beef Broccoli<span class="badge">Popular</span></span>
-                        <span class="menu-item-price">159 / 269</span>
-                    </div>
-                    <p class="menu-item-desc">Tender beef with fresh broccoli in oyster sauce</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">House Special Noodles</span>
+                    <span class="menu-item-price">169</span>
                 </div>
+                <p class="menu-item-desc">Wok-fried noodles with shrimp, squid, pork, and chicken</p>
             </div>
             <div class="menu-item">
-                <img src="images/Black Pepper Beef.jpg" alt="Black Pepper Beef" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Black Pepper Beef</span>
-                        <span class="menu-item-price">159 / 269</span>
-                    </div>
-                    <p class="menu-item-desc">Beef strips in bold black pepper sauce</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Kra Pao Moo Krob</span>
+                    <span class="menu-item-price">179</span>
                 </div>
+                <p class="menu-item-desc">Crispy pork belly with garlic, chilies, and Thai holy basil</p>
             </div>
             <div class="menu-item">
-                <img src="images/Black Pepper Beef.jpg" alt="Beef Mushroom" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Beef Mushroom</span>
-                        <span class="menu-item-price">159 / 269</span>
-                    </div>
-                    <p class="menu-item-desc">Tender beef with savory mushrooms</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Pad Kra Pao</span>
+                    <span class="menu-item-price">149</span>
                 </div>
+                <p class="menu-item-desc">Thai street food - minced meat with holy basil and egg</p>
+            </div>
+
+            <!-- Fried Rice Meals -->
+            <h3 class="section-title">Fried Rice Meals</h3>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Chicken Fillet</span>
+                    <span class="menu-item-price">149</span>
+                </div>
+                <p class="menu-item-desc">Crispy chicken fillet on yangchow fried rice</p>
             </div>
             <div class="menu-item">
-                <img src="images/Thai Pork Cashew.jpg" alt="Thai Pork Cashew" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Thai Pork Cashew</span>
-                        <span class="menu-item-price">159 / 259</span>
-                    </div>
-                    <p class="menu-item-desc">Pork with roasted cashews in Thai chili sauce</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Pork Tonkatsu</span>
+                    <span class="menu-item-price">159</span>
                 </div>
+                <p class="menu-item-desc">Crispy pork tonkatsu on yangchow fried rice</p>
             </div>
             <div class="menu-item">
-                <img src="images/Spicy Pork Strips.jpg" alt="Spicy Pork Strips" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Spicy Pork Strips</span>
-                        <span class="menu-item-price">159 / 259</span>
-                    </div>
-                    <p class="menu-item-desc">Crispy pork in spicy sweet sauce</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">BBQ Chicken Wings</span>
+                    <span class="menu-item-price">149</span>
                 </div>
+                <p class="menu-item-desc">Juicy BBQ wings with savory egg fried rice</p>
             </div>
             <div class="menu-item">
-                <img src="images/Spicy Pork Ribs.jpg" alt="Sweet & Spicy Pork Ribs" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Sweet & Spicy Pork Ribs</span>
-                        <span class="menu-item-price">179 / 289</span>
-                    </div>
-                    <p class="menu-item-desc">Fall-off-the-bone ribs in fiery glaze</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Honey Butter Garlic Wings</span>
+                    <span class="menu-item-price">149</span>
                 </div>
+                <p class="menu-item-desc">Sweet honey butter garlic wings with egg fried rice</p>
             </div>
             <div class="menu-item">
-                <img src="images/Squid and bell pepper.jpg" alt="Squid in Bell Pepper" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Squid in Bell Pepper</span>
-                        <span class="menu-item-price">159 / 269</span>
-                    </div>
-                    <p class="menu-item-desc">Fresh squid with colorful bell peppers</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Buffalo Wings</span>
+                    <span class="menu-item-price">149</span>
                 </div>
+                <p class="menu-item-desc">Tangy and spicy buffalo wings with egg fried rice</p>
             </div>
             <div class="menu-item">
-                <img src="images/Squid Veggie.jpg" alt="Squid w/ Veggie" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Squid w/ Veggie</span>
-                        <span class="menu-item-price">159 / 269</span>
-                    </div>
-                    <p class="menu-item-desc">Squid stir-fried with mixed vegetables</p>
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Beef Gyudon</span>
+                    <span class="menu-item-price">169</span>
                 </div>
+                <p class="menu-item-desc">Thinly sliced beef in savory-sweet soy sauce over rice</p>
+            </div>
+
+            <!-- Drinks -->
+            <h3 class="section-title">Drinks</h3>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Vietnamese Coffee</span>
+                    <span class="menu-item-price">119</span>
+                </div>
+                <p class="menu-item-desc">Deep roasted coffee served ice-cold, smooth and satisfying</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Coconut Coffee</span>
+                    <span class="menu-item-price">139</span>
+                </div>
+                <p class="menu-item-desc">Rich coffee with a smooth tropical touch</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Peach Mango Soda</span>
+                    <span class="menu-item-price">79</span>
+                </div>
+                <p class="menu-item-desc">Refreshing peach mango soda with mint garnish</p>
             </div>
         </div>
+
         <div class="page-indicator">
             <div class="scroll-hint">Swipe up for more</div>
             <div class="page-dots">
                 <span class="page-dot active"></span>
                 <span class="page-dot"></span>
-                <span class="page-dot"></span>
             </div>
         </div>
     </section>
 
-    <!-- Page 2: Sizzling, Silog & Grill -->
+    <!-- Page 2: Asian Stir Fry, Rice, Beverages, Grill Master, Pinoy Classic -->
     <section class="menu-page" id="page2">
         <div class="page-header">
             <div class="logo">Pedro's <span>Cuisine</span></div>
-            <h1 class="category-title">Sizzling & Silog</h1>
-            <p class="category-subtitle">Filipino Favorites</p>
+            <h1 class="category-title">Full Menu</h1>
+            <p class="category-subtitle">Stir Fry, Rice & More</p>
         </div>
 
         <div class="menu-items">
-            <!-- Sizzling -->
+            <!-- Asian Stir Fry -->
+            <h3 class="section-title">Asian Stir Fry</h3>
+            <div class="size-labels" style="grid-column: span 2;">w/Rice: Double | Family</div>
             <div class="menu-item">
                 <div class="menu-item-header">
-                    <span class="menu-item-name">Sizzling Liempo</span>
-                    <span class="menu-item-price">99 / 149</span>
+                    <span class="menu-item-name">Orange Chicken</span>
+                    <span class="menu-item-price">149 | 269 | 439</span>
                 </div>
-                <p class="menu-item-desc">Grilled pork belly on hot plate (Reg/Unli Rice)</p>
             </div>
             <div class="menu-item">
                 <div class="menu-item-header">
-                    <span class="menu-item-name">Sizzling Porkchop</span>
-                    <span class="menu-item-price">99 / 149</span>
+                    <span class="menu-item-name">Pad Kra Pao</span>
+                    <span class="menu-item-price">149 | 279 | 479</span>
                 </div>
-                <p class="menu-item-desc">Juicy porkchop sizzling plate (Reg/Unli Rice)</p>
             </div>
             <div class="menu-item">
                 <div class="menu-item-header">
-                    <span class="menu-item-name">Sizzling Chicken</span>
-                    <span class="menu-item-price">99 / 149</span>
+                    <span class="menu-item-name">Sweet & Spicy Pork Ribs</span>
+                    <span class="menu-item-price">189 | 348 | 539</span>
                 </div>
-                <p class="menu-item-desc">Tender chicken on sizzling plate (Reg/Unli Rice)</p>
             </div>
             <div class="menu-item">
                 <div class="menu-item-header">
-                    <span class="menu-item-name">Sizzling Crispy Sisig</span>
-                    <span class="menu-item-price">99 / 149</span>
+                    <span class="menu-item-name">Squid in Bell Pepper</span>
+                    <span class="menu-item-price">169 | 328 | 479</span>
                 </div>
-                <p class="menu-item-desc">Crispy pork sisig on sizzling plate (Reg/Unli Rice)</p>
             </div>
             <div class="menu-item">
                 <div class="menu-item-header">
-                    <span class="menu-item-name">Sizzling Lechon Kawali</span>
-                    <span class="menu-item-price">99 / 149</span>
+                    <span class="menu-item-name">Squid w/ Veggie</span>
+                    <span class="menu-item-price">169 | 328 | 479</span>
                 </div>
-                <p class="menu-item-desc">Crispy fried pork belly (Reg/Unli Rice)</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Krapao Moo Krob</span>
+                    <span class="menu-item-price">179 | 328 | 529</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Braised Tofu w/ Pork Belly</span>
+                    <span class="menu-item-price">169 | 318 | 488</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Kung Pao Chicken</span>
+                    <span class="menu-item-price">149 | 279 | 439</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">General Tso Chicken</span>
+                    <span class="menu-item-price">149 | 279 | 439</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Spicy Garlic Wings</span>
+                    <span class="menu-item-price">179 | 328 | 479</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Krapao Squid</span>
+                    <span class="menu-item-price">169 | 328 | 479</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Mapo Tofu</span>
+                    <span class="menu-item-price">149 | 258 | 427</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Stir Fry Veggie</span>
+                    <span class="menu-item-price">139 | 238 | 397</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Ampalaya with Tofu</span>
+                    <span class="menu-item-price">139 | 238 | 397</span>
+                </div>
             </div>
 
-            <!-- Silog -->
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Beef Gyuden Silog</span>
-                    <span class="menu-item-price">99 / 149</span>
-                </div>
-                <p class="menu-item-desc">Beef gyudon with egg and rice (Reg/Unli)</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Chicksilog</span>
-                    <span class="menu-item-price">99 / 149</span>
-                </div>
-                <p class="menu-item-desc">Fried chicken with egg and rice (Reg/Unli)</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Longsilog</span>
-                    <span class="menu-item-price">99 / 149</span>
-                </div>
-                <p class="menu-item-desc">Longganisa with egg and rice (Reg/Unli)</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Spamsilog</span>
-                    <span class="menu-item-price">99 / 149</span>
-                </div>
-                <p class="menu-item-desc">Spam with egg and rice (Reg/Unli)</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Porkchopsilog</span>
-                    <span class="menu-item-price">99 / 149</span>
-                </div>
-                <p class="menu-item-desc">Porkchop with egg and rice (Reg/Unli)</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Bacon Silog</span>
-                    <span class="menu-item-price">99 / 149</span>
-                </div>
-                <p class="menu-item-desc">Bacon with egg and rice (Reg/Unli)</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Dangsitilog</span>
-                    <span class="menu-item-price">99 / 149</span>
-                </div>
-                <p class="menu-item-desc">Danggit with egg and rice (Reg/Unli)</p>
-            </div>
-        </div>
-        <div class="page-indicator">
-            <div class="scroll-hint">Swipe up for more</div>
-            <div class="page-dots">
-                <span class="page-dot"></span>
-                <span class="page-dot active"></span>
-                <span class="page-dot"></span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Page 3: Grill, Combos, Rice & Drinks -->
-    <section class="menu-page" id="page3">
-        <div class="page-header">
-            <div class="logo">Pedro's <span>Cuisine</span></div>
-            <h1 class="category-title">Grill & Combos</h1>
-            <p class="category-subtitle">More Favorites</p>
-        </div>
-
-        <div class="menu-items">
-            <!-- Grill Master -->
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Bacolod Chicken - Paa</span>
-                    <span class="menu-item-price">145 / 165</span>
-                </div>
-                <p class="menu-item-desc">Bacolod-style grilled leg quarter</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Bacolod Chicken - Pecho</span>
-                    <span class="menu-item-price">145 / 165</span>
-                </div>
-                <p class="menu-item-desc">Bacolod-style grilled chicken breast</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Peri-Peri Chicken</span>
-                    <span class="menu-item-price">125 / 145</span>
-                </div>
-                <p class="menu-item-desc">Spicy peri-peri style grilled chicken</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Vietnamese Chicken</span>
-                    <span class="menu-item-price">125 / 145</span>
-                </div>
-                <p class="menu-item-desc">Vietnamese-style grilled chicken</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Grilled Liempo</span>
-                    <span class="menu-item-price">145 / 175</span>
-                </div>
-                <p class="menu-item-desc">Grilled pork belly with special marinade</p>
-            </div>
-
-            <!-- Combos -->
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Tapa + Hungarian</span>
-                    <span class="menu-item-price">145</span>
-                </div>
-                <p class="menu-item-desc">Beef tapa with hungarian sausage combo</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Porkchop + Longganisa</span>
-                    <span class="menu-item-price">145</span>
-                </div>
-                <p class="menu-item-desc">Porkchop with longganisa combo</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Bacon & Tocino</span>
-                    <span class="menu-item-price">185</span>
-                </div>
-                <p class="menu-item-desc">Bacon with sweet tocino combo</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Gyudon + Crispy Sisig</span>
-                    <span class="menu-item-price">185</span>
-                </div>
-                <p class="menu-item-desc">Beef gyudon with crispy sisig</p>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Adobo + Bangus</span>
-                    <span class="menu-item-price">189</span>
-                </div>
-                <p class="menu-item-desc">Pork adobo with fried milkfish</p>
-            </div>
-
-            <!-- Rice & Drinks -->
+            <!-- Fried Rice Solo -->
+            <h3 class="section-title">Fried Rice Solo</h3>
             <div class="menu-item">
                 <div class="menu-item-header">
                     <span class="menu-item-name">Plain Rice</span>
                     <span class="menu-item-price">25</span>
                 </div>
-                <p class="menu-item-desc">Steamed white rice</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Egg Fried Rice</span>
+                    <span class="menu-item-price">69</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Yangchow Fried Rice - Chicken</span>
+                    <span class="menu-item-price">99</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Yangchow Fried Rice - Pork</span>
+                    <span class="menu-item-price">99</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Nasi Goreng Chicken</span>
+                    <span class="menu-item-price">99</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Kimchi Fried Rice</span>
+                    <span class="menu-item-price">99</span>
+                </div>
+            </div>
+
+            <!-- Fried Rice Platter -->
+            <h3 class="section-title">Fried Rice Platter</h3>
+            <div class="size-labels" style="grid-column: span 2;">Double | 2 to 3 pax | 3 to 5 pax</div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Egg Fried Rice</span>
+                    <span class="menu-item-price">139 | 199 | 289</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Nasi Goreng - Chicken</span>
+                    <span class="menu-item-price">249 | 349 | 509</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Yangchow - Chicken</span>
+                    <span class="menu-item-price">199 | 289 | 409</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Yangchow - Pork</span>
+                    <span class="menu-item-price">199 | 289 | 409</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Kimchi - Pork</span>
+                    <span class="menu-item-price">199 | 299 | 419</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Kimchi - Chicken</span>
+                    <span class="menu-item-price">199 | 299 | 419</span>
+                </div>
+            </div>
+
+            <!-- Beverages -->
+            <h3 class="section-title">Beverages / Fruit Soda</h3>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Bottled Water</span>
+                    <span class="menu-item-price">20</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Coke / SanMig Light</span>
+                    <span class="menu-item-price">60 / 75</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Cucumber Lemonade / Strawberry</span>
+                    <span class="menu-item-price">49</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Blueberry</span>
+                    <span class="menu-item-price">49</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Cucumber Lemonade "Pitcher"</span>
+                    <span class="menu-item-price">79</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Strawberry / Peach Mango "Pitcher"</span>
+                    <span class="menu-item-price">79</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Blueberry "Pitcher"</span>
+                    <span class="menu-item-price">79</span>
+                </div>
+            </div>
+
+            <!-- Grill Master -->
+            <h3 class="section-title">Grill Master</h3>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Peri-Peri Chicken w/ Mandy Rice</span>
+                    <span class="menu-item-price">Half: 445 | Whole: 650</span>
+                </div>
+            </div>
+
+            <!-- Pinoy Classic -->
+            <h3 class="section-title">Pinoy Classic</h3>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Sisig Platter</span>
+                    <span class="menu-item-price">179</span>
+                </div>
+            </div>
+
+            <!-- Rice Upgrade -->
+            <h3 class="section-title">Rice Upgrade</h3>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span class="menu-item-name">Egg Fried Rice</span>
+                    <span class="menu-item-price">+30</span>
+                </div>
             </div>
             <div class="menu-item">
                 <div class="menu-item-header">
                     <span class="menu-item-name">Yangchow Fried Rice</span>
-                    <span class="menu-item-price">70 / 179</span>
+                    <span class="menu-item-price">+45</span>
                 </div>
-                <p class="menu-item-desc">Classic yangchow (Regular / Platter)</p>
             </div>
             <div class="menu-item">
                 <div class="menu-item-header">
-                    <span class="menu-item-name">Drinks</span>
-                    <span class="menu-item-price">25</span>
+                    <span class="menu-item-name">Kimchi Fried Rice</span>
+                    <span class="menu-item-price">+55</span>
                 </div>
-                <p class="menu-item-desc">Iced Tea, Blue Lemonade, Cucumber Lemonade, Melon</p>
             </div>
         </div>
+
         <div class="page-indicator">
             <div class="page-dots">
                 <span class="page-dot"></span>
-                <span class="page-dot"></span>
                 <span class="page-dot active"></span>
             </div>
-            <p style="margin-top: 1rem; color: var(--gold); font-size: 0.8rem;">Prices in PHP</p>
+            <p style="margin-top: 0.5rem; color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
         </div>
     </section>
 
@@ -675,15 +712,11 @@
                 if (entry.isIntersecting) {
                     const pageId = entry.target.id;
                     const pageNum = parseInt(pageId.replace('page', '')) - 1;
-
-                    document.querySelectorAll('.page-dot').forEach((dot, index) => {
-                        // Update dots in all pages
-                        const allDots = document.querySelectorAll('.page-indicator');
-                        allDots.forEach(indicator => {
-                            const dots = indicator.querySelectorAll('.page-dot');
-                            dots.forEach((d, i) => {
-                                d.classList.toggle('active', i === pageNum);
-                            });
+                    const allDots = document.querySelectorAll('.page-indicator');
+                    allDots.forEach(indicator => {
+                        const dots = indicator.querySelectorAll('.page-dot');
+                        dots.forEach((d, i) => {
+                            d.classList.toggle('active', i === pageNum);
                         });
                     });
                 }
