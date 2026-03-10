@@ -109,9 +109,12 @@
         .menu-item {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            padding: 1rem;
+            padding: 0.75rem;
             border-left: 3px solid var(--primary-red);
             transition: all 0.3s ease;
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
         }
 
         .menu-item:hover {
@@ -119,17 +122,30 @@
             border-left-color: var(--gold);
         }
 
+        .menu-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .menu-item-content {
+            flex: 1;
+            min-width: 0;
+        }
+
         .menu-item-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             gap: 0.5rem;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.15rem;
         }
 
         .menu-item-name {
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: white;
         }
 
@@ -137,13 +153,13 @@
             font-weight: 700;
             color: var(--gold);
             white-space: nowrap;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
         .menu-item-desc {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #aaa;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         /* Size Labels */
@@ -298,88 +314,124 @@
         </div>
         <div class="menu-items">
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Orange Chicken</span>
-                    <span class="menu-item-price">149 / 249</span>
+                <img src="images/Orange Chicken.jpg" alt="Orange Chicken" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Orange Chicken</span>
+                        <span class="menu-item-price">149 / 249</span>
+                    </div>
+                    <p class="menu-item-desc">Crispy chicken in tangy orange glaze with sesame seeds</p>
                 </div>
-                <p class="menu-item-desc">Crispy chicken in tangy orange glaze with sesame seeds</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">General Tso Chicken<span class="badge">Bestseller</span></span>
-                    <span class="menu-item-price">149 / 249</span>
+                <img src="images/General Tso.jpg" alt="General Tso Chicken" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">General Tso Chicken<span class="badge">Bestseller</span></span>
+                        <span class="menu-item-price">149 / 249</span>
+                    </div>
+                    <p class="menu-item-desc">Sweet & spicy crispy chicken, a house favorite</p>
                 </div>
-                <p class="menu-item-desc">Sweet & spicy crispy chicken, a house favorite</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Pad Kra Pao</span>
-                    <span class="menu-item-price">149 / 249</span>
+                <img src="images/Padkra Pao.jpg" alt="Pad Kra Pao" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Pad Kra Pao</span>
+                        <span class="menu-item-price">149 / 249</span>
+                    </div>
+                    <p class="menu-item-desc">Thai basil stir-fry with fried egg</p>
                 </div>
-                <p class="menu-item-desc">Thai basil stir-fry with fried egg</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Kung Pao Chicken</span>
-                    <span class="menu-item-price">149 / 249</span>
+                <img src="images/Kung Pao.jpg" alt="Kung Pao Chicken" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Kung Pao Chicken</span>
+                        <span class="menu-item-price">149 / 249</span>
+                    </div>
+                    <p class="menu-item-desc">Spicy chicken with peanuts & dried chilies</p>
                 </div>
-                <p class="menu-item-desc">Spicy chicken with peanuts & dried chilies</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Beef Broccoli<span class="badge">Popular</span></span>
-                    <span class="menu-item-price">159 / 269</span>
+                <img src="images/Beef Brocolli.jpg" alt="Beef Broccoli" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Beef Broccoli<span class="badge">Popular</span></span>
+                        <span class="menu-item-price">159 / 269</span>
+                    </div>
+                    <p class="menu-item-desc">Tender beef with fresh broccoli in oyster sauce</p>
                 </div>
-                <p class="menu-item-desc">Tender beef with fresh broccoli in oyster sauce</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Black Pepper Beef</span>
-                    <span class="menu-item-price">159 / 269</span>
+                <img src="images/Black Pepper Beef.jpg" alt="Black Pepper Beef" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Black Pepper Beef</span>
+                        <span class="menu-item-price">159 / 269</span>
+                    </div>
+                    <p class="menu-item-desc">Beef strips in bold black pepper sauce</p>
                 </div>
-                <p class="menu-item-desc">Beef strips in bold black pepper sauce</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Beef Mushroom</span>
-                    <span class="menu-item-price">159 / 269</span>
+                <img src="images/Black Pepper Beef.jpg" alt="Beef Mushroom" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Beef Mushroom</span>
+                        <span class="menu-item-price">159 / 269</span>
+                    </div>
+                    <p class="menu-item-desc">Tender beef with savory mushrooms</p>
                 </div>
-                <p class="menu-item-desc">Tender beef with savory mushrooms</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Thai Pork Cashew</span>
-                    <span class="menu-item-price">159 / 259</span>
+                <img src="images/Thai Pork Cashew.jpg" alt="Thai Pork Cashew" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Thai Pork Cashew</span>
+                        <span class="menu-item-price">159 / 259</span>
+                    </div>
+                    <p class="menu-item-desc">Pork with roasted cashews in Thai chili sauce</p>
                 </div>
-                <p class="menu-item-desc">Pork with roasted cashews in Thai chili sauce</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Spicy Pork Strips</span>
-                    <span class="menu-item-price">159 / 259</span>
+                <img src="images/Spicy Pork Strips.jpg" alt="Spicy Pork Strips" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Spicy Pork Strips</span>
+                        <span class="menu-item-price">159 / 259</span>
+                    </div>
+                    <p class="menu-item-desc">Crispy pork in spicy sweet sauce</p>
                 </div>
-                <p class="menu-item-desc">Crispy pork in spicy sweet sauce</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Sweet & Spicy Pork Ribs</span>
-                    <span class="menu-item-price">179 / 289</span>
+                <img src="images/Spicy Pork Ribs.jpg" alt="Sweet & Spicy Pork Ribs" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Sweet & Spicy Pork Ribs</span>
+                        <span class="menu-item-price">179 / 289</span>
+                    </div>
+                    <p class="menu-item-desc">Fall-off-the-bone ribs in fiery glaze</p>
                 </div>
-                <p class="menu-item-desc">Fall-off-the-bone ribs in fiery glaze</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Squid in Bell Pepper</span>
-                    <span class="menu-item-price">159 / 269</span>
+                <img src="images/Squid and bell pepper.jpg" alt="Squid in Bell Pepper" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Squid in Bell Pepper</span>
+                        <span class="menu-item-price">159 / 269</span>
+                    </div>
+                    <p class="menu-item-desc">Fresh squid with colorful bell peppers</p>
                 </div>
-                <p class="menu-item-desc">Fresh squid with colorful bell peppers</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Squid w/ Veggie</span>
-                    <span class="menu-item-price">159 / 269</span>
+                <img src="images/Squid Veggie.jpg" alt="Squid w/ Veggie" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Squid w/ Veggie</span>
+                        <span class="menu-item-price">159 / 269</span>
+                    </div>
+                    <p class="menu-item-desc">Squid stir-fried with mixed vegetables</p>
                 </div>
-                <p class="menu-item-desc">Squid stir-fried with mixed vegetables</p>
             </div>
         </div>
         <div class="page-indicator">
