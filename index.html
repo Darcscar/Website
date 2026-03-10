@@ -498,50 +498,6 @@
             line-height: 1.5;
         }
 
-        /* Menu Section */
-        .menu {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, var(--cream) 0%, #fff 100%);
-        }
-
-        .menu-categories-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-        }
-
-        .menu-category-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .menu-category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.2);
-            border-color: var(--primary-red);
-        }
-
-        .menu-category-card h3 {
-            font-size: 1.1rem;
-            color: var(--primary-red);
-            margin-bottom: 0.5rem;
-        }
-
-        .menu-category-card p {
-            font-size: 0.85rem;
-            color: #777;
-        }
-
-        .menu-category-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
-        }
-
         /* Menu Modal */
         .menu-modal {
             display: none;
@@ -618,61 +574,20 @@
             padding: 1.5rem 2rem;
         }
 
-        .menu-item {
+        .menu-modal-images {
+            max-width: 900px;
+        }
+
+        .menu-images-modal {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 1rem 0;
-            border-bottom: 1px dashed #ddd;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .menu-item:last-child {
-            border-bottom: none;
-        }
-
-        .menu-item-info h4 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--charcoal);
-            margin-bottom: 0.25rem;
-        }
-
-        .menu-item-info p {
-            font-size: 0.85rem;
-            color: #777;
-        }
-
-        .menu-item-price {
-            font-weight: 600;
-            color: var(--primary-red);
-            white-space: nowrap;
-            margin-left: 1rem;
-        }
-
-        /* Menu Images */
-        .menu-images {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .menu-image-container {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
-
-        .menu-image-container:hover {
-            transform: scale(1.02);
-        }
-
-        .menu-image-container img {
+        .menu-images-modal img {
             width: 100%;
             height: auto;
-            display: block;
+            border-radius: 8px;
         }
 
         /* Reviews Section */
@@ -1110,17 +1025,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .menu-images {
-                grid-template-columns: 1fr;
-            }
-
-            .menu-categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
 
             .reviews-grid {
                 grid-template-columns: 1fr;
@@ -1195,7 +1099,6 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#dishes">Dishes</a></li>
-                <li><a href="#menu">Menu</a></li>
                 <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -1223,10 +1126,10 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Order Now
                 </a>
-                <a href="#menu" class="btn btn-secondary">
+                <button onclick="openMenuModal()" class="btn btn-secondary">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/></svg>
                     View Menu
-                </a>
+                </button>
                 <a href="tel:0424215968" class="btn btn-outline">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
                     Call Us
@@ -1355,83 +1258,18 @@
         </div>
     </section>
 
-    <!-- Menu Section -->
-    <section id="menu" class="menu">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <p class="section-subtitle">Our Offerings</p>
-                <h2 class="section-title">Menu Categories</h2>
-                <div class="section-divider"></div>
-                <p style="margin-top: 1rem; color: #666;">Click a category to view items</p>
-            </div>
-            <div class="menu-categories-grid">
-                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('asian-stir-fry')">
-                    <div class="menu-category-icon">🥘</div>
-                    <h3>Asian Stir Fry</h3>
-                    <p>12 items</p>
-                </div>
-                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('sizzling')">
-                    <div class="menu-category-icon">🍳</div>
-                    <h3>Sizzling</h3>
-                    <p>5 items</p>
-                </div>
-                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('silog')">
-                    <div class="menu-category-icon">🍚</div>
-                    <h3>Favorite Silog</h3>
-                    <p>7 items</p>
-                </div>
-                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('grill-master')">
-                    <div class="menu-category-icon">🍗</div>
-                    <h3>Grill Master</h3>
-                    <p>6 items</p>
-                </div>
-                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('yangchow')">
-                    <div class="menu-category-icon">🍱</div>
-                    <h3>Yangchow Specials</h3>
-                    <p>7 items</p>
-                </div>
-                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('combos')">
-                    <div class="menu-category-icon">🥡</div>
-                    <h3>Ultimate Combos</h3>
-                    <p>6 items</p>
-                </div>
-                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('short-orders')">
-                    <div class="menu-category-icon">🍜</div>
-                    <h3>Short Orders</h3>
-                    <p>3 items</p>
-                </div>
-                <div class="menu-category-card animate-on-scroll" onclick="openMenuModal('rice-drinks')">
-                    <div class="menu-category-icon">🥤</div>
-                    <h3>Rice & Drinks</h3>
-                    <p>10 items</p>
-                </div>
-            </div>
-
-            <!-- Full Menu Images -->
-            <div class="section-header animate-on-scroll" style="margin-top: 4rem;">
-                <p class="section-subtitle">Complete Menu</p>
-                <h2 class="section-title">Our Full Menu</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div class="menu-images animate-on-scroll">
-                <div class="menu-image-container">
-                    <img src="images/3.png" alt="Pedro's Menu - Yangchow Fried Rice Specials and Ultimate Combos">
-                </div>
-                <div class="menu-image-container">
-                    <img src="images/4.png" alt="Pedro's Menu - Asian Stir Fry, Sizzling, Grill Master and Rice">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Menu Modals -->
+    <!-- Menu Modal -->
     <div id="menu-modal" class="menu-modal" onclick="closeMenuModal(event)">
-        <div class="menu-modal-content" onclick="event.stopPropagation()">
+        <div class="menu-modal-content menu-modal-images" onclick="event.stopPropagation()">
             <div class="menu-modal-header">
-                <h3 id="modal-title">Menu Category</h3>
+                <h3>Our Menu</h3>
                 <button class="menu-modal-close" onclick="closeMenuModal()">&times;</button>
             </div>
-            <div class="menu-modal-body" id="modal-body">
+            <div class="menu-modal-body">
+                <div class="menu-images-modal">
+                    <img src="images/3.jpg" alt="Pedro's Menu Page 1">
+                    <img src="images/4.jpg" alt="Pedro's Menu Page 2">
+                </div>
             </div>
         </div>
     </div>
@@ -1570,7 +1408,6 @@
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
                 <a href="#dishes">Dishes</a>
-                <a href="#menu">Menu</a>
                 <a href="#contact">Contact</a>
             </div>
             <div class="footer-social">
@@ -1648,126 +1485,11 @@
             });
         });
 
-        // Menu Modal Data
-        const menuData = {
-            'asian-stir-fry': {
-                title: 'Asian Stir Fry',
-                items: [
-                    { name: 'Orange Chicken', desc: 'Crispy chicken in tangy orange sauce', price: '₱149 / ₱249' },
-                    { name: 'Pad Kra Pao', desc: 'Thai basil stir-fry with fried egg', price: '₱149 / ₱249' },
-                    { name: 'Sweet & Spicy Pork Ribs', desc: 'Tender ribs in fiery chili glaze', price: '₱179 / ₱289' },
-                    { name: 'Squid in Bell Pepper', desc: 'Fresh squid with colorful peppers', price: '₱159 / ₱269' },
-                    { name: 'Squid w/ Veggie', desc: 'Squid with mixed vegetables', price: '₱159 / ₱269' },
-                    { name: 'Beef Mushroom', desc: 'Tender beef with savory mushrooms', price: '₱159 / ₱269' },
-                    { name: 'Beef Broccoli', desc: 'Tender beef with fresh broccoli', price: '₱159 / ₱269' },
-                    { name: 'Black Pepper Beef', desc: 'Beef strips in bold pepper sauce', price: '₱159 / ₱269' },
-                    { name: 'Thai Pork with Cashew', desc: 'Pork with cashews in chili sauce', price: '₱159 / ₱259' },
-                    { name: 'Kung Pao Chicken', desc: 'Spicy chicken with peanuts & dried chilies', price: '₱149 / ₱249' },
-                    { name: 'General Tso Chicken', desc: 'Crispy chicken in sweet & spicy glaze', price: '₱149 / ₱249' },
-                    { name: 'Spicy Pork Strips', desc: 'Crispy pork strips with spicy sauce', price: '₱159 / ₱259' }
-                ]
-            },
-            'sizzling': {
-                title: 'Sizzling',
-                items: [
-                    { name: 'Sizzling Liempo', desc: 'Grilled pork belly on sizzling plate', price: '₱99 / ₱149' },
-                    { name: 'Sizzling Porkchop', desc: 'Juicy porkchop on sizzling plate', price: '₱99 / ₱149' },
-                    { name: 'Sizzling Chicken', desc: 'Tender chicken on sizzling plate', price: '₱99 / ₱149' },
-                    { name: 'Sizzling Crispy Sisig', desc: 'Crispy pork sisig on sizzling plate', price: '₱99 / ₱149' },
-                    { name: 'Sizzling Lechon Kawali', desc: 'Crispy fried pork belly on sizzling plate', price: '₱99 / ₱149' }
-                ]
-            },
-            'silog': {
-                title: 'All Time Favorite Silog',
-                items: [
-                    { name: 'Beef Gyuden Silog', desc: 'Beef gyudon with egg and rice', price: '₱99 / ₱149' },
-                    { name: 'Chicksilog', desc: 'Fried chicken with egg and rice', price: '₱99 / ₱149' },
-                    { name: 'Longsilog', desc: 'Longganisa with egg and rice', price: '₱99 / ₱149' },
-                    { name: 'Spamsilog', desc: 'Spam with egg and rice', price: '₱99 / ₱149' },
-                    { name: 'Dangsitilog', desc: 'Danggit with egg and rice', price: '₱99 / ₱149' },
-                    { name: 'Porkchopsilog', desc: 'Porkchop with egg and rice', price: '₱99 / ₱149' },
-                    { name: 'Bacon Bacon Silog', desc: 'Bacon with egg and rice', price: '₱99 / ₱149' }
-                ]
-            },
-            'grill-master': {
-                title: 'Grill Master',
-                items: [
-                    { name: 'Regular Bacolod', desc: 'Bacolod-style grilled chicken', price: '₱99' },
-                    { name: 'Vietnamese Chicken', desc: 'Vietnamese-style grilled chicken', price: '₱125 / ₱145' },
-                    { name: 'Peri-Peri Chicken', desc: 'Spicy peri-peri style chicken', price: '₱125 / ₱145' },
-                    { name: 'Bacolod Chicken - Paa', desc: 'Bacolod chicken leg quarter', price: '₱145 / ₱165' },
-                    { name: 'Bacolod Chicken - Pecho', desc: 'Bacolod chicken breast', price: '₱145 / ₱165' },
-                    { name: 'Grilled Liempo', desc: 'Grilled pork belly', price: '₱145 / ₱175' }
-                ]
-            },
-            'yangchow': {
-                title: 'Yangchow Fried Rice Specials',
-                items: [
-                    { name: 'Orange Chicken', desc: 'With yangchow fried rice', price: '₱145 / ₱155' },
-                    { name: 'Chicken Fillet', desc: 'With yangchow fried rice', price: '₱145' },
-                    { name: 'Gen Tso Chicken', desc: 'With yangchow fried rice', price: '₱155' },
-                    { name: 'Spicy Pork Strips', desc: 'With yangchow fried rice', price: '₱155' },
-                    { name: 'Lechon Kawali', desc: 'With yangchow fried rice', price: '₱165' },
-                    { name: 'Pork Tonkatsu', desc: 'With yangchow fried rice', price: '₱165' },
-                    { name: 'Sweet & Sour Pork', desc: 'With yangchow fried rice', price: '₱165' }
-                ]
-            },
-            'combos': {
-                title: 'Ultimate Combos',
-                items: [
-                    { name: 'Tapa + Hungarian', desc: 'Beef tapa with hungarian sausage', price: '₱145' },
-                    { name: 'Adobo + Bangus', desc: 'Pork adobo with fried bangus', price: '₱189' },
-                    { name: 'Crispy Liempo 1 Fish', desc: 'Crispy liempo with fish', price: '₱189' },
-                    { name: 'Porkchop + Longganisa', desc: 'Porkchop with longganisa', price: '₱145' },
-                    { name: 'Bacon & Tocino', desc: 'Bacon with tocino combo', price: '₱185' },
-                    { name: 'Gyudon and Crispy Sisig', desc: 'Beef gyudon with crispy sisig', price: '₱185' }
-                ]
-            },
-            'short-orders': {
-                title: 'Short Orders',
-                items: [
-                    { name: 'Chami', desc: 'Solo / Medium / Large / Bilao', price: '₱70 - ₱750' },
-                    { name: 'Niki Bihon', desc: 'Solo / Medium / Large / Bilao', price: '₱80 - ₱850' },
-                    { name: 'Lomi', desc: 'Solo / Medium / Large / Bilao', price: '₱80 - ₱850' }
-                ]
-            },
-            'rice-drinks': {
-                title: 'Rice & Drinks',
-                items: [
-                    { name: 'Plain Rice', desc: '', price: '₱25' },
-                    { name: 'Egg Fried Rice', desc: '', price: '₱50' },
-                    { name: 'Yangchow Fried Rice', desc: '', price: '₱70' },
-                    { name: 'Platter Egg Fried', desc: '', price: '₱99' },
-                    { name: 'Platter Yangchow', desc: '', price: '₱179' },
-                    { name: 'Cucumber Lemonade', desc: '', price: '₱25' },
-                    { name: 'Red Iced Tea', desc: '', price: '₱25' },
-                    { name: 'Blue Lemonade', desc: '', price: '₱25' },
-                    { name: 'Palamig', desc: '', price: '₱25' },
-                    { name: 'Melon', desc: '', price: '₱25' }
-                ]
-            }
-        };
-
-        function openMenuModal(category) {
+        // Menu Modal Functions
+        function openMenuModal() {
             const modal = document.getElementById('menu-modal');
-            const title = document.getElementById('modal-title');
-            const body = document.getElementById('modal-body');
-            const data = menuData[category];
-
-            if (data) {
-                title.textContent = data.title;
-                body.innerHTML = data.items.map(item => `
-                    <div class="menu-item">
-                        <div class="menu-item-info">
-                            <h4>${item.name}</h4>
-                            ${item.desc ? `<p>${item.desc}</p>` : ''}
-                        </div>
-                        <span class="menu-item-price">${item.price}</span>
-                    </div>
-                `).join('');
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeMenuModal(event) {
