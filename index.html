@@ -575,20 +575,46 @@
         }
 
         .menu-modal-images {
-            max-width: 1200px;
+            max-width: 1600px;
         }
 
         .menu-images-modal {
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            flex-direction: row;
+            gap: 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         .menu-images-modal img {
-            width: 100%;
+            width: 50%;
             height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+
+        .menu-images-modal img:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .menu-images-modal img:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        @media (max-width: 768px) {
+            .menu-images-modal {
+                flex-direction: column;
+            }
+
+            .menu-images-modal img {
+                width: 100%;
+            }
+
+            .menu-images-modal img:first-child {
+                border-radius: 8px 8px 0 0;
+            }
+
+            .menu-images-modal img:last-child {
+                border-radius: 0 0 8px 8px;
+            }
         }
 
         /* Reviews Section */
