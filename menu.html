@@ -110,14 +110,30 @@
         .menu-item {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
-            padding: 0.6rem 0.75rem;
+            padding: 0.5rem;
             border-left: 3px solid var(--primary-red);
             transition: all 0.3s ease;
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
         }
 
         .menu-item:hover {
             background: rgba(255, 255, 255, 0.08);
             border-left-color: var(--orange);
+        }
+
+        .menu-item-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .menu-item-content {
+            flex: 1;
+            min-width: 0;
         }
 
         .menu-item-header {
@@ -129,7 +145,7 @@
 
         .menu-item-name {
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: white;
         }
 
@@ -137,14 +153,14 @@
             font-weight: 700;
             color: var(--orange);
             white-space: nowrap;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .menu-item-desc {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #aaa;
             line-height: 1.3;
-            margin-top: 0.2rem;
+            margin-top: 0.15rem;
         }
 
         /* Section Title */
@@ -304,124 +320,169 @@
         <div class="menu-items">
             <!-- Best Seller -->
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Yangchow Lechon Kawali<span class="badge">Best Seller</span></span>
-                    <span class="menu-item-price">169</span>
+                <img src="images/Krapao Moo Krob.jpg" alt="Yangchow Lechon Kawali" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Yangchow Lechon Kawali<span class="badge">Best Seller</span></span>
+                        <span class="menu-item-price">169</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Asian -->
             <h3 class="section-title">Asian</h3>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Pad Thai</span>
-                    <span class="menu-item-price">179</span>
+                <img src="images/Padkra Pao.jpg" alt="Pad Thai" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Pad Thai</span>
+                        <span class="menu-item-price">179</span>
+                    </div>
+                    <p class="menu-item-desc">Thai stir-fried rice noodles with egg, vegetables, and peanuts</p>
                 </div>
-                <p class="menu-item-desc">Thai stir-fried rice noodles with egg, vegetables, and peanuts</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Lo Mien</span>
-                    <span class="menu-item-price">169</span>
+                <img src="images/Thai Pork Cashew.jpg" alt="Lo Mien" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Lo Mien</span>
+                        <span class="menu-item-price">169</span>
+                    </div>
+                    <p class="menu-item-desc">Stir-fried noodles with savory sauce, vegetables, and meat</p>
                 </div>
-                <p class="menu-item-desc">Stir-fried noodles with savory sauce, vegetables, and meat</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Beef Pho</span>
-                    <span class="menu-item-price">189</span>
+                <img src="images/Beef Brocolli.jpg" alt="Beef Pho" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Beef Pho</span>
+                        <span class="menu-item-price">189</span>
+                    </div>
+                    <p class="menu-item-desc">Vietnamese rice noodles in aromatic beef broth with fresh herbs</p>
                 </div>
-                <p class="menu-item-desc">Vietnamese rice noodles in aromatic beef broth with fresh herbs</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">House Special Noodles</span>
-                    <span class="menu-item-price">169</span>
+                <img src="images/Squid Veggie.jpg" alt="House Special Noodles" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">House Special Noodles</span>
+                        <span class="menu-item-price">169</span>
+                    </div>
+                    <p class="menu-item-desc">Wok-fried noodles with shrimp, squid, pork, and chicken</p>
                 </div>
-                <p class="menu-item-desc">Wok-fried noodles with shrimp, squid, pork, and chicken</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Kra Pao Moo Krob</span>
-                    <span class="menu-item-price">179</span>
+                <img src="images/Krapao Moo Krob.jpg" alt="Kra Pao Moo Krob" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Kra Pao Moo Krob</span>
+                        <span class="menu-item-price">179</span>
+                    </div>
+                    <p class="menu-item-desc">Crispy pork belly with garlic, chilies, and Thai holy basil</p>
                 </div>
-                <p class="menu-item-desc">Crispy pork belly with garlic, chilies, and Thai holy basil</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Pad Kra Pao</span>
-                    <span class="menu-item-price">149</span>
+                <img src="images/Padkra Pao.jpg" alt="Pad Kra Pao" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Pad Kra Pao</span>
+                        <span class="menu-item-price">149</span>
+                    </div>
+                    <p class="menu-item-desc">Thai street food - minced meat with holy basil and egg</p>
                 </div>
-                <p class="menu-item-desc">Thai street food - minced meat with holy basil and egg</p>
             </div>
 
             <!-- Fried Rice Meals -->
             <h3 class="section-title">Fried Rice Meals</h3>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Chicken Fillet</span>
-                    <span class="menu-item-price">149</span>
+                <img src="images/General Tso.jpg" alt="Chicken Fillet" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Chicken Fillet</span>
+                        <span class="menu-item-price">149</span>
+                    </div>
+                    <p class="menu-item-desc">Crispy chicken fillet on yangchow fried rice</p>
                 </div>
-                <p class="menu-item-desc">Crispy chicken fillet on yangchow fried rice</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Pork Tonkatsu</span>
-                    <span class="menu-item-price">159</span>
+                <img src="images/Spicy Pork Strips.jpg" alt="Pork Tonkatsu" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Pork Tonkatsu</span>
+                        <span class="menu-item-price">159</span>
+                    </div>
+                    <p class="menu-item-desc">Crispy pork tonkatsu on yangchow fried rice</p>
                 </div>
-                <p class="menu-item-desc">Crispy pork tonkatsu on yangchow fried rice</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">BBQ Chicken Wings</span>
-                    <span class="menu-item-price">149</span>
+                <img src="images/Spicy Pork Ribs.jpg" alt="BBQ Chicken Wings" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">BBQ Chicken Wings</span>
+                        <span class="menu-item-price">149</span>
+                    </div>
+                    <p class="menu-item-desc">Juicy BBQ wings with savory egg fried rice</p>
                 </div>
-                <p class="menu-item-desc">Juicy BBQ wings with savory egg fried rice</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Honey Butter Garlic Wings</span>
-                    <span class="menu-item-price">149</span>
+                <img src="images/Orange Chicken.jpg" alt="Honey Butter Garlic Wings" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Honey Butter Garlic Wings</span>
+                        <span class="menu-item-price">149</span>
+                    </div>
+                    <p class="menu-item-desc">Sweet honey butter garlic wings with egg fried rice</p>
                 </div>
-                <p class="menu-item-desc">Sweet honey butter garlic wings with egg fried rice</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Buffalo Wings</span>
-                    <span class="menu-item-price">149</span>
+                <img src="images/Kung Pao.jpg" alt="Buffalo Wings" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Buffalo Wings</span>
+                        <span class="menu-item-price">149</span>
+                    </div>
+                    <p class="menu-item-desc">Tangy and spicy buffalo wings with egg fried rice</p>
                 </div>
-                <p class="menu-item-desc">Tangy and spicy buffalo wings with egg fried rice</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Beef Gyudon</span>
-                    <span class="menu-item-price">169</span>
+                <img src="images/Black Pepper Beef.jpg" alt="Beef Gyudon" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Beef Gyudon</span>
+                        <span class="menu-item-price">169</span>
+                    </div>
+                    <p class="menu-item-desc">Thinly sliced beef in savory-sweet soy sauce over rice</p>
                 </div>
-                <p class="menu-item-desc">Thinly sliced beef in savory-sweet soy sauce over rice</p>
             </div>
 
             <!-- Drinks -->
             <h3 class="section-title">Drinks</h3>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Vietnamese Coffee</span>
-                    <span class="menu-item-price">119</span>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Vietnamese Coffee</span>
+                        <span class="menu-item-price">119</span>
+                    </div>
+                    <p class="menu-item-desc">Deep roasted coffee served ice-cold, smooth and satisfying</p>
                 </div>
-                <p class="menu-item-desc">Deep roasted coffee served ice-cold, smooth and satisfying</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Coconut Coffee</span>
-                    <span class="menu-item-price">139</span>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Coconut Coffee</span>
+                        <span class="menu-item-price">139</span>
+                    </div>
+                    <p class="menu-item-desc">Rich coffee with a smooth tropical touch</p>
                 </div>
-                <p class="menu-item-desc">Rich coffee with a smooth tropical touch</p>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Peach Mango Soda</span>
-                    <span class="menu-item-price">79</span>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Peach Mango Soda</span>
+                        <span class="menu-item-price">79</span>
+                    </div>
+                    <p class="menu-item-desc">Refreshing peach mango soda with mint garnish</p>
                 </div>
-                <p class="menu-item-desc">Refreshing peach mango soda with mint garnish</p>
             </div>
         </div>
 
@@ -445,89 +506,129 @@
         <div class="menu-items">
             <!-- Asian Stir Fry -->
             <h3 class="section-title">Asian Stir Fry</h3>
-            <div class="size-labels" style="grid-column: span 2;">w/Rice: Double | Family</div>
+            <div class="size-labels" style="grid-column: span 2;">w/Rice | Double | Family</div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Orange Chicken</span>
-                    <span class="menu-item-price">149 | 269 | 439</span>
+                <img src="images/Orange Chicken.jpg" alt="Orange Chicken" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Orange Chicken</span>
+                        <span class="menu-item-price">149 | 269 | 439</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Pad Kra Pao</span>
-                    <span class="menu-item-price">149 | 279 | 479</span>
+                <img src="images/Padkra Pao.jpg" alt="Pad Kra Pao" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Pad Kra Pao</span>
+                        <span class="menu-item-price">149 | 279 | 479</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Sweet & Spicy Pork Ribs</span>
-                    <span class="menu-item-price">189 | 348 | 539</span>
+                <img src="images/Spicy Pork Ribs.jpg" alt="Sweet & Spicy Pork Ribs" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Sweet & Spicy Pork Ribs</span>
+                        <span class="menu-item-price">189 | 348 | 539</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Squid in Bell Pepper</span>
-                    <span class="menu-item-price">169 | 328 | 479</span>
+                <img src="images/Squid and bell pepper.jpg" alt="Squid in Bell Pepper" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Squid in Bell Pepper</span>
+                        <span class="menu-item-price">169 | 328 | 479</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Squid w/ Veggie</span>
-                    <span class="menu-item-price">169 | 328 | 479</span>
+                <img src="images/Squid Veggie.jpg" alt="Squid w/ Veggie" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Squid w/ Veggie</span>
+                        <span class="menu-item-price">169 | 328 | 479</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Krapao Moo Krob</span>
-                    <span class="menu-item-price">179 | 328 | 529</span>
+                <img src="images/Krapao Moo Krob.jpg" alt="Krapao Moo Krob" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Krapao Moo Krob</span>
+                        <span class="menu-item-price">179 | 328 | 529</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Braised Tofu w/ Pork Belly</span>
-                    <span class="menu-item-price">169 | 318 | 488</span>
+                <img src="images/Thai Pork Cashew.jpg" alt="Braised Tofu" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Braised Tofu w/ Pork Belly</span>
+                        <span class="menu-item-price">169 | 318 | 488</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Kung Pao Chicken</span>
-                    <span class="menu-item-price">149 | 279 | 439</span>
+                <img src="images/Kung Pao.jpg" alt="Kung Pao Chicken" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Kung Pao Chicken</span>
+                        <span class="menu-item-price">149 | 279 | 439</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">General Tso Chicken</span>
-                    <span class="menu-item-price">149 | 279 | 439</span>
+                <img src="images/General Tso.jpg" alt="General Tso Chicken" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">General Tso Chicken</span>
+                        <span class="menu-item-price">149 | 279 | 439</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Spicy Garlic Wings</span>
-                    <span class="menu-item-price">179 | 328 | 479</span>
+                <img src="images/Spicy Pork Strips.jpg" alt="Spicy Garlic Wings" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Spicy Garlic Wings</span>
+                        <span class="menu-item-price">179 | 328 | 479</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Krapao Squid</span>
-                    <span class="menu-item-price">169 | 328 | 479</span>
+                <img src="images/Squid Veggie.jpg" alt="Krapao Squid" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Krapao Squid</span>
+                        <span class="menu-item-price">169 | 328 | 479</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Mapo Tofu</span>
-                    <span class="menu-item-price">149 | 258 | 427</span>
+                <img src="images/Black Pepper Beef.jpg" alt="Mapo Tofu" class="menu-item-img">
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Mapo Tofu</span>
+                        <span class="menu-item-price">149 | 258 | 427</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Stir Fry Veggie</span>
-                    <span class="menu-item-price">139 | 238 | 397</span>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Stir Fry Veggie</span>
+                        <span class="menu-item-price">139 | 238 | 397</span>
+                    </div>
                 </div>
             </div>
             <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Ampalaya with Tofu</span>
-                    <span class="menu-item-price">139 | 238 | 397</span>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">Ampalaya with Tofu</span>
+                        <span class="menu-item-price">139 | 238 | 397</span>
+                    </div>
                 </div>
             </div>
 
