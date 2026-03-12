@@ -11,7 +11,6 @@
   ],
 
   "friedRiceMeals": [
-    { "name": "Fried Rice With Lechon Kawali Yangchow", "price": 249 },
     { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller" },
     { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
     { "name": "BBQ Chicken Wings", "price": 169, "badge": "Best Seller" },
