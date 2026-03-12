@@ -9,298 +9,81 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary-red: #C41E3A;
             --dark-red: #8B0000;
             --gold: #D4AF37;
-            --light-gold: #F4E4BC;
             --charcoal: #2C2C2C;
             --dark-bg: #1a1a1a;
-            --cream: #FFF8F0;
             --orange: #E85D04;
         }
+        html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+        body { font-family: 'Poppins', sans-serif; background: var(--dark-bg); color: white; overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
 
-        html {
-            scroll-behavior: smooth;
-            scroll-snap-type: y proximity;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--dark-bg);
-            color: white;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* Page Container */
         .menu-page {
-            min-height: 100vh;
-            width: 100%;
-            scroll-snap-align: start;
-            display: flex;
-            flex-direction: column;
-            padding: 1rem;
+            min-height: 100vh; width: 100%; scroll-snap-align: start;
+            display: flex; flex-direction: column; padding: 1rem;
             background: linear-gradient(135deg, var(--dark-bg) 0%, var(--charcoal) 100%);
             position: relative;
         }
-
         .menu-page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
             background: linear-gradient(90deg, var(--primary-red), var(--orange), var(--primary-red));
         }
 
-        /* Header */
-        .page-header {
-            text-align: center;
-            padding: 0.75rem 0 1rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            margin-bottom: 0.75rem;
-        }
+        .page-header { text-align: center; padding: 0.75rem 0 1rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); margin-bottom: 0.75rem; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); margin-bottom: 0.15rem; }
+        .logo span { color: var(--primary-red); }
+        .category-title { font-size: 1.5rem; color: white; margin-bottom: 0.15rem; }
+        .category-subtitle { color: var(--orange); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--gold);
-            margin-bottom: 0.15rem;
-        }
-
-        .logo span {
-            color: var(--primary-red);
-        }
-
-        .category-title {
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 0.15rem;
-        }
-
-        .category-subtitle {
-            color: var(--orange);
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* Menu Items */
-        .menu-items {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            overflow-y: auto;
-            padding-bottom: 0.5rem;
-        }
-
+        .menu-items { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; overflow-y: auto; padding-bottom: 0.5rem; }
         .menu-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 0.6rem;
-            border-left: 3px solid var(--primary-red);
-            transition: all 0.3s ease;
-            display: flex;
-            gap: 0.8rem;
-            align-items: center;
+            background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 0.6rem;
+            border-left: 3px solid var(--primary-red); transition: all 0.3s ease;
+            display: flex; gap: 0.8rem; align-items: center;
         }
+        .menu-item:hover { background: rgba(255, 255, 255, 0.08); border-left-color: var(--orange); }
+        .menu-item-img { width: 85px; height: 85px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+        .menu-item-content { flex: 1; min-width: 0; }
+        .menu-item-header { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+        .menu-item-name { font-weight: 600; font-size: 1.05rem; color: white; }
+        .menu-item-price { font-weight: 700; color: var(--orange); white-space: nowrap; font-size: 1rem; }
+        .menu-item-desc { font-size: 0.9rem; color: #aaa; line-height: 1.4; margin-top: 0.3rem; }
 
-        .menu-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-left-color: var(--orange);
-        }
+        .section-title { font-size: 1rem; color: var(--orange); margin: 0.75rem 0 0.5rem; padding-bottom: 0.25rem; border-bottom: 1px dashed var(--orange); }
+        .size-labels { display: flex; justify-content: flex-end; gap: 0.5rem; margin-bottom: 0.25rem; padding-right: 0.5rem; font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
 
-        .menu-item-img {
-            width: 85px;
-            height: 85px;
-            border-radius: 10px;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
+        .page-indicator { text-align: center; padding: 0.5rem 0; color: #666; font-size: 0.75rem; }
+        .page-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.25rem; }
+        .page-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); }
+        .page-dot.active { background: var(--orange); }
+        .scroll-hint { text-align: center; color: var(--orange); font-size: 0.7rem; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-5px); } 60% { transform: translateY(-3px); } }
 
-        .menu-item-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .menu-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .menu-item-name {
-            font-weight: 600;
-            font-size: 1.05rem;
-            color: white;
-        }
-
-        .menu-item-price {
-            font-weight: 700;
-            color: var(--orange);
-            white-space: nowrap;
-            font-size: 1rem;
-        }
-
-        .menu-item-desc {
-            font-size: 0.9rem;
-            color: #aaa;
-            line-height: 1.4;
-            margin-top: 0.3rem;
-        }
-
-        /* Section Title */
-        .section-title {
-            font-size: 1rem;
-            color: var(--orange);
-            margin: 0.75rem 0 0.5rem;
-            padding-bottom: 0.25rem;
-            border-bottom: 1px dashed var(--orange);
-        }
-
-        /* Size Labels */
-        .size-labels {
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.5rem;
-            margin-bottom: 0.25rem;
-            padding-right: 0.5rem;
-            font-size: 0.65rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Page Indicator */
-        .page-indicator {
-            text-align: center;
-            padding: 0.5rem 0;
-            color: #666;
-            font-size: 0.75rem;
-        }
-
-        .page-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 0.25rem;
-        }
-
-        .page-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .page-dot.active {
-            background: var(--orange);
-        }
-
-        /* Scroll hint */
-        .scroll-hint {
-            text-align: center;
-            color: var(--orange);
-            font-size: 0.7rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-5px); }
-            60% { transform: translateY(-3px); }
-        }
-
-        /* Back button */
         .back-btn {
-            position: fixed;
-            top: 0.75rem;
-            left: 0.75rem;
-            background: var(--primary-red);
-            color: white;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-size: 1rem;
-            cursor: pointer;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            position: fixed; top: 0.75rem; left: 0.75rem; background: var(--primary-red); color: white;
+            border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1rem; cursor: pointer;
+            z-index: 100; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); transition: all 0.3s ease;
         }
+        .back-btn:hover { background: var(--dark-red); transform: scale(1.1); }
 
-        .back-btn:hover {
-            background: var(--dark-red);
-            transform: scale(1.1);
-        }
+        .badge { display: inline-block; background: var(--orange); color: white; font-size: 0.55rem; padding: 0.1rem 0.3rem; border-radius: 3px; margin-left: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        /* Badge */
-        .badge {
-            display: inline-block;
-            background: var(--orange);
-            color: white;
-            font-size: 0.55rem;
-            padding: 0.1rem 0.3rem;
-            border-radius: 3px;
-            margin-left: 0.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Grid layout for larger screens */
         @media (min-width: 768px) {
-            .menu-page {
-                padding: 1.5rem 2rem;
-            }
-
-            .menu-items {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-            }
-
-            .section-title {
-                grid-column: span 2;
-            }
-
-            .category-title {
-                font-size: 2rem;
-            }
+            .menu-page { padding: 1.5rem 2rem; }
+            .menu-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .section-title, .size-labels { grid-column: span 2; }
+            .category-title { font-size: 2rem; }
         }
-
         @media (max-height: 700px) {
-            .menu-item {
-                padding: 0.5rem 0.6rem;
-            }
-
-            .menu-item-name {
-                font-size: 0.8rem;
-            }
-
-            .page-header {
-                padding: 0.5rem 0 0.75rem;
-            }
-
-            .category-title {
-                font-size: 1.3rem;
-            }
+            .menu-item { padding: 0.5rem 0.6rem; }
+            .menu-item-name { font-size: 0.8rem; }
+            .page-header { padding: 0.5rem 0 0.75rem; }
+            .category-title { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -309,538 +92,182 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
     </a>
 
-    <!-- Page 1: Best Seller, Asian, Fried Rice Meals, Drinks -->
-    <section class="menu-page" id="page1">
-        <div class="page-header">
-            <div class="logo">Pedro's Classic and <span>Asian Cuisine</span></div>
-            <h1 class="category-title">Our Menu</h1>
-            <p class="category-subtitle">Best Seller & Asian Favorites</p>
-        </div>
-
-        <div class="menu-items">
-            <!-- Best Seller -->
-            <div class="menu-item">
-                <img src="images/Best Seller/yangchow lechon kawali.png" alt="Yangchow Lechon Kawali" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Yangchow Lechon Kawali<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">189</span>
-                    </div>
-                    <p class="menu-item-desc">Yangchow fried rice topped with crispy lechon kawali.</p>
-                </div>
-            </div>
-
-            <!-- Asian Noodles -->
-            <h3 class="section-title">Asian Noodles</h3>
-            <div class="menu-item">
-                <img src="images/Asian/PAD THAI.jpg" alt="Pad Thai" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Pad Thai<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">199</span>
-                    </div>
-                    <p class="menu-item-desc">Thai stir-fried rice noodles with egg, vegetables, and peanuts</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian/lo mien.png" alt="Lo Mien" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Lo Mien</span>
-                        <span class="menu-item-price">189</span>
-                    </div>
-                    <p class="menu-item-desc">Stir-fried noodles with savory sauce, vegetables, and meat</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian/Beef Pho.jpg" alt="Beef Pho" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Beef Pho</span>
-                        <span class="menu-item-price">209</span>
-                    </div>
-                    <p class="menu-item-desc">Vietnamese rice noodles in aromatic beef broth with fresh herbs</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian/stirfry noodles.jpg" alt="House Special Noodles" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">House Special Noodles</span>
-                        <span class="menu-item-price">189</span>
-                    </div>
-                    <p class="menu-item-desc">Wok-fried noodles with shrimp, squid, pork, and chicken</p>
-                </div>
-            </div>
-
-            <!-- Fried Rice Meals -->
-            <h3 class="section-title">Fried Rice Meals</h3>
-            <div class="menu-item">
-                <img src="images/Best Seller/yangchow lechon kawali.png" alt="Fried Rice With Lechon Kawali Yangchow" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Fried Rice With Lechon Kawali Yangchow</span>
-                        <span class="menu-item-price">249</span>
-                    </div>
-                    <p class="menu-item-desc">Crispy Thai-style pork belly served with your choice of Yangchow Fried Rice or Kimchi Fried Rice</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Fried Rice Meals/chicken fillet.jpg" alt="Chicken Fillet" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Chicken Fillet<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">169</span>
-                    </div>
-                    <p class="menu-item-desc">Crispy chicken fillet on yangchow fried rice</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Fried Rice Meals/tonkatsu1.png" alt="Pork Tonkatsu" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Pork Tonkatsu<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">179</span>
-                    </div>
-                    <p class="menu-item-desc">Crispy pork tonkatsu on yangchow fried rice</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Fried Rice Meals/spicy garlic wings.jpg" alt="BBQ Chicken Wings" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">BBQ Chicken Wings<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">169</span>
-                    </div>
-                    <p class="menu-item-desc">Juicy BBQ wings with savory egg fried rice</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Fried Rice Meals/honey butter garlic wings.jpg" alt="Honey Butter Garlic Wings" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Honey Butter Garlic Wings<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">169</span>
-                    </div>
-                    <p class="menu-item-desc">Sweet honey butter garlic wings with egg fried rice</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Fried Rice Meals/spicy garlic wings.jpg" alt="Buffalo Wings" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Buffalo Wings<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">169</span>
-                    </div>
-                    <p class="menu-item-desc">Tangy and spicy buffalo wings with egg fried rice</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Fried Rice Meals/beef gyudon.jpg" alt="Beef Gyudon" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Beef Gyudon<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">189</span>
-                    </div>
-                    <p class="menu-item-desc">Thinly sliced beef in savory-sweet soy sauce over rice</p>
-                </div>
-            </div>
-
-            <!-- Drinks -->
-            <h3 class="section-title">Drinks</h3>
-            <div class="menu-item">
-                <img src="images/Drinks/vietnamese coffee.jpg" alt="Vietnamese Coffee" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Vietnamese Coffee</span>
-                        <span class="menu-item-price">139</span>
-                    </div>
-                    <p class="menu-item-desc">Deep roasted coffee served ice-cold, smooth and satisfying</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Drinks/vietnamese coffee.jpg" alt="Coconut Coffee" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Coconut Coffee</span>
-                        <span class="menu-item-price">159</span>
-                    </div>
-                    <p class="menu-item-desc">Rich coffee with a smooth tropical touch</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Peach Mango Soda</span>
-                        <span class="menu-item-price">99</span>
-                    </div>
-                    <p class="menu-item-desc">Refreshing peach mango soda with mint garnish</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-indicator">
-            <div class="scroll-hint">Swipe up for more</div>
-            <div class="page-dots">
-                <span class="page-dot active"></span>
-                <span class="page-dot"></span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Page 2: Asian Stir Fry, Rice, Beverages, Grill Master, Pinoy Classic -->
-    <section class="menu-page" id="page2">
-        <div class="page-header">
-            <div class="logo">Pedro's <span>Cuisine</span></div>
-            <h1 class="category-title">Full Menu</h1>
-            <p class="category-subtitle">Stir Fry, Rice & More</p>
-        </div>
-
-        <div class="menu-items">
-            <!-- Asian Stir Fry -->
-            <h3 class="section-title">Asian Stir Fry</h3>
-            <div class="size-labels" style="grid-column: span 2;">w/Rice | Double | Family</div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/Spicy Pork Ribs.jpg" alt="Spicy Garlic Pork Thai Style" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Spicy Garlic Pork Thai Style</span>
-                        <span class="menu-item-price">179 | 348 | 499</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/Orange Chicken.jpg" alt="Orange Chicken" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Orange Chicken</span>
-                        <span class="menu-item-price">159 | 289 | 459</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian/Padkra Pao.jpg" alt="Pad Kra Pao" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Pad Kra Pao<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">159 | 299 | 499</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/Spicy Pork Ribs.jpg" alt="Sweet & Spicy Pork Ribs" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Sweet & Spicy Pork Ribs<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">199 | 368 | 559</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/Squid and bell pepper.jpg" alt="Squid in Bell Pepper" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Squid in Bell Pepper</span>
-                        <span class="menu-item-price">179 | 348 | 499</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/Squid Veggie.jpg" alt="Squid w/ Veggie" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Squid w/ Veggie<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">179 | 348 | 499</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/Krapao Moo Krob.jpg" alt="Krapao Moo Krob" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Krapao Moo Krob<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">189 | 348 | 549</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/cabbage egg.jpg" alt="Braised Tofu" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Braised Tofu w/ Pork Belly</span>
-                        <span class="menu-item-price">179 | 338 | 508</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/Kung Pao.jpg" alt="Kung Pao Chicken" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Kung Pao Chicken</span>
-                        <span class="menu-item-price">169 | 299 | 459</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/General Tso.jpg" alt="General Tso Chicken" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">General Tso Chicken<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">169 | 299 | 459</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/spicy garlic wings.jpg" alt="Spicy Garlic Wings" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Spicy Garlic Wings</span>
-                        <span class="menu-item-price">189 | 348 | 499</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/krapao squid.png" alt="Krapao Squid" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Krapao Squid<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">179 | 348 | 499</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/mapo tofu.jpg" alt="Mapo Tofu" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Mapo Tofu<span class="badge">Best Seller</span></span>
-                        <span class="menu-item-price">159 | 278 | 447</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/cabbage egg.jpg" alt="Stir Fry Cabbage with Egg" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Stir Fry Cabbage with Egg</span>
-                        <span class="menu-item-price">149 | 258 | 417</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Asian Stir Fry/stirfry ampalaya with tofu.jpeg" alt="Ampalaya with Tofu" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Ampalaya with Tofu</span>
-                        <span class="menu-item-price">149 | 258 | 417</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fried Rice Solo -->
-            <h3 class="section-title">Fried Rice Solo</h3>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Plain Rice</span>
-                    <span class="menu-item-price">45</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Egg Fried Rice</span>
-                    <span class="menu-item-price">89</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Yangchow Fried Rice - Chicken</span>
-                    <span class="menu-item-price">119</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Yangchow Fried Rice - Pork</span>
-                    <span class="menu-item-price">119</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Fried Rice Solo/nasi goreng.jpg" alt="Nasi Goreng Chicken" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Nasi Goreng Chicken</span>
-                        <span class="menu-item-price">119</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Kimchi Fried Rice</span>
-                    <span class="menu-item-price">119</span>
-                </div>
-            </div>
-
-            <!-- Fried Rice Platter -->
-            <h3 class="section-title">Fried Rice Platter</h3>
-            <div class="size-labels" style="grid-column: span 2;">Double | 2 to 3 pax | 3 to 5 pax</div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Egg Fried Rice</span>
-                    <span class="menu-item-price">159 | 219 | 309</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="images/Fried Rice Solo/nasi goreng.jpg" alt="Nasi Goreng - Chicken" class="menu-item-img">
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <span class="menu-item-name">Nasi Goreng - Chicken</span>
-                        <span class="menu-item-price">269 | 369 | 529</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Yangchow - Chicken</span>
-                    <span class="menu-item-price">219 | 309 | 429</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Yangchow - Pork</span>
-                    <span class="menu-item-price">219 | 309 | 429</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Kimchi - Pork</span>
-                    <span class="menu-item-price">219 | 319 | 439</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Kimchi - Chicken</span>
-                    <span class="menu-item-price">219 | 319 | 439</span>
-                </div>
-            </div>
-
-            <!-- Beverages -->
-            <h3 class="section-title">Beverages / Fruit Soda</h3>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Bottled Water</span>
-                    <span class="menu-item-price">40</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Coke</span>
-                    <span class="menu-item-price">80</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">SanMig Light</span>
-                    <span class="menu-item-price">95</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Cucumber Lemonade</span>
-                    <span class="menu-item-price">69</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Strawberry</span>
-                    <span class="menu-item-price">69</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Blueberry</span>
-                    <span class="menu-item-price">69</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Peach Mango</span>
-                    <span class="menu-item-price">69</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Pitcher (Cucumber Lemonade / Strawberry / Peach Mango / Blueberry)</span>
-                    <span class="menu-item-price">99</span>
-                </div>
-            </div>
-
-            <!-- Grill Master -->
-            <h3 class="section-title">Grill Master</h3>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Peri-Peri Chicken w/ Bukhari Rice</span>
-                    <span class="menu-item-price">Half: 465 | Whole: 670</span>
-                </div>
-            </div>
-
-            <!-- Pinoy Classic -->
-            <h3 class="section-title">Pinoy Classic</h3>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Sisig Platter</span>
-                    <span class="menu-item-price">199</span>
-                </div>
-            </div>
-
-            <!-- Rice Upgrade -->
-            <h3 class="section-title">Rice Upgrade</h3>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Egg Fried Rice</span>
-                    <span class="menu-item-price">+50</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Yangchow Fried Rice</span>
-                    <span class="menu-item-price">+65</span>
-                </div>
-            </div>
-            <div class="menu-item">
-                <div class="menu-item-header">
-                    <span class="menu-item-name">Kimchi Fried Rice</span>
-                    <span class="menu-item-price">+75</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-indicator">
-            <div class="page-dots">
-                <span class="page-dot"></span>
-                <span class="page-dot active"></span>
-            </div>
-            <p style="margin-top: 0.5rem; color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
-        </div>
-    </section>
+    <div id="menu-container"></div>
 
     <script>
-        // Update page dots on scroll
-        const pages = document.querySelectorAll('.menu-page');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const pageId = entry.target.id;
-                    const pageNum = parseInt(pageId.replace('page', '')) - 1;
-                    const allDots = document.querySelectorAll('.page-indicator');
-                    allDots.forEach(indicator => {
-                        const dots = indicator.querySelectorAll('.page-dot');
-                        dots.forEach((d, i) => {
-                            d.classList.toggle('active', i === pageNum);
-                        });
-                    });
-                }
-            });
-        }, { threshold: 0.5 });
+        const images = {
+            "Yangchow Lechon Kawali": "images/Best Seller/yangchow lechon kawali.png",
+            "Pad Thai": "images/Asian/PAD THAI.jpg",
+            "Lo Mien": "images/Asian/lo mien.png",
+            "Beef Pho": "images/Asian/Beef Pho.jpg",
+            "House Special Noodles": "images/Asian/stirfry noodles.jpg",
+            "Fried Rice With Lechon Kawali Yangchow": "images/Best Seller/yangchow lechon kawali.png",
+            "Chicken Fillet": "images/Fried Rice Meals/chicken fillet.jpg",
+            "Pork Tonkatsu": "images/Fried Rice Meals/tonkatsu1.png",
+            "BBQ Chicken Wings": "images/Fried Rice Meals/spicy garlic wings.jpg",
+            "Honey Butter Garlic Wings": "images/Fried Rice Meals/honey butter garlic wings.jpg",
+            "Buffalo Wings": "images/Fried Rice Meals/spicy garlic wings.jpg",
+            "Beef Gyudon": "images/Fried Rice Meals/beef gyudon.jpg",
+            "Vietnamese Coffee": "images/Drinks/vietnamese coffee.jpg",
+            "Coconut Coffee": "images/Drinks/vietnamese coffee.jpg",
+            "Spicy Garlic Pork Thai Style": "images/Asian Stir Fry/Spicy Pork Ribs.jpg",
+            "Orange Chicken": "images/Asian Stir Fry/Orange Chicken.jpg",
+            "Pad Kra Pao": "images/Asian/Padkra Pao.jpg",
+            "Sweet & Spicy Pork Ribs": "images/Asian Stir Fry/Spicy Pork Ribs.jpg",
+            "Squid in Bell Pepper": "images/Asian Stir Fry/Squid and bell pepper.jpg",
+            "Squid w/ Veggie": "images/Asian Stir Fry/Squid Veggie.jpg",
+            "Krapao Moo Krob": "images/Asian Stir Fry/Krapao Moo Krob.jpg",
+            "Braised Tofu w/ Pork Belly": "images/Asian Stir Fry/cabbage egg.jpg",
+            "Kung Pao Chicken": "images/Asian Stir Fry/Kung Pao.jpg",
+            "General Tso Chicken": "images/Asian Stir Fry/General Tso.jpg",
+            "Spicy Garlic Wings": "images/Asian Stir Fry/spicy garlic wings.jpg",
+            "Krapao Squid": "images/Asian Stir Fry/krapao squid.png",
+            "Mapo Tofu": "images/Asian Stir Fry/mapo tofu.jpg",
+            "Stir Fry Cabbage with Egg": "images/Asian Stir Fry/cabbage egg.jpg",
+            "Ampalaya with Tofu": "images/Asian Stir Fry/stirfry ampalaya with tofu.jpeg",
+            "Nasi Goreng Chicken": "images/Fried Rice Solo/nasi goreng.jpg",
+            "Nasi Goreng - Chicken": "images/Fried Rice Solo/nasi goreng.jpg"
+        };
 
-        pages.forEach(page => observer.observe(page));
+        const descriptions = {
+            "Yangchow Lechon Kawali": "Yangchow fried rice topped with crispy lechon kawali.",
+            "Pad Thai": "Thai stir-fried rice noodles with egg, vegetables, and peanuts",
+            "Lo Mien": "Stir-fried noodles with savory sauce, vegetables, and meat",
+            "Beef Pho": "Vietnamese rice noodles in aromatic beef broth with fresh herbs",
+            "House Special Noodles": "Wok-fried noodles with shrimp, squid, pork, and chicken",
+            "Fried Rice With Lechon Kawali Yangchow": "Crispy Thai-style pork belly with Yangchow or Kimchi Fried Rice",
+            "Chicken Fillet": "Crispy chicken fillet on yangchow fried rice",
+            "Pork Tonkatsu": "Crispy pork tonkatsu on yangchow fried rice",
+            "BBQ Chicken Wings": "Juicy BBQ wings with savory egg fried rice",
+            "Honey Butter Garlic Wings": "Sweet honey butter garlic wings with egg fried rice",
+            "Buffalo Wings": "Tangy and spicy buffalo wings with egg fried rice",
+            "Beef Gyudon": "Thinly sliced beef in savory-sweet soy sauce over rice",
+            "Vietnamese Coffee": "Deep roasted coffee served ice-cold, smooth and satisfying",
+            "Coconut Coffee": "Rich coffee with a smooth tropical touch",
+            "Peach Mango Soda": "Refreshing peach mango soda with mint garnish"
+        };
+
+        async function loadMenu() {
+            try {
+                const response = await fetch('menu-data.json');
+                const data = await response.json();
+                renderMenu(data);
+            } catch (error) {
+                console.error('Error loading menu:', error);
+            }
+        }
+
+        function renderItem(item, priceType = 'simple') {
+            const badge = item.badge ? `<span class="badge">${item.badge}</span>` : '';
+            const img = images[item.name];
+            const desc = descriptions[item.name];
+
+            let price;
+            if (priceType === 'simple') {
+                price = item.price;
+            } else if (priceType === 'stirfry') {
+                price = `${item.withRice} | ${item.double} | ${item.family}`;
+            } else if (priceType === 'platter') {
+                price = `${item.double} | ${item.twoToThree} | ${item.threeToFive}`;
+            } else if (priceType === 'grill') {
+                price = `Half: ${item.half} | Whole: ${item.whole}`;
+            }
+
+            if (img) {
+                return `<div class="menu-item">
+                    <img src="${img}" alt="${item.name}" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <span class="menu-item-name">${item.name}${badge}</span>
+                            <span class="menu-item-price">${price}</span>
+                        </div>
+                        ${desc ? `<p class="menu-item-desc">${desc}</p>` : ''}
+                    </div>
+                </div>`;
+            } else {
+                return `<div class="menu-item">
+                    <div class="menu-item-header">
+                        <span class="menu-item-name">${item.name}${badge}</span>
+                        <span class="menu-item-price">${price}</span>
+                    </div>
+                    ${desc ? `<p class="menu-item-desc">${desc}</p>` : ''}
+                </div>`;
+            }
+        }
+
+        function renderSection(title, items, priceType = 'simple', sizeLabels = null) {
+            let html = title ? `<h3 class="section-title">${title}</h3>` : '';
+            if (sizeLabels) html += `<div class="size-labels">${sizeLabels}</div>`;
+            items.forEach(item => html += renderItem(item, priceType));
+            return html;
+        }
+
+        function renderMenu(data) {
+            const container = document.getElementById('menu-container');
+
+            // Page 1
+            let page1 = `<section class="menu-page" id="page1">
+                <div class="page-header">
+                    <div class="logo">Pedro's Classic and <span>Asian Cuisine</span></div>
+                    <h1 class="category-title">Our Menu</h1>
+                    <p class="category-subtitle">Best Seller & Asian Favorites</p>
+                </div>
+                <div class="menu-items">
+                    ${renderSection(null, data.bestSeller)}
+                    ${renderSection('Asian Noodles', data.asianNoodles)}
+                    ${renderSection('Fried Rice Meals', data.friedRiceMeals)}
+                    ${renderSection('Drinks', data.drinks)}
+                </div>
+                <div class="page-indicator">
+                    <div class="scroll-hint">Swipe up for more</div>
+                    <div class="page-dots"><span class="page-dot active"></span><span class="page-dot"></span></div>
+                </div>
+            </section>`;
+
+            // Page 2
+            let page2 = `<section class="menu-page" id="page2">
+                <div class="page-header">
+                    <div class="logo">Pedro's <span>Cuisine</span></div>
+                    <h1 class="category-title">Full Menu</h1>
+                    <p class="category-subtitle">Stir Fry, Rice & More</p>
+                </div>
+                <div class="menu-items">
+                    ${renderSection('Asian Stir Fry', data.asianStirFry, 'stirfry', 'w/Rice | Double | Family')}
+                    ${renderSection('Fried Rice Solo', data.friedRiceSolo)}
+                    ${renderSection('Fried Rice Platter', data.friedRicePlatter, 'platter', 'Double | 2-3 pax | 3-5 pax')}
+                    ${renderSection('Beverages / Fruit Soda', data.beverages)}
+                    ${renderSection('Grill Master', data.grillMaster, 'grill')}
+                    ${renderSection('Pinoy Classic', data.pinoyClassic)}
+                    ${renderSection('Rice Upgrade', data.riceUpgrade)}
+                </div>
+                <div class="page-indicator">
+                    <div class="page-dots"><span class="page-dot"></span><span class="page-dot active"></span></div>
+                    <p style="margin-top: 0.5rem; color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
+                </div>
+            </section>`;
+
+            container.innerHTML = page1 + page2;
+            setupPageObserver();
+        }
+
+        function setupPageObserver() {
+            const pages = document.querySelectorAll('.menu-page');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const pageNum = parseInt(entry.target.id.replace('page', '')) - 1;
+                        document.querySelectorAll('.page-indicator').forEach(indicator => {
+                            indicator.querySelectorAll('.page-dot').forEach((d, i) => {
+                                d.classList.toggle('active', i === pageNum);
+                            });
+                        });
+                    }
+                });
+            }, { threshold: 0.5 });
+            pages.forEach(page => observer.observe(page));
+        }
+
+        loadMenu();
     </script>
 </body>
 </html>
