@@ -18,13 +18,13 @@
             --dark-bg: #1a1a1a;
             --orange: #E85D04;
         }
-        html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+        html { scroll-behavior: smooth; }
         body { font-family: 'Poppins', sans-serif; background: var(--dark-bg); color: white; overflow-x: hidden; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
 
         .menu-page {
-            min-height: 100vh; width: 100%; scroll-snap-align: start;
-            display: flex; flex-direction: column; padding: 1rem;
+            min-height: 100vh; width: 100%;
+            flex-direction: column; padding: 1rem;
             background: linear-gradient(135deg, var(--dark-bg) 0%, var(--charcoal) 100%);
             position: relative;
         }
@@ -54,7 +54,7 @@
         .menu-item-desc { font-size: 0.9rem; color: #aaa; line-height: 1.4; margin-top: 0.3rem; }
 
         .section-title { font-size: 1rem; color: var(--orange); margin: 0.75rem 0 0.5rem; padding-bottom: 0.25rem; border-bottom: 1px dashed var(--orange); }
-        .size-labels { display: flex; justify-content: flex-end; gap: 0.5rem; margin-bottom: 0.25rem; padding-right: 0.5rem; font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+        .size-labels { display: flex; justify-content: flex-end; gap: 0.75rem; margin-bottom: 0.35rem; padding-right: 0.5rem; font-size: 0.8rem; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
 
         .page-indicator { text-align: center; padding: 0.5rem 0; color: #666; font-size: 0.75rem; }
         .page-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.25rem; }
@@ -72,6 +72,29 @@
         .back-btn:hover { background: var(--dark-red); transform: scale(1.1); }
 
         .badge { display: inline-block; background: var(--orange); color: white; font-size: 0.55rem; padding: 0.1rem 0.3rem; border-radius: 3px; margin-left: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .page-tabs {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            display: flex; background: var(--charcoal);
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            z-index: 100; padding: 0.5rem;
+        }
+        .page-tab {
+            flex: 1; padding: 0.75rem 1rem; text-align: center;
+            background: transparent; border: none; color: #888;
+            font-family: 'Poppins', sans-serif; font-size: 0.85rem;
+            cursor: pointer; transition: all 0.3s ease;
+            border-radius: 8px; margin: 0 0.25rem;
+        }
+        .page-tab.active {
+            background: var(--primary-red); color: white;
+        }
+        .page-tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1); color: white;
+        }
+
+        .menu-page { display: none; padding-bottom: 4rem; }
+        .menu-page.active { display: flex; }
 
         @media (min-width: 768px) {
             .menu-page { padding: 1.5rem 2rem; }
@@ -93,6 +116,11 @@
     </a>
 
     <div id="menu-container"></div>
+
+    <div class="page-tabs">
+        <button class="page-tab active" data-page="page1">Main Dishes</button>
+        <button class="page-tab" data-page="page2">Sides & Drinks</button>
+    </div>
 
     <script>
         const images = {
@@ -205,65 +233,76 @@
         function renderMenu(data) {
             const container = document.getElementById('menu-container');
 
-            // Page 1
+            // Page 1: Main Dishes
             let page1 = `<section class="menu-page" id="page1">
                 <div class="page-header">
                     <div class="logo">Pedro's Classic and <span>Asian Cuisine</span></div>
-                    <h1 class="category-title">Our Menu</h1>
+                    <h1 class="category-title">Main Dishes</h1>
                     <p class="category-subtitle">Best Seller & Asian Favorites</p>
                 </div>
                 <div class="menu-items">
                     ${renderSection(null, data.bestSeller)}
                     ${renderSection('Fried Rice Meals', data.friedRiceMeals)}
                     ${renderSection('Asian Noodles', data.asianNoodles)}
+                    ${renderSection('Asian Stir Fry', data.asianStirFry, 'stirfry', 'w/Rice | Double | Family')}
                 </div>
                 <div class="page-indicator">
-                    <div class="scroll-hint">Swipe up for more</div>
-                    <div class="page-dots"><span class="page-dot active"></span><span class="page-dot"></span></div>
+                    <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
                 </div>
             </section>`;
 
-            // Page 2
+            // Page 2: Sides, Drinks & More
             let page2 = `<section class="menu-page" id="page2">
                 <div class="page-header">
                     <div class="logo">Pedro's <span>Cuisine</span></div>
-                    <h1 class="category-title">Full Menu</h1>
-                    <p class="category-subtitle">Stir Fry, Rice & More</p>
+                    <h1 class="category-title">Sides, Drinks & More</h1>
+                    <p class="category-subtitle">Rice, Beverages & Extras</p>
                 </div>
                 <div class="menu-items">
-                    ${renderSection('Asian Stir Fry', data.asianStirFry, 'stirfry', 'w/Rice | Double | Family')}
                     ${renderSection('Fried Rice Solo', data.friedRiceSolo)}
                     ${renderSection('Fried Rice Platter', data.friedRicePlatter, 'platter', 'Double | 2-3 pax | 3-5 pax')}
-                    ${renderSection('Beverages / Fruit Soda', data.beverages)}
                     ${renderSection('Grill Master', data.grillMaster, 'grill')}
                     ${renderSection('Pinoy Classic', data.pinoyClassic)}
                     ${renderSection('Rice Upgrade', data.riceUpgrade)}
+                    ${renderSection('Beverages / Fruit Soda', data.beverages)}
                 </div>
                 <div class="page-indicator">
-                    <div class="page-dots"><span class="page-dot"></span><span class="page-dot active"></span></div>
-                    <p style="margin-top: 0.5rem; color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
+                    <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
                 </div>
             </section>`;
 
             container.innerHTML = page1 + page2;
             setupPageObserver();
+            setupPageTabs();
         }
 
         function setupPageObserver() {
+            // No longer needed with tab navigation
+        }
+
+        function setupPageTabs() {
+            const tabs = document.querySelectorAll('.page-tab');
             const pages = document.querySelectorAll('.menu-page');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const pageNum = parseInt(entry.target.id.replace('page', '')) - 1;
-                        document.querySelectorAll('.page-indicator').forEach(indicator => {
-                            indicator.querySelectorAll('.page-dot').forEach((d, i) => {
-                                d.classList.toggle('active', i === pageNum);
-                            });
-                        });
-                    }
+
+            // Show first page by default
+            document.getElementById('page1').classList.add('active');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetPage = tab.dataset.page;
+
+                    // Update tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    // Update pages
+                    pages.forEach(p => p.classList.remove('active'));
+                    document.getElementById(targetPage).classList.add('active');
+
+                    // Scroll to top
+                    window.scrollTo(0, 0);
                 });
-            }, { threshold: 0.5 });
-            pages.forEach(page => observer.observe(page));
+            });
         }
 
         loadMenu();
