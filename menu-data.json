@@ -4,13 +4,12 @@
   ],
 
   "friedRiceMeals": [
-    { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller" },
-    { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
-    { "name": "BBQ Chicken Wings", "price": 169, "badge": "Best Seller" },
-    { "name": "Honey Butter Garlic Wings", "price": 169, "badge": "Best Seller" },
-    { "name": "Buffalo Wings", "price": 169, "badge": "Best Seller" },
-    { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller" },
-    { "name": "8 oz Ice", "price": "FREE" }
+    { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" },
+    { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" },
+    { "name": "BBQ Chicken Wings", "price": 169, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" },
+    { "name": "Honey Butter Garlic Wings", "price": 169, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" },
+    { "name": "Buffalo Wings", "price": 169, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" },
+    { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" }
   ],
 
   "asianNoodles": [

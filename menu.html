@@ -75,6 +75,7 @@
         .back-btn:hover { background: var(--dark-red); transform: scale(1.1); }
 
         .badge { display: inline-block; background: var(--orange); color: white; font-size: 0.55rem; padding: 0.1rem 0.3rem; border-radius: 3px; margin-left: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .freebie { display: block; color: var(--gold); font-size: 0.75rem; font-weight: 500; margin-top: 0.2rem; }
 
         .page-tabs {
             position: fixed; bottom: 0; left: 0; right: 0;
@@ -157,7 +158,11 @@
             "Stir Fry Cabbage with Egg": "images/Asian Stir Fry/cabbage egg.jpg",
             "Ampalaya with Tofu": "images/Asian Stir Fry/stirfry ampalaya with tofu.jpeg",
             "Nasi Goreng Chicken": "images/Fried Rice Solo/nasi goreng.jpg",
-            "Nasi Goreng - Chicken": "images/Fried Rice Solo/nasi goreng.jpg"
+            "Nasi Goreng - Chicken": "images/Fried Rice Solo/nasi goreng.jpg",
+            "Kimchi Fried Rice": "images/Fried Rice Solo/kimchi fried rice.jpg",
+            "Yangchow Fried Rice - Chicken": "images/Fried Rice Solo/yangchow chicken.jpg",
+            "Yangchow Fried Rice - Pork": "images/Fried Rice Solo/yangchow pork.jpg",
+            "Egg Fried Rice": "images/Fried Rice Solo/egg fried rice.jpg"
         };
 
         const descriptions = {
@@ -190,6 +195,7 @@
 
         function renderItem(item, priceType = 'simple') {
             const badge = item.badge ? `<span class="badge">${item.badge}</span>` : '';
+            const freebie = item.freebie ? `<span class="freebie">${item.freebie}</span>` : '';
             const img = images[item.name];
             const desc = descriptions[item.name];
             const hasMultiplePrices = priceType !== 'simple';
@@ -234,6 +240,7 @@
                                 <span class="menu-item-name">${item.name}${badge}</span>
                                 <span class="menu-item-price">${price}</span>
                             </div>
+                            ${freebie}
                             ${desc ? `<p class="menu-item-desc">${desc}</p>` : ''}
                         </div>
                     </div>`;
@@ -243,6 +250,7 @@
                             <span class="menu-item-name">${item.name}${badge}</span>
                             <span class="menu-item-price">${price}</span>
                         </div>
+                        ${freebie}
                         ${desc ? `<p class="menu-item-desc">${desc}</p>` : ''}
                     </div>`;
                 }
