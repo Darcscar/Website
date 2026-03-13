@@ -1,4 +1,8 @@
 {
+  "bestSeller": [
+    { "name": "Yangchow Lechon Kawali", "price": 189, "image": "images/Best Seller/yangchow lechon kawali.png", "badge": "Best Seller" }
+  ],
+
   "friedRiceMeals": [
     { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller" },
     { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
@@ -51,13 +55,10 @@
     { "name": "Kimchi - Chicken", "double": 219, "twoToThree": 319, "threeToFive": 439 }
   ],
 
-  "drinks": [
+  "beverages": [
     { "name": "Vietnamese Coffee", "price": 139 },
     { "name": "Coconut Coffee", "price": 159 },
-    { "name": "Peach Mango Soda", "price": 99 }
-  ],
-
-  "beverages": [
+    { "name": "Peach Mango Soda", "price": 99 },
     { "name": "Bottled Water", "price": 40 },
     { "name": "Coke", "price": 80 },
     { "name": "SanMig Light", "price": 95 },
