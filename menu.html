@@ -53,8 +53,10 @@
         .menu-item-price { font-weight: 700; color: var(--orange); white-space: nowrap; font-size: 1rem; }
         .menu-item-desc { font-size: 0.9rem; color: #aaa; line-height: 1.4; margin-top: 0.3rem; }
 
-        .menu-item-multi .menu-item-content { display: flex; flex-direction: column; }
-        .menu-item-price-right { font-weight: 700; color: var(--orange); font-size: 0.9rem; text-align: right; margin-top: 0.3rem; }
+        .menu-item-multi .menu-item-content { display: flex; flex-wrap: wrap; align-items: baseline; }
+        .menu-item-multi .menu-item-name { flex: 1; min-width: 0; }
+        .menu-item-price-right { font-weight: 700; color: var(--orange); font-size: 0.9rem; text-align: right; }
+        .menu-item-multi .menu-item-desc { width: 100%; }
 
         .section-title { font-size: 1rem; color: var(--orange); margin: 0.75rem 0 0.5rem; padding-bottom: 0.25rem; border-bottom: 1px dashed var(--orange); }
         .size-labels { display: flex; justify-content: flex-end; gap: 0.75rem; margin-bottom: 0.35rem; padding-right: 0.5rem; font-size: 0.8rem; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
