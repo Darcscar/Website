@@ -81,9 +81,9 @@
     { "name": "Coke", "price": 30 },
     { "name": "Cucumber Lemonade", "price": 49 },
     { "name": "Strawberry", "price": 49 },
-    { "name": "Peach Mango Soda Pitcher", "price": 179 },
     { "name": "Blueberry", "price": 49 },
-    { "name": "Pitcher (All Flavors)", "price": 99 }
+    { "name": "Pitcher (All Flavors)", "price": 99 },
+    { "name": "Peach Mango Soda Pitcher", "price": 179 }
   ],
 
   "grillMaster": [
