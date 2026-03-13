@@ -1,8 +1,4 @@
 {
-  "bestSeller": [
-    { "name": "Yangchow Lechon Kawali", "price": 189, "image": "images/Best Seller/yangchow lechon kawali.png", "badge": "Best Seller" }
-  ],
-
   "friedRiceMeals": [
     { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller" },
     { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
