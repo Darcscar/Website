@@ -77,6 +77,10 @@
     { "name": "Sisig Platter", "price": 199 }
   ],
 
+  "sandwich": [
+    { "name": "Philly Cheesesteak", "price": 249 }
+  ],
+
   "riceUpgrade": [
     { "name": "Egg Fried Rice", "price": "+50" },
     { "name": "Yangchow Fried Rice", "price": "+65" },
