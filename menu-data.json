@@ -9,7 +9,8 @@
     { "name": "BBQ Chicken Wings", "price": 169, "badge": "Best Seller" },
     { "name": "Honey Butter Garlic Wings", "price": 169, "badge": "Best Seller" },
     { "name": "Buffalo Wings", "price": 169, "badge": "Best Seller" },
-    { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller" }
+    { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller" },
+    { "name": "8 oz Ice", "price": "FREE" }
   ],
 
   "asianNoodles": [
