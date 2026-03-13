@@ -20,11 +20,6 @@
     { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller" }
   ],
 
-  "drinks": [
-    { "name": "Vietnamese Coffee", "price": 139 },
-    { "name": "Coconut Coffee", "price": 159 },
-    { "name": "Peach Mango Soda", "price": 99 }
-  ],
 
 "asianStirFry": [
   { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 329, "family": 499 },
@@ -78,12 +73,15 @@
   ],
 
   "beverages": [
+    { "name": "Vietnamese Coffee", "price": 139 },
+    { "name": "Coconut Coffee", "price": 159 },
+    { "name": "Peach Mango Soda", "price": 99 },
     { "name": "Bottled Water", "price": 20 },
-    { "name": "Coke", "price": 30 },
     { "name": "SanMig Light", "price": 75 },
-    { "name": "Peach Mango Soda Pitcher", "price": 179 },
+    { "name": "Coke", "price": 30 },
     { "name": "Cucumber Lemonade", "price": 49 },
     { "name": "Strawberry", "price": 49 },
+    { "name": "Peach Mango Soda Pitcher", "price": 179 },
     { "name": "Blueberry", "price": 49 },
     { "name": "Pitcher (All Flavors)", "price": 99 }
   ],
