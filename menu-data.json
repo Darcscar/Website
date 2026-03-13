@@ -3,13 +3,6 @@
     { "name": "Yangchow Lechon Kawali", "price": 189, "image": "images/Best Seller/yangchow lechon kawali.png", "badge": "Best Seller" }
   ],
 
-  "asianNoodles": [
-    { "name": "Pad Thai", "price": 199, "badge": "Best Seller" },
-    { "name": "Lo Mien", "price": 139 },
-    { "name": "Beef Pho", "price": 199 },
-    { "name": "House Special Noodles", "price": 189 }
-  ],
-
   "friedRiceMeals": [
     { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller" },
     { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
@@ -19,10 +12,11 @@
     { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller" }
   ],
 
-  "drinks": [
-    { "name": "Vietnamese Coffee", "price": 139 },
-    { "name": "Coconut Coffee", "price": 159 },
-    { "name": "Peach Mango Soda", "price": 99 }
+  "asianNoodles": [
+    { "name": "Pad Thai", "price": 199, "badge": "Best Seller" },
+    { "name": "Lo Mien", "price": 139 },
+    { "name": "Beef Pho", "price": 199 },
+    { "name": "House Special Noodles", "price": 189 }
   ],
 
   "asianStirFry": [
@@ -59,6 +53,12 @@
     { "name": "Yangchow - Pork", "double": 219, "twoToThree": 309, "threeToFive": 429 },
     { "name": "Kimchi - Pork", "double": 219, "twoToThree": 319, "threeToFive": 439 },
     { "name": "Kimchi - Chicken", "double": 219, "twoToThree": 319, "threeToFive": 439 }
+  ],
+
+  "drinks": [
+    { "name": "Vietnamese Coffee", "price": 139 },
+    { "name": "Coconut Coffee", "price": 159 },
+    { "name": "Peach Mango Soda", "price": 99 }
   ],
 
   "beverages": [
