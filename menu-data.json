@@ -3,15 +3,6 @@
     { "name": "Yangchow Lechon Kawali", "price": 189, "image": "images/Best Seller/yangchow lechon kawali.png", "badge": "Best Seller" }
   ],
 
-  "friedRiceMeals": [
-    { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" },
-    { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" },
-    { "name": "BBQ Chicken Wings", "price": 169, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" },
-    { "name": "Honey Butter Garlic Wings", "price": 169, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" },
-    { "name": "Buffalo Wings", "price": 169, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" },
-    { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller", "freebie": "w/ FREE 8 oz Iced Tea" }
-  ],
-
   "asianNoodles": [
     { "name": "Pad Thai", "price": 199, "badge": "Best Seller" },
     { "name": "Lo Mien", "price": 139 },
@@ -19,26 +10,57 @@
     { "name": "House Special Noodles", "price": 189 }
   ],
 
-  "asianStirFry": [
-    { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 348, "family": 499 },
-    { "name": "Orange Chicken", "withRice": 159, "double": 289, "family": 459 },
-    { "name": "Pad Kra Pao", "withRice": 159, "double": 299, "family": 499, "badge": "Best Seller" },
-    { "name": "Sweet & Spicy Pork Ribs", "withRice": 199, "double": 368, "family": 559, "badge": "Best Seller" },
-    { "name": "Squid in Bell Pepper", "withRice": 179, "double": 348, "family": 499 },
-    { "name": "Squid w/ Veggie", "withRice": 179, "double": 348, "family": 499, "badge": "Best Seller" },
-    { "name": "Krapao Moo Krob", "withRice": 189, "double": 348, "family": 549, "badge": "Best Seller" },
-    { "name": "Braised Tofu w/ Pork Belly", "withRice": 179, "double": 338, "family": 508 },
-    { "name": "Kung Pao Chicken", "withRice": 169, "double": 299, "family": 459 },
-    { "name": "General Tso Chicken", "withRice": 169, "double": 299, "family": 459, "badge": "Best Seller" },
-    { "name": "Spicy Garlic Wings", "withRice": 189, "double": 348, "family": 499 },
-    { "name": "Krapao Squid", "withRice": 179, "double": 348, "family": 499, "badge": "Best Seller" },
-    { "name": "Mapo Tofu", "withRice": 159, "double": 278, "family": 447, "badge": "Best Seller" },
-    { "name": "Stir Fry Cabbage with Egg", "withRice": 149, "double": 258, "family": 417 },
-    { "name": "Ampalaya with Tofu", "withRice": 149, "double": 258, "family": 417 }
+  "friedRiceMeals": [
+    { "name": "Fried Rice With Lechon Kawali Yangchow", "price": 249 },
+    { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller" },
+    { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
+    { "name": "BBQ Chicken Wings", "price": 169, "badge": "Best Seller" },
+    { "name": "Honey Butter Garlic Wings", "price": 169, "badge": "Best Seller" },
+    { "name": "Buffalo Wings", "price": 169, "badge": "Best Seller" },
+    { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller" }
   ],
 
+  "drinks": [
+    { "name": "Vietnamese Coffee", "price": 139 },
+    { "name": "Coconut Coffee", "price": 159 },
+    { "name": "Peach Mango Soda", "price": 99 }
+  ],
+
+"asianStirFry": [
+  { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 329, "family": 499 },
+
+  { "name": "Orange Chicken", "withRice": 159, "double": 289, "family": 459 },
+
+  { "name": "Pad Kra Pao", "withRice": 169, "double": 299, "family": 469, "badge": "Best Seller" },
+
+  { "name": "Sweet & Spicy Pork Ribs", "withRice": 199, "double": 339, "family": 619, "badge": "Best Seller" },
+
+  { "name": "Squid in Bell Pepper", "withRice": 179, "double": 349, "family": 529 },
+
+  { "name": "Squid w/ Veggie", "withRice": 179, "double": 349, "family": 519, "badge": "Best Seller" },
+
+  { "name": "Krapao Moo Krob", "withRice": 189, "double": 419, "family": 629, "badge": "Best Seller" },
+
+  { "name": "Braised Tofu w/ Pork Belly", "withRice": 179, "double": 329, "family": 499 },
+
+  { "name": "Kung Pao Chicken", "withRice": 169, "double": 289, "family": 469 },
+
+  { "name": "General Tso Chicken", "withRice": 169, "double": 289, "family": 469, "badge": "Best Seller" },
+
+  { "name": "Spicy Garlic Wings", "withRice": 189, "double": 329, "family": 489 },
+
+  { "name": "Krapao Squid", "withRice": 179, "double": 339, "family": 509, "badge": "Best Seller" },
+
+  { "name": "Mapo Tofu", "withRice": 159, "double": 279, "family": 429, "badge": "Best Seller" },
+
+  { "name": "Stir Fry Cabbage with Egg", "withRice": 149, "double": 239, "family": 369 },
+
+  { "name": "Ampalaya with Tofu", "withRice": 149, "double": 229, "family": 369 }
+],
+  
+
   "friedRiceSolo": [
-    { "name": "Plain Rice", "price": 20 },
+    { "name": "Plain Rice", "price": 25 },
     { "name": "Egg Fried Rice", "price": 89 },
     { "name": "Yangchow Fried Rice - Chicken", "price": 119 },
     { "name": "Yangchow Fried Rice - Pork", "price": 119 },
@@ -56,16 +78,13 @@
   ],
 
   "beverages": [
-    { "name": "Vietnamese Coffee", "price": 139 },
-    { "name": "Coconut Coffee", "price": 159 },
-    { "name": "Peach Mango Soda", "price": 99 },
     { "name": "Bottled Water", "price": 20 },
     { "name": "Coke", "price": 30 },
     { "name": "SanMig Light", "price": 75 },
+    { "name": "Peach Mango Soda Pitcher", "price": 179 },
     { "name": "Cucumber Lemonade", "price": 49 },
     { "name": "Strawberry", "price": 49 },
     { "name": "Blueberry", "price": 49 },
-    { "name": "Peach Mango", "price": 49 },
     { "name": "Pitcher (All Flavors)", "price": 99 }
   ],
 
@@ -77,13 +96,9 @@
     { "name": "Sisig Platter", "price": 199 }
   ],
 
-  "sandwich": [
-    { "name": "Philly Cheesesteak", "price": 249 }
-  ],
-
   "riceUpgrade": [
-    { "name": "Egg Fried Rice", "price": "+50" },
-    { "name": "Yangchow Fried Rice", "price": "+65" },
-    { "name": "Kimchi Fried Rice", "price": "+75" }
+    { "name": "Egg Fried Rice", "price": "+30" },
+    { "name": "Yangchow Fried Rice", "price": "+45" },
+    { "name": "Kimchi Fried Rice", "price": "+55" }
   ]
 }
