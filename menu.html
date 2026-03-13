@@ -198,10 +198,12 @@
             const freebie = item.freebie ? `<span class="freebie">${item.freebie}</span>` : '';
             const img = images[item.name];
             const desc = descriptions[item.name];
-            const hasMultiplePrices = priceType !== 'simple';
+            const priceOnRight = priceType !== 'simple';
 
             let price;
             if (priceType === 'simple') {
+                price = item.price;
+            } else if (priceType === 'right') {
                 price = item.price;
             } else if (priceType === 'stirfry') {
                 price = `${item.withRice} | ${item.double} | ${item.family}`;
@@ -211,7 +213,7 @@
                 price = `Half: ${item.half} | Whole: ${item.whole}`;
             }
 
-            if (hasMultiplePrices) {
+            if (priceOnRight) {
                 // Multi-price layout: name on left, prices on right (new line)
                 if (img) {
                     return `<div class="menu-item menu-item-multi">
@@ -293,12 +295,12 @@
                     <p class="category-subtitle">Rice, Beverages & Extras</p>
                 </div>
                 <div class="menu-items">
-                    ${renderSection('Fried Rice Solo', data.friedRiceSolo)}
+                    ${renderSection('Fried Rice Solo', data.friedRiceSolo, 'right')}
                     ${renderSection('Fried Rice Platter', data.friedRicePlatter, 'platter', 'Double | 2-3 pax | 3-5 pax')}
                     ${renderSection('Grill Master', data.grillMaster, 'grill')}
                     ${renderSection('Pinoy Classic', data.pinoyClassic)}
-                    ${renderSection('Rice Upgrade', data.riceUpgrade)}
-                    ${renderSection('Beverages / Fruit Soda', data.beverages)}
+                    ${renderSection('Rice Upgrade', data.riceUpgrade, 'right')}
+                    ${renderSection('Beverages / Fruit Soda', data.beverages, 'right')}
                 </div>
                 <div class="page-indicator">
                     <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
