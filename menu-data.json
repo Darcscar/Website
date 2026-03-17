@@ -86,10 +86,6 @@
     { "name": "Peri-Peri Chicken w/ Bukhari Rice", "half": 465, "whole": 670 }
   ],
 
-  "pinoyClassic": [
-    { "name": "Sisig Platter", "price": 199 }
-  ],
-
   "sandwich": [
     { "name": "Philly Cheesesteak", "price": 249 }
   ],
