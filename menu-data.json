@@ -11,7 +11,7 @@
   ],
 
   "friedRiceMeals": [
-    { "name": "Fried Rice With Lechon Kawali Yangchow", "price": 249 },
+    { "name": "Fried Rice With Lechon Kawali Yangchow", "price": 189 },
     { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller" },
     { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
     { "name": "BBQ Chicken Wings", "price": 169, "badge": "Best Seller" },
@@ -42,7 +42,7 @@
 
   { "name": "General Tso Chicken", "withRice": 169, "double": 289, "family": 469, "badge": "Best Seller" },
 
-  { "name": "Spicy Garlic Wings", "withRice": 189, "double": 329, "family": 489 },
+  { "name": "Spicy Garlic Wings", "withRice": 169, "double": 329, "family": 489 },
 
   { "name": "Krapao Squid", "withRice": 179, "double": 339, "family": 509, "badge": "Best Seller" },
 
@@ -57,8 +57,8 @@
   "friedRiceSolo": [
     { "name": "Plain Rice", "price": 25 },
     { "name": "Egg Fried Rice", "price": 89 },
-    { "name": "Yangchow Fried Rice - Chicken", "price": 119 },
-    { "name": "Yangchow Fried Rice - Pork", "price": 119 },
+    { "name": "Yangchow Fried Rice - Chicken", "price": 99 },
+    { "name": "Yangchow Fried Rice - Pork", "price": 99 },
     { "name": "Nasi Goreng Chicken", "price": 119 },
     { "name": "Kimchi Fried Rice", "price": 119 }
   ],
