@@ -1,8 +1,5 @@
 {
-  "bestSeller": [
-    { "name": "Yangchow Lechon Kawali", "price": 189, "image": "images/Best Seller/yangchow lechon kawali.png", "badge": "Best Seller" }
-  ],
-
+  
   "asianNoodles": [
     { "name": "Pad Thai", "price": 199, "badge": "Best Seller" },
     { "name": "Lo Mien", "price": 139 },
