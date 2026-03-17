@@ -20,7 +20,7 @@
 "asianStirFry": [
   { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 329, "family": 499 },
 
-  { "name": "Orange Chicken", "withRice": 159, "double": 289, "family": 459 },
+  { "name": "Orange Chicken", "withRice": 169, "double": 289, "family": 459, "badge": "Best Seller" },
 
   { "name": "Pad Kra Pao", "withRice": 169, "double": 299, "family": 469, "badge": "Best Seller" },
 
