@@ -20,31 +20,31 @@
 "asianStirFry": [
   { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 329, "family": 499 },
 
-  { "name": "Orange Chicken", "withRice": 169, "double": 289, "family": 459, "badge": "Best Seller" },
+  { "name": "Orange Chicken", "withRice": 169, "double": 269, "family": 459, "badge": "Best Seller" },
 
-  { "name": "Pad Kra Pao", "withRice": 169, "double": 299, "family": 469, "badge": "Best Seller" },
+  { "name": "Pad Kra Pao", "withRice": 169, "double": 279, "family": 469, "badge": "Best Seller" },
 
   { "name": "Sweet & Spicy Pork Ribs", "withRice": 199, "double": 339, "family": 619, "badge": "Best Seller" },
 
-  { "name": "Squid in Bell Pepper", "withRice": 179, "double": 349, "family": 529 },
+  { "name": "Squid in Bell Pepper", "withRice": 179, "double": 329, "family": 529 },
 
-  { "name": "Squid w/ Veggie", "withRice": 179, "double": 349, "family": 519, "badge": "Best Seller" },
+  { "name": "Squid w/ Veggie", "withRice": 179, "double": 329, "family": 519, "badge": "Best Seller" },
 
   { "name": "Krapao Moo Krob", "withRice": 189, "double": 419, "family": 629, "badge": "Best Seller" },
 
   { "name": "Braised Tofu w/ Pork Belly", "withRice": 179, "double": 329, "family": 499 },
 
-  { "name": "Kung Pao Chicken", "withRice": 169, "double": 289, "family": 469 },
+  { "name": "Kung Pao Chicken", "withRice": 169, "double": 269, "family": 469 },
 
-  { "name": "General Tso Chicken", "withRice": 169, "double": 289, "family": 469, "badge": "Best Seller" },
+  { "name": "General Tso Chicken", "withRice": 169, "double": 269, "family": 469, "badge": "Best Seller" },
 
-  { "name": "Spicy Garlic Wings", "withRice": 169, "double": 329, "family": 489 },
+  { "name": "Spicy Garlic Wings", "withRice": 169, "double": 279, "family": 489 },
 
-  { "name": "Krapao Squid", "withRice": 179, "double": 339, "family": 509, "badge": "Best Seller" },
+  { "name": "Krapao Squid", "withRice": 179, "double": 319, "family": 509, "badge": "Best Seller" },
 
-  { "name": "Mapo Tofu", "withRice": 159, "double": 279, "family": 429, "badge": "Best Seller" },
+  { "name": "Mapo Tofu", "withRice": 159, "double": 249, "family": 429, "badge": "Best Seller" },
 
-  { "name": "Stir Fry Cabbage with Egg", "withRice": 149, "double": 239, "family": 369 },
+  { "name": "Stir Fry Cabbage with Egg", "withRice": 149, "double": 199, "family": 369 },
 
   { "name": "Ampalaya with Tofu", "withRice": 149, "double": 229, "family": 369 }
 ],
