@@ -7,7 +7,7 @@
   ],
 
   "friedRiceMeals": [
-    { "name": "Fried Rice With Lechon Kawali Yangchow", "price": 189 },
+    { "name": "Yangchow Rice With Lechon Kawali", "price": 189 },
     { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller" },
     { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
     { "name": "BBQ Chicken Wings", "price": 169, "badge": "Best Seller" },
@@ -46,7 +46,7 @@
 
   { "name": "Stir Fry Cabbage with Egg", "withRice": 149, "double": 199, "family": 369 },
 
-  { "name": "Ampalaya with Tofu", "withRice": 149, "double": 229, "family": 369 }
+  { "name": "Ampalaya with Tofu", "withRice": 149, "double": 199, "family": 369 }
 ],
   
 
