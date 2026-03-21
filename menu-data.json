@@ -3,7 +3,9 @@
     { "name": "Pad Thai", "price": 199, "badge": "Best Seller" },
     { "name": "Lo Mien", "price": 139 },
     { "name": "Beef Pho", "price": 199 },
-    { "name": "House Special Noodles", "price": 189 }
+    { "name": "House Special Noodles", "price": 189 },
+    { "name": "Spicy Oxtail Beef Pho", "price": 229 },
+    { "name": "Tomyum", "price": 329 }
   ],
 
   "friedRiceMeals": [
