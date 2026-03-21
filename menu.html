@@ -249,12 +249,14 @@
                     </div>`;
                 } else {
                     return `<div class="menu-item">
-                        <div class="menu-item-header">
-                            <span class="menu-item-name">${item.name}${badge}</span>
-                            <span class="menu-item-price">${price}</span>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <span class="menu-item-name">${item.name}${badge}</span>
+                                <span class="menu-item-price">${price}</span>
+                            </div>
+                            ${freebie}
+                            ${desc ? `<p class="menu-item-desc">${desc}</p>` : ''}
                         </div>
-                        ${freebie}
-                        ${desc ? `<p class="menu-item-desc">${desc}</p>` : ''}
                     </div>`;
                 }
             }
