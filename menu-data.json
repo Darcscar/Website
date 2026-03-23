@@ -2,7 +2,7 @@
   "asianNoodles": [
     { "name": "Pad Thai", "price": 199, "badge": "Best Seller" },
     { "name": "Lo Mien", "price": 139 },
-    { "name": "Beef Pho", "price": 199 },
+    { "name": "Beef Pho", "price": 219 },
     { "name": "House Special Noodles", "price": 189 },
     { "name": "Spicy Oxtail Beef Pho", "price": 229 },
     { "name": "Tomyum", "price": 389 }
@@ -46,9 +46,7 @@
 
   { "name": "Mapo Tofu", "withRice": 159, "double": 249, "family": 429, "badge": "Best Seller" },
 
-  { "name": "Stir Fry Cabbage with Egg", "withRice": 149, "double": 199, "family": 369 },
-
-  { "name": "Ampalaya with Tofu", "withRice": 149, "double": 199, "family": 369 }
+  { "name": "Stir Fry Cabbage with Egg", "withRice": 149, "double": 199, "family": 369 }
 ],
   
 
