@@ -91,8 +91,8 @@
   ],
 
   "riceUpgrade": [
-    { "name": "Egg Fried Rice", "price": "+30" },
-    { "name": "Yangchow Fried Rice", "price": "+45" },
-    { "name": "Kimchi Fried Rice", "price": "+55" }
+    { "name": "Egg Fried Rice", "price": "+25" },
+    { "name": "Yangchow Fried Rice", "price": "+35" },
+    { "name": "Kimchi Fried Rice", "price": "+45" }
   ]
 }
