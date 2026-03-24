@@ -59,7 +59,8 @@
         .menu-item-multi .menu-item-desc { width: 100%; }
 
         .section-title { font-size: 1rem; color: var(--orange); margin: 0.75rem 0 0.5rem; padding-bottom: 0.25rem; border-bottom: 1px dashed var(--orange); }
-        .size-labels { display: flex; justify-content: flex-end; gap: 0.75rem; margin-bottom: 0.35rem; padding-right: 0.5rem; font-size: 0.8rem; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+        .size-labels { display: flex; justify-content: flex-end; gap: 0.75rem; margin-bottom: 0; padding-right: 0.5rem; font-size: 0.8rem; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+        .pax-labels { display: flex; justify-content: flex-end; gap: 0.75rem; margin-bottom: 0.35rem; padding-right: 0.5rem; font-size: 0.55rem; color: var(--orange); opacity: 0.7; font-weight: 400; margin-top: -0.1rem; }
 
         .page-indicator { text-align: center; padding: 0.5rem 0; color: #666; font-size: 0.75rem; }
         .page-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.25rem; }
@@ -105,7 +106,7 @@
         @media (min-width: 768px) {
             .menu-page { padding: 1.5rem 2rem; }
             .menu-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-            .section-title, .size-labels { grid-column: span 2; }
+            .section-title, .size-labels, .pax-labels { grid-column: span 2; }
             .category-title { font-size: 2rem; }
         }
         @media (max-height: 700px) {
@@ -262,9 +263,10 @@
             }
         }
 
-        function renderSection(title, items, priceType = 'simple', sizeLabels = null) {
+        function renderSection(title, items, priceType = 'simple', sizeLabels = null, paxLabels = null) {
             let html = title ? `<h3 class="section-title">${title}</h3>` : '';
             if (sizeLabels) html += `<div class="size-labels">${sizeLabels}</div>`;
+            if (paxLabels) html += `<div class="pax-labels">${paxLabels}</div>`;
             items.forEach(item => html += renderItem(item, priceType));
             return html;
         }
@@ -282,7 +284,7 @@
                 <div class="menu-items">
                     ${renderSection('Fried Rice Meals', data.friedRiceMeals)}
                     ${renderSection('Asian Noodles', data.asianNoodles)}
-                    ${renderSection('Asian Stir Fry', data.asianStirFry, 'stirfry', 'w/Rice | Double<br><small style="font-size:0.55rem;opacity:0.7;">2-3 pax</small> | Family<br><small style="font-size:0.55rem;opacity:0.7;">3-5 pax</small>')}
+                    ${renderSection('Asian Stir Fry', data.asianStirFry, 'stirfry', 'w/Rice | Double | Family', '&nbsp; | 2-3 pax | 3-5 pax')}
                 </div>
                 <div class="page-indicator">
                     <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
