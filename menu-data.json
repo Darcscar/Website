@@ -19,11 +19,11 @@
   "wokTossedSpecialties": [
     { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 349, "family": 529 },
 
-    { "name": "Orange Chicken", "withRice": 169, "double": 289, "family": 489, "badge": "Best Seller" },
+    { "name": "Orange Chicken", "withRice": 159, "double": 289, "family": 489, "badge": "Best Seller" },
 
-    { "name": "Lemon Chicken", "withRice": 169, "double": 289, "family": 489 },
+    { "name": "Lemon Chicken", "withRice": 159, "double": 289, "family": 489 },
 
-    { "name": "Pad Kra Pao", "withRice": 169, "double": 299, "family": 499, "badge": "Best Seller" },
+    { "name": "Pad Kra Pao", "withRice": 159, "double": 299, "family": 499, "badge": "Best Seller" },
 
     { "name": "Sweet & Spicy Pork Ribs", "withRice": 209, "double": 379, "family": 659, "badge": "Best Seller" },
 
@@ -33,7 +33,7 @@
 
     { "name": "Krapao Moo Krob", "withRice": 209, "double": 439, "family": 669, "badge": "Best Seller" },
 
-    { "name": "Kung Pao Chicken", "withRice": 169, "double": 289, "family": 489 },
+    { "name": "Kung Pao Chicken", "withRice": 159, "double": 289, "family": 489 },
 
     { "name": "General Tso Chicken", "withRice": 169, "double": 289, "family": 489, "badge": "Best Seller" },
 
@@ -41,9 +41,9 @@
 
     { "name": "Krapao Squid", "withRice": 189, "double": 339, "family": 539, "badge": "Best Seller" },
 
-    { "name": "Mapo Tofu", "withRice": 159, "double": 259, "family": 439, "badge": "Best Seller" },
+    { "name": "Mapo Tofu", "withRice": 149, "double": 259, "family": 439, "badge": "Best Seller" },
 
-    { "name": "Stir Fry Cabbage with Egg", "withRice": 139, "double": 209, "family": 379 }
+    { "name": "Stir Fry Cabbage with Egg", "withRice": 129, "double": 209, "family": 379 }
   ],
 
   "riceBowlsAndBasics": [

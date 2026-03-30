@@ -213,7 +213,7 @@
             } else if (priceType === 'right') {
                 price = item.price;
             } else if (priceType === 'stirfry') {
-                price = `${item.withRice} | ${item.double}`;
+                price = `${item.withRice} | ${item.double} | ${item.family}`;
             } else if (priceType === 'platter') {
                 price = `${item.twoToThree} | ${item.threeToFive}`;
             } else if (priceType === 'grill') {
@@ -289,7 +289,7 @@
                 <div class="menu-items">
                     ${renderSection('Signature Fried Rice Collection', data.signatureFriedRiceCollection)}
                     ${renderSection('Wok Street Noodle House', data.wokStreetNoodleHouse)}
-                    ${renderSection('Wok Tossed Specialties', data.wokTossedSpecialties, 'stirfry', 'w/Rice | Double', '&nbsp; | 2-3 pax')}
+                    ${renderSection('Wok Tossed Specialties', data.wokTossedSpecialties, 'stirfry', 'w/Rice | Double | Family', '&nbsp; | 2-3 pax | 5-6 pax')}
                 </div>
                 <div class="page-indicator">
                     <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
