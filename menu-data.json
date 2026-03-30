@@ -21,6 +21,8 @@
 
     { "name": "Orange Chicken", "withRice": 169, "double": 289, "family": 489, "badge": "Best Seller" },
 
+    { "name": "Lemon Chicken", "withRice": 169, "double": 289, "family": 489 },
+
     { "name": "Pad Kra Pao", "withRice": 169, "double": 299, "family": 499, "badge": "Best Seller" },
 
     { "name": "Sweet & Spicy Pork Ribs", "withRice": 209, "double": 379, "family": 659, "badge": "Best Seller" },
