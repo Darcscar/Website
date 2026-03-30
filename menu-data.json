@@ -19,7 +19,9 @@
   "wokTossedSpecialties": [
     { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 349, "family": 529 },
 
-    { "name": "Krapao Moo Krob", "withRice": 209, "double": 439, "family": 669, "badge": "Best Seller" },
+    { "name": "Orange Chicken", "withRice": 169, "double": 289, "family": 489, "badge": "Best Seller" },
+
+    { "name": "Pad Kra Pao", "withRice": 169, "double": 299, "family": 499, "badge": "Best Seller" },
 
     { "name": "Sweet & Spicy Pork Ribs", "withRice": 209, "double": 379, "family": 659, "badge": "Best Seller" },
 
@@ -27,17 +29,15 @@
 
     { "name": "Squid w/ Veggie", "withRice": 189, "double": 349, "family": 549, "badge": "Best Seller" },
 
-    { "name": "Krapao Squid", "withRice": 189, "double": 339, "family": 539, "badge": "Best Seller" },
-
-    { "name": "Orange Chicken", "withRice": 169, "double": 289, "family": 489, "badge": "Best Seller" },
-
-    { "name": "Pad Kra Pao", "withRice": 169, "double": 299, "family": 499, "badge": "Best Seller" },
+    { "name": "Krapao Moo Krob", "withRice": 209, "double": 439, "family": 669, "badge": "Best Seller" },
 
     { "name": "Kung Pao Chicken", "withRice": 169, "double": 289, "family": 489 },
 
     { "name": "General Tso Chicken", "withRice": 169, "double": 289, "family": 489, "badge": "Best Seller" },
 
     { "name": "Spicy Garlic Wings", "withRice": 169, "double": 299, "family": 509 },
+
+    { "name": "Krapao Squid", "withRice": 189, "double": 339, "family": 539, "badge": "Best Seller" },
 
     { "name": "Mapo Tofu", "withRice": 159, "double": 259, "family": 439, "badge": "Best Seller" },
 
