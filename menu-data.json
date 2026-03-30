@@ -1,66 +1,59 @@
 {
-  "asianNoodles": [
+  "wokStreetNoodleHouse": [
     { "name": "Pad Thai", "price": 199, "badge": "Best Seller" },
-    { "name": "Lo Mien", "price": 139 },
+    { "name": "Lo Mein", "price": 149 },
     { "name": "Beef Pho", "price": 219 },
-    { "name": "House Special Noodles", "price": 189 },
-    { "name": "Spicy Oxtail Beef Pho", "price": 229 },
-    { "name": "Tomyum", "price": 389 }
+    { "name": "House Special Noodles", "price": 199 }
   ],
 
-  "friedRiceMeals": [
-    { "name": "Yangchow Rice With Lechon Kawali", "price": 189 },
+  "signatureFriedRiceCollection": [
+    { "name": "Yangchow Rice With Lechon Kawali", "price": 189, "badge": "Best Seller" },
     { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller" },
     { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
     { "name": "BBQ Chicken Wings", "price": 169, "badge": "Best Seller" },
     { "name": "Honey Butter Garlic Wings", "price": 169, "badge": "Best Seller" },
     { "name": "Buffalo Wings", "price": 169, "badge": "Best Seller" },
-    { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller" },
-    { "name": "Ham Katsu", "price": 199 }
+    { "name": "Beef Gyudon", "price": 199, "badge": "Best Seller" }
   ],
 
+  "wokTossedSpecialties": [
+    { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 349, "family": 529 },
 
-"asianStirFry": [
-  { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 329, "family": 499 },
+    { "name": "Orange Chicken", "withRice": 169, "double": 289, "family": 489, "badge": "Best Seller" },
 
-  { "name": "Orange Chicken", "withRice": 169, "double": 269, "family": 459, "badge": "Best Seller" },
+    { "name": "Pad Kra Pao", "withRice": 169, "double": 299, "family": 499, "badge": "Best Seller" },
 
-  { "name": "Lemon Chicken", "withRice": 189, "double": 289, "family": 479 },
+    { "name": "Sweet & Spicy Pork Ribs", "withRice": 209, "double": 379, "family": 659, "badge": "Best Seller" },
 
-  { "name": "Pad Kra Pao", "withRice": 169, "double": 279, "family": 469, "badge": "Best Seller" },
+    { "name": "Squid in Bell Pepper", "withRice": 189, "double": 349, "family": 559 },
 
-  { "name": "Sweet & Spicy Pork Ribs", "withRice": 199, "double": 339, "family": 619, "badge": "Best Seller" },
+    { "name": "Squid w/ Veggie", "withRice": 189, "double": 349, "family": 549, "badge": "Best Seller" },
 
-  { "name": "Squid in Bell Pepper", "withRice": 179, "double": 329, "family": 529 },
+    { "name": "Krapao Moo Krob", "withRice": 209, "double": 439, "family": 669, "badge": "Best Seller" },
 
-  { "name": "Squid w/ Veggie", "withRice": 179, "double": 329, "family": 519, "badge": "Best Seller" },
+    { "name": "Kung Pao Chicken", "withRice": 169, "double": 289, "family": 489 },
 
-  { "name": "Krapao Moo Krob", "withRice": 189, "double": 419, "family": 629, "badge": "Best Seller" },
+    { "name": "General Tso Chicken", "withRice": 169, "double": 289, "family": 489, "badge": "Best Seller" },
 
-  { "name": "Kung Pao Chicken", "withRice": 169, "double": 269, "family": 469 },
+    { "name": "Spicy Garlic Wings", "withRice": 169, "double": 299, "family": 509 },
 
-  { "name": "General Tso Chicken", "withRice": 169, "double": 269, "family": 469, "badge": "Best Seller" },
+    { "name": "Krapao Squid", "withRice": 189, "double": 339, "family": 539, "badge": "Best Seller" },
 
-  { "name": "Spicy Garlic Wings", "withRice": 169, "double": 279, "family": 489 },
+    { "name": "Mapo Tofu", "withRice": 159, "double": 259, "family": 439, "badge": "Best Seller" },
 
-  { "name": "Krapao Squid", "withRice": 179, "double": 319, "family": 509, "badge": "Best Seller" },
+    { "name": "Stir Fry Cabbage with Egg", "withRice": 139, "double": 209, "family": 379 }
+  ],
 
-  { "name": "Mapo Tofu", "withRice": 159, "double": 249, "family": 429, "badge": "Best Seller" },
-
-  { "name": "Stir Fry Cabbage with Egg", "withRice": 149, "double": 199, "family": 369 }
-],
-  
-
-  "friedRiceSolo": [
+  "riceBowlsAndBasics": [
     { "name": "Plain Rice", "price": 25 },
-    { "name": "Egg Fried Rice", "price": 89 },
-    { "name": "Yangchow Fried Rice - Chicken", "price": 99 },
-    { "name": "Yangchow Fried Rice - Pork", "price": 99 },
-    { "name": "Nasi Goreng Chicken", "price": 119 },
-    { "name": "Kimchi Fried Rice", "price": 119 }
+    { "name": "Egg Fried Rice", "price": 69 },
+    { "name": "Yangchow Fried Rice - Chicken", "price": 89 },
+    { "name": "Yangchow Fried Rice - Pork", "price": 89 },
+    { "name": "Nasi Goreng Chicken", "price": 99 },
+    { "name": "Kimchi Fried Rice", "price": 99 }
   ],
 
-  "friedRicePlatter": [
+  "sharingPlatters": [
     { "name": "Egg Fried Rice", "double": 159, "twoToThree": 219, "threeToFive": 309 },
     { "name": "Nasi Goreng - Chicken", "double": 269, "twoToThree": 369, "threeToFive": 529 },
     { "name": "Yangchow - Chicken", "double": 219, "twoToThree": 309, "threeToFive": 429 },
@@ -69,7 +62,7 @@
     { "name": "Kimchi - Chicken", "double": 219, "twoToThree": 319, "threeToFive": 439 }
   ],
 
-  "beverages": [
+  "refreshmentsAndHouseDrinks": [
     { "name": "Vietnamese Coffee", "price": 139 },
     { "name": "Coconut Coffee", "price": 159 },
     { "name": "Peach Mango Soda", "price": 99 },
@@ -77,23 +70,23 @@
     { "name": "SanMig Light", "price": 75 },
     { "name": "Coke", "price": 30 },
     { "name": "Cucumber Lemonade", "price": 49 },
-    { "name": "Strawberry", "price": 49 },
-    { "name": "Blueberry", "price": 49 },
+    { "name": "Strawberry Soda", "price": 49 },
+    { "name": "Blueberry Soda", "price": 49 },
     { "name": "Pitcher (All Flavors)", "price": 99 },
-    { "name": "Peach Mango Soda Pitcher", "price": 179 }
+    { "name": "Peach Mango Pitcher", "price": 179 }
   ],
 
-  "grillMaster": [
+  "flameGrillSelection": [
     { "name": "Peri-Peri Chicken w/ Bukhari Rice", "half": 465, "whole": 670 }
   ],
 
-  "sandwich": [
+  "sandwichAtelier": [
     { "name": "Philly Cheesesteak", "price": 249 }
   ],
 
-  "riceUpgrade": [
-    { "name": "Egg Fried Rice", "price": "+25" },
-    { "name": "Yangchow Fried Rice", "price": "+35" },
-    { "name": "Kimchi Fried Rice", "price": "+45" }
+  "signatureRiceUpgrades": [
+    { "name": "Egg Fried Rice", "price": "+30" },
+    { "name": "Yangchow Fried Rice", "price": "+45" },
+    { "name": "Kimchi Fried Rice", "price": "+55" }
   ]
 }

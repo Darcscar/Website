@@ -213,9 +213,9 @@
             } else if (priceType === 'right') {
                 price = item.price;
             } else if (priceType === 'stirfry') {
-                price = `${item.withRice} | ${item.double} | ${item.family}`;
+                price = `${item.withRice} | ${item.double}`;
             } else if (priceType === 'platter') {
-                price = `${item.double} | ${item.twoToThree} | ${item.threeToFive}`;
+                price = `${item.twoToThree} | ${item.threeToFive}`;
             } else if (priceType === 'grill') {
                 price = `Half: ${item.half} | Whole: ${item.whole}`;
             }
@@ -287,9 +287,9 @@
                     <p class="category-subtitle">Best Seller & Asian Favorites</p>
                 </div>
                 <div class="menu-items">
-                    ${renderSection('Fried Rice Meals', data.friedRiceMeals)}
-                    ${renderSection('Asian Noodles', data.asianNoodles)}
-                    ${renderSection('Asian Stir Fry', data.asianStirFry, 'stirfry', 'w/Rice | Double | Family', '&nbsp; | 2-3 pax | 3-5 pax')}
+                    ${renderSection('Signature Fried Rice Collection', data.signatureFriedRiceCollection)}
+                    ${renderSection('Wok Street Noodle House', data.wokStreetNoodleHouse)}
+                    ${renderSection('Wok Tossed Specialties', data.wokTossedSpecialties, 'stirfry', 'w/Rice | Double', '&nbsp; | 2-3 pax')}
                 </div>
                 <div class="page-indicator">
                     <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
@@ -304,12 +304,12 @@
                     <p class="category-subtitle">Rice, Beverages & Extras</p>
                 </div>
                 <div class="menu-items">
-                    ${renderSection('Fried Rice Solo', data.friedRiceSolo, 'right')}
-                    ${renderSection('Fried Rice Platter', data.friedRicePlatter, 'platter', 'Double | 2-3 pax | 3-5 pax')}
-                    ${renderSection('Grill Master', data.grillMaster, 'grill')}
-                    ${renderSection('Sandwich', data.sandwich)}
-                    ${renderSection('Rice Upgrade', data.riceUpgrade, 'right')}
-                    ${renderSection('Beverages / Fruit Soda', data.beverages, 'right')}
+                    ${renderSection('Rice Bowls & Basics', data.riceBowlsAndBasics, 'right')}
+                    ${renderSection('Sharing Platters', data.sharingPlatters, 'platter', '2-3 pax | 3-5 pax')}
+                    ${renderSection('Flame Grill Selection', data.flameGrillSelection, 'grill')}
+                    ${renderSection('Sandwich Atelier', data.sandwichAtelier)}
+                    ${renderSection('Signature Rice Upgrades', data.signatureRiceUpgrades, 'right')}
+                    ${renderSection('Refreshments & House Drinks', data.refreshmentsAndHouseDrinks, 'right')}
                 </div>
                 <div class="page-indicator">
                     <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
