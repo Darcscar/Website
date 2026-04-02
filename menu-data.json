@@ -86,6 +86,73 @@
     { "name": "Philly Cheesesteak", "price": 249 }
   ],
 
+  "bentoBoxes": [
+    {
+      "name": "General Tso's Bento",
+      "price": 219,
+      "badge": "Best Seller",
+      "description": "Sweet & spicy crispy chicken with Egg Fried Rice",
+      "includes": {
+        "main": "General Tso Chicken",
+        "rice": "Egg Fried Rice",
+        "side": ["Stir Fry Veggie", "Mapo Tofu"],
+        "soup": "Miso Soup",
+        "drink": ["Coke", "Cucumber Lemonade", "Strawberry Soda", "Blueberry Soda"]
+      }
+    },
+    {
+      "name": "Orange Chicken Bento",
+      "price": 219,
+      "badge": "Popular",
+      "description": "Tangy citrus glaze chicken with Egg Fried Rice",
+      "includes": {
+        "main": "Orange Chicken",
+        "rice": "Egg Fried Rice",
+        "side": ["Stir Fry Veggie", "Mapo Tofu"],
+        "soup": "Miso Soup",
+        "drink": ["Coke", "Cucumber Lemonade", "Strawberry Soda", "Blueberry Soda"]
+      }
+    },
+    {
+      "name": "Wings Bento",
+      "price": 229,
+      "description": "BBQ, Honey Butter Garlic, or Buffalo wings with Egg Fried Rice",
+      "includes": {
+        "main": ["BBQ Chicken Wings", "Honey Butter Garlic Wings", "Buffalo Wings"],
+        "rice": "Egg Fried Rice",
+        "side": ["Stir Fry Veggie", "Mapo Tofu"],
+        "soup": "Miso Soup",
+        "drink": ["Coke", "Cucumber Lemonade", "Strawberry Soda", "Blueberry Soda"]
+      }
+    },
+    {
+      "name": "Krapao Moo Krob Bento",
+      "price": 249,
+      "badge": "Premium",
+      "description": "Crispy pork belly with holy basil on Plain Rice",
+      "includes": {
+        "main": "Krapao Moo Krob",
+        "rice": "Plain Rice",
+        "side": ["Stir Fry Veggie", "Mapo Tofu"],
+        "soup": "Miso Soup",
+        "drink": ["Coke", "Cucumber Lemonade", "Strawberry Soda", "Blueberry Soda"]
+      }
+    },
+    {
+      "name": "Premium Ribs Bento",
+      "price": 279,
+      "badge": "Premium",
+      "description": "Sweet & Spicy Pork Ribs with Yangchow Fried Rice & Peach Mango Soda",
+      "includes": {
+        "main": "Sweet & Spicy Pork Ribs",
+        "rice": "Yangchow Fried Rice",
+        "side": ["Stir Fry Veggie", "Mapo Tofu"],
+        "soup": "Miso Soup",
+        "drink": "Peach Mango Soda"
+      }
+    }
+  ],
+
   "signatureRiceUpgrades": [
     { "name": "Egg Fried Rice", "price": "+30" },
     { "name": "Yangchow Fried Rice", "price": "+45" },

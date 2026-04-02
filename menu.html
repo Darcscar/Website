@@ -80,6 +80,10 @@
         .badge { display: inline-block; background: var(--orange); color: white; font-size: 0.55rem; padding: 0.1rem 0.3rem; border-radius: 3px; margin-left: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
         .freebie { display: block; color: var(--gold); font-size: 0.75rem; font-weight: 500; margin-top: 0.2rem; }
 
+        .bento-item { border-left-color: var(--orange); }
+        .bento-includes { display: flex; flex-direction: column; gap: 0.15rem; margin-top: 0.3rem; font-size: 0.75rem; color: #ccc; }
+        .bento-line strong { color: var(--gold); font-weight: 600; margin-right: 0.2rem; }
+
         .page-tabs {
             position: fixed; bottom: 0; left: 0; right: 0;
             display: flex; background: var(--charcoal);
@@ -268,6 +272,56 @@
             }
         }
 
+        function renderBentoItem(item) {
+            const badge = item.badge ? `<span class="badge">${item.badge}</span>` : '';
+            const mainKey = Array.isArray(item.includes.main) ? item.includes.main[0] : item.includes.main;
+            const img = images[mainKey] || images[item.name];
+
+            const mainText = Array.isArray(item.includes.main) ? item.includes.main.join(' / ') : item.includes.main;
+            const sideText = Array.isArray(item.includes.side) ? item.includes.side.join(' or ') : item.includes.side;
+            const drinkText = Array.isArray(item.includes.drink) ? item.includes.drink.join(', ') : item.includes.drink;
+
+            const includesHtml = `
+                <div class="bento-includes">
+                    <span class="bento-line"><strong>Main:</strong> ${mainText}</span>
+                    <span class="bento-line"><strong>Rice:</strong> ${item.includes.rice}</span>
+                    <span class="bento-line"><strong>Side:</strong> ${sideText}</span>
+                    <span class="bento-line"><strong>Soup:</strong> ${item.includes.soup}</span>
+                    <span class="bento-line"><strong>Drink:</strong> ${drinkText}</span>
+                </div>`;
+
+            if (img) {
+                return `<div class="menu-item bento-item">
+                    <img src="${img}" alt="${item.name}" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <span class="menu-item-name">${item.name}${badge}</span>
+                            <span class="menu-item-price">${item.price}</span>
+                        </div>
+                        <p class="menu-item-desc">${item.description}</p>
+                        ${includesHtml}
+                    </div>
+                </div>`;
+            } else {
+                return `<div class="menu-item bento-item">
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <span class="menu-item-name">${item.name}${badge}</span>
+                            <span class="menu-item-price">${item.price}</span>
+                        </div>
+                        <p class="menu-item-desc">${item.description}</p>
+                        ${includesHtml}
+                    </div>
+                </div>`;
+            }
+        }
+
+        function renderBentoSection(title, items) {
+            let html = title ? `<h3 class="section-title">${title}</h3>` : '';
+            items.forEach(item => html += renderBentoItem(item));
+            return html;
+        }
+
         function renderSection(title, items, priceType = 'simple', sizeLabels = null, paxLabels = null) {
             let html = title ? `<h3 class="section-title">${title}</h3>` : '';
             if (sizeLabels) html += `<div class="size-labels">${sizeLabels}</div>`;
@@ -288,6 +342,7 @@
                 </div>
                 <div class="menu-items">
                     ${renderSection('Signature Fried Rice Collection', data.signatureFriedRiceCollection)}
+                    ${renderBentoSection('Bento Boxes', data.bentoBoxes)}
                     ${renderSection('Wok Street Noodle House', data.wokStreetNoodleHouse)}
                     ${renderSection('Wok Tossed Specialties', data.wokTossedSpecialties, 'stirfry', 'w/Rice | Double', '&nbsp; | 2-3 pax')}
                 </div>
