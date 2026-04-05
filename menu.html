@@ -171,7 +171,10 @@
             "Yangchow Fried Rice - Chicken": "images/Fried Rice Solo/yangchow chicken.jpg",
             "Yangchow Fried Rice - Pork": "images/Fried Rice Solo/yangchow pork.jpg",
             "Egg Fried Rice": "images/Fried Rice Solo/egg fried rice.jpg",
-            "Philly Cheesesteak": "images/Sandwich/philly.jpg"
+            "Philly Cheesesteak": "images/Sandwich/philly.jpg",
+            "General Tso's Bento": "images/Bento Deals/general tso bento.jpg",
+            "Orange Chicken Bento": "images/Bento Deals/orange chicken bento.jpg",
+            "Premium Ribs Bento": "images/Bento Deals/pork ribs bento.jpg"
         };
 
         const descriptions = {
@@ -275,7 +278,7 @@
         function renderBentoItem(item) {
             const badge = item.badge ? `<span class="badge">${item.badge}</span>` : '';
             const mainKey = Array.isArray(item.includes.main) ? item.includes.main[0] : item.includes.main;
-            const img = images[mainKey] || images[item.name];
+            const img = images[item.name] || images[mainKey];
 
             const mainText = Array.isArray(item.includes.main) ? item.includes.main.join(' / ') : item.includes.main;
             const sideText = Array.isArray(item.includes.side) ? item.includes.side.join(' or ') : item.includes.side;
