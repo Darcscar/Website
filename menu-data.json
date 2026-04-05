@@ -142,13 +142,13 @@
       "name": "Premium Ribs Bento",
       "price": 279,
       "badge": "Premium",
-      "description": "Sweet & Spicy Pork Ribs with Yangchow Fried Rice & Peach Mango Soda",
+      "description": "Sweet & Spicy Pork Ribs with Egg Fried Rice or Plain Rice",
       "includes": {
         "main": "Sweet & Spicy Pork Ribs",
-        "rice": "Yangchow Fried Rice",
+        "rice": ["Egg Fried Rice", "Plain Rice"],
         "side": ["Stir Fry Veggie", "Mapo Tofu"],
         "soup": "Miso Soup",
-        "drink": "Peach Mango Soda"
+        "drink": ["Coke", "Cucumber Lemonade", "Strawberry Soda", "Blueberry Soda"]
       }
     }
   ],

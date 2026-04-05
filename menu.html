@@ -287,7 +287,7 @@
             const includesHtml = `
                 <div class="bento-includes">
                     <span class="bento-line"><strong>Main:</strong> ${mainText}</span>
-                    <span class="bento-line"><strong>Rice:</strong> ${item.includes.rice}</span>
+                    <span class="bento-line"><strong>Rice:</strong> ${Array.isArray(item.includes.rice) ? item.includes.rice.join(' or ') : item.includes.rice}</span>
                     <span class="bento-line"><strong>Side:</strong> ${sideText}</span>
                     <span class="bento-line"><strong>Soup:</strong> ${item.includes.soup}</span>
                     <span class="bento-line"><strong>Drink:</strong> ${drinkText}</span>
