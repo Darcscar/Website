@@ -130,7 +130,8 @@
 
     <div class="page-tabs">
         <button class="page-tab active" data-page="page1">Main Dishes</button>
-        <button class="page-tab" data-page="page2">Sides & Drinks</button>
+        <button class="page-tab" data-page="page2">Bento Meals</button>
+        <button class="page-tab" data-page="page3">Sides & Drinks</button>
     </div>
 
     <script>
@@ -346,7 +347,6 @@
                 </div>
                 <div class="menu-items">
                     ${renderSection('Signature Fried Rice Collection', data.signatureFriedRiceCollection)}
-                    ${renderBentoSection('Bento Boxes', data.bentoBoxes)}
                     ${renderSection('Wok Street Noodle House', data.wokStreetNoodleHouse)}
                     ${renderSection('Wok Tossed Specialties', data.wokTossedSpecialties, 'stirfry', 'w/Rice | Double', '&nbsp; | 2-3 pax')}
                 </div>
@@ -355,8 +355,23 @@
                 </div>
             </section>`;
 
-            // Page 2: Sides, Drinks & More
+            // Page 2: Bento Meals
             let page2 = `<section class="menu-page" id="page2">
+                <div class="page-header">
+                    <div class="logo">Pedro's Classic and <span>Asian Cuisine</span></div>
+                    <h1 class="category-title">Bento Meals</h1>
+                    <p class="category-subtitle">Complete Meal Combos</p>
+                </div>
+                <div class="menu-items">
+                    ${renderBentoSection('Bento Boxes', data.bentoBoxes)}
+                </div>
+                <div class="page-indicator">
+                    <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
+                </div>
+            </section>`;
+
+            // Page 3: Sides, Drinks & More
+            let page3 = `<section class="menu-page" id="page3">
                 <div class="page-header">
                     <div class="logo">Pedro's <span>Cuisine</span></div>
                     <h1 class="category-title">Sides, Drinks & More</h1>
@@ -375,7 +390,7 @@
                 </div>
             </section>`;
 
-            container.innerHTML = page1 + page2;
+            container.innerHTML = page1 + page2 + page3;
             setupPageObserver();
             setupPageTabs();
         }
