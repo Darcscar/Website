@@ -128,7 +128,7 @@
     {
       "name": "Krapao Moo Krob Bento",
       "price": 249,
-      "badge": "Premium",
+      "badge": "Best Seller",
       "description": "Crispy pork belly with holy basil on Plain Rice",
       "includes": {
         "main": "Krapao Moo Krob",
@@ -139,9 +139,9 @@
       }
     },
     {
-      "name": "Premium Ribs Bento",
+      "name": "Ribs Bento",
       "price": 279,
-      "badge": "Premium",
+      "badge": "Best Seller",
       "description": "Sweet & Spicy Pork Ribs with Egg Fried Rice or Plain Rice",
       "includes": {
         "main": "Sweet & Spicy Pork Ribs",
