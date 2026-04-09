@@ -59,8 +59,7 @@
         .menu-item-multi .menu-item-desc { width: 100%; }
 
         .section-title { font-size: 1rem; color: var(--orange); margin: 0.75rem 0 0.5rem; padding-bottom: 0.25rem; border-bottom: 1px dashed var(--orange); }
-        .size-labels { display: flex; justify-content: flex-end; gap: 0.75rem; margin-bottom: 0; padding-right: 0.5rem; font-size: 0.8rem; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-        .pax-labels { display: flex; justify-content: flex-end; gap: 0.75rem; margin-bottom: 0.35rem; padding-right: 0.5rem; font-size: 0.55rem; color: var(--orange); opacity: 0.7; font-weight: 400; margin-top: -0.1rem; }
+        .size-labels { display: flex; justify-content: flex-end; gap: 0.75rem; margin-bottom: 0.35rem; padding-right: 0.5rem; font-size: 0.8rem; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
 
         .page-indicator { text-align: center; padding: 0.5rem 0; color: #666; font-size: 0.75rem; }
         .page-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.25rem; }
@@ -79,10 +78,6 @@
 
         .badge { display: inline-block; background: var(--orange); color: white; font-size: 0.55rem; padding: 0.1rem 0.3rem; border-radius: 3px; margin-left: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
         .freebie { display: block; color: var(--gold); font-size: 0.75rem; font-weight: 500; margin-top: 0.2rem; }
-
-        .bento-item { border-left-color: var(--orange); }
-        .bento-includes { display: flex; flex-direction: column; gap: 0.15rem; margin-top: 0.3rem; font-size: 0.75rem; color: #ccc; }
-        .bento-line strong { color: var(--gold); font-weight: 600; margin-right: 0.2rem; }
 
         .page-tabs {
             position: fixed; bottom: 0; left: 0; right: 0;
@@ -110,7 +105,7 @@
         @media (min-width: 768px) {
             .menu-page { padding: 1.5rem 2rem; }
             .menu-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-            .section-title, .size-labels, .pax-labels { grid-column: span 2; }
+            .section-title, .size-labels { grid-column: span 2; }
             .category-title { font-size: 2rem; }
         }
         @media (max-height: 700px) {
@@ -130,70 +125,62 @@
 
     <div class="page-tabs">
         <button class="page-tab active" data-page="page1">Main Dishes</button>
-        <button class="page-tab" data-page="page2">Bento Meals</button>
-        <button class="page-tab" data-page="page3">Sides & Drinks</button>
+        <button class="page-tab" data-page="page2">Sides & Drinks</button>
     </div>
 
     <script>
         const images = {
+            "Yangchow Lechon Kawali": "images/Best Seller/yangchow lechon kawali.png",
             "Pad Thai": "images/Asian/PAD THAI.jpg",
-            "Lo Mein": "images/Asian/lo mien.png",
+            "Lo Mien": "images/Asian/lo mien.png",
             "Beef Pho": "images/Asian/Beef Pho.jpg",
-            "Tomyum": "images/Asian/tom yum.jpeg",
-            "Spicy Oxtail Beef Pho": "images/Asian/spicy oxtail.jpeg",
             "House Special Noodles": "images/Asian/stirfry noodles.jpg",
-            "Yangchow Rice With Lechon Kawali": "images/Best Seller/yangchow lechon kawali.png",
+            "Fried Rice With Lechon Kawali Yangchow": "images/Best Seller/yangchow lechon kawali.png",
             "Chicken Fillet": "images/Fried Rice Meals/chicken fillet.jpg",
             "Pork Tonkatsu": "images/Fried Rice Meals/tonkatsu1.png",
-            "BBQ Chicken Wings": "images/Fried Rice Meals/bbq egg fried.jpg",
+            "BBQ Chicken Wings": "images/Fried Rice Meals/spicy garlic wings.jpg",
             "Honey Butter Garlic Wings": "images/Fried Rice Meals/honey butter garlic wings.jpg",
             "Buffalo Wings": "images/Fried Rice Meals/spicy garlic wings.jpg",
             "Beef Gyudon": "images/Fried Rice Meals/beef gyudon.jpg",
-            "Ham Katsu": "images/Fried Rice Meals/katsu ham.jpg",
             "Vietnamese Coffee": "images/Drinks/vietnamese coffee.jpg",
             "Coconut Coffee": "images/Drinks/vietnamese coffee.jpg",
             "Spicy Garlic Pork Thai Style": "images/Asian Stir Fry/spicy garlic pork thai style.jpg",
             "Orange Chicken": "images/Asian Stir Fry/Orange Chicken.jpg",
-            "Lemon Chicken": "images/Asian Stir Fry/lemon chicken.jpg",
             "Pad Kra Pao": "images/Asian/Padkra Pao.jpg",
             "Sweet & Spicy Pork Ribs": "images/Asian Stir Fry/Spicy Pork Ribs.jpg",
             "Squid in Bell Pepper": "images/Asian Stir Fry/Squid and bell pepper.jpg",
             "Squid w/ Veggie": "images/Asian Stir Fry/Squid Veggie.jpg",
             "Krapao Moo Krob": "images/Asian Stir Fry/Krapao Moo Krob.jpg",
+            "Braised Tofu w/ Pork Belly": "images/Asian Stir Fry/cabbage egg.jpg",
             "Kung Pao Chicken": "images/Asian Stir Fry/Kung Pao.jpg",
             "General Tso Chicken": "images/Asian Stir Fry/General Tso.jpg",
             "Spicy Garlic Wings": "images/Asian Stir Fry/spicy garlic wings.jpg",
             "Krapao Squid": "images/Asian Stir Fry/krapao squid.png",
             "Mapo Tofu": "images/Asian Stir Fry/mapo tofu.jpg",
             "Stir Fry Cabbage with Egg": "images/Asian Stir Fry/cabbage egg.jpg",
+            "Ampalaya with Tofu": "images/Asian Stir Fry/stirfry ampalaya with tofu.jpeg",
             "Nasi Goreng Chicken": "images/Fried Rice Solo/nasi goreng.jpg",
             "Nasi Goreng - Chicken": "images/Fried Rice Solo/nasi goreng.jpg",
             "Kimchi Fried Rice": "images/Fried Rice Solo/kimchi fried rice.jpg",
             "Yangchow Fried Rice - Chicken": "images/Fried Rice Solo/yangchow chicken.jpg",
             "Yangchow Fried Rice - Pork": "images/Fried Rice Solo/yangchow pork.jpg",
             "Egg Fried Rice": "images/Fried Rice Solo/egg fried rice.jpg",
-            "Philly Cheesesteak": "images/Sandwich/philly.jpg",
-            "General Tso's Bento": "images/Bento Deals/general tso bento.jpg",
-            "Orange Chicken Bento": "images/Bento Deals/orange chicken bento.jpg",
-            "Ribs Bento": "images/Bento Deals/pork ribs bento.jpg",
-            "Wings Bento": "images/Bento Deals/wings bento.jpg"
+            "Philly Cheesesteak": "images/Sandwich/philly.jpg"
         };
 
         const descriptions = {
+            "Yangchow Lechon Kawali": "Yangchow fried rice topped with crispy lechon kawali.",
             "Pad Thai": "Thai stir-fried rice noodles with egg, vegetables, and peanuts",
-            "Lo Mein": "Stir-fried noodles with savory sauce, vegetables, and meat",
+            "Lo Mien": "Stir-fried noodles with savory sauce, vegetables, and meat",
             "Beef Pho": "Vietnamese rice noodles in aromatic beef broth with fresh herbs",
-            "Tomyum": "Hot and sour Thai soup with shrimp, herbs, and chili",
-            "Spicy Oxtail Beef Pho": "Rich beef broth with tender oxtail, rice noodles, and a spicy kick",
             "House Special Noodles": "Wok-fried noodles with shrimp, squid, pork, and chicken",
-            "Yangchow Rice With Lechon Kawali": "Crispy Thai-style pork belly with Yangchow or Kimchi Fried Rice",
+            "Fried Rice With Lechon Kawali Yangchow": "Crispy Thai-style pork belly with Yangchow or Kimchi Fried Rice",
             "Chicken Fillet": "Crispy chicken fillet on yangchow fried rice",
             "Pork Tonkatsu": "Crispy pork tonkatsu on yangchow fried rice",
             "BBQ Chicken Wings": "Juicy BBQ wings with savory egg fried rice",
             "Honey Butter Garlic Wings": "Sweet honey butter garlic wings with egg fried rice",
             "Buffalo Wings": "Tangy and spicy buffalo wings with egg fried rice",
             "Beef Gyudon": "Thinly sliced beef in savory-sweet soy sauce over rice",
-            "Ham Katsu": "Crispy breaded ham cutlet on yangchow fried rice",
             "Vietnamese Coffee": "Deep roasted coffee served ice-cold, smooth and satisfying",
             "Coconut Coffee": "Rich coffee with a smooth tropical touch",
             "Peach Mango Soda": "Refreshing peach mango soda with mint garnish"
@@ -222,9 +209,9 @@
             } else if (priceType === 'right') {
                 price = item.price;
             } else if (priceType === 'stirfry') {
-                price = `${item.withRice} | ${item.double}`;
+                price = `${item.withRice} | ${item.double} | ${item.family}`;
             } else if (priceType === 'platter') {
-                price = `${item.twoToThree} | ${item.threeToFive}`;
+                price = `${item.double} | ${item.twoToThree} | ${item.threeToFive}`;
             } else if (priceType === 'grill') {
                 price = `Half: ${item.half} | Whole: ${item.whole}`;
             }
@@ -264,73 +251,20 @@
                     </div>`;
                 } else {
                     return `<div class="menu-item">
-                        <div class="menu-item-content">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">${item.name}${badge}</span>
-                                <span class="menu-item-price">${price}</span>
-                            </div>
-                            ${freebie}
-                            ${desc ? `<p class="menu-item-desc">${desc}</p>` : ''}
+                        <div class="menu-item-header">
+                            <span class="menu-item-name">${item.name}${badge}</span>
+                            <span class="menu-item-price">${price}</span>
                         </div>
+                        ${freebie}
+                        ${desc ? `<p class="menu-item-desc">${desc}</p>` : ''}
                     </div>`;
                 }
             }
         }
 
-        function renderBentoItem(item) {
-            const badge = item.badge ? `<span class="badge">${item.badge}</span>` : '';
-            const mainKey = Array.isArray(item.includes.main) ? item.includes.main[0] : item.includes.main;
-            const img = images[item.name] || images[mainKey];
-
-            const mainText = Array.isArray(item.includes.main) ? item.includes.main.join(' / ') : item.includes.main;
-            const sideText = Array.isArray(item.includes.side) ? item.includes.side.join(' or ') : item.includes.side;
-            const drinkText = Array.isArray(item.includes.drink) ? item.includes.drink.join(', ') : item.includes.drink;
-
-            const includesHtml = `
-                <div class="bento-includes">
-                    <span class="bento-line"><strong>Main:</strong> ${mainText}</span>
-                    <span class="bento-line"><strong>Rice:</strong> ${Array.isArray(item.includes.rice) ? item.includes.rice.join(' or ') : item.includes.rice}</span>
-                    <span class="bento-line"><strong>Side:</strong> ${sideText}</span>
-                    <span class="bento-line"><strong>Soup:</strong> ${item.includes.soup}</span>
-                    <span class="bento-line"><strong>Drink:</strong> ${drinkText}</span>
-                </div>`;
-
-            if (img) {
-                return `<div class="menu-item bento-item">
-                    <img src="${img}" alt="${item.name}" class="menu-item-img">
-                    <div class="menu-item-content">
-                        <div class="menu-item-header">
-                            <span class="menu-item-name">${item.name}${badge}</span>
-                            <span class="menu-item-price">${item.price}</span>
-                        </div>
-                        <p class="menu-item-desc">${item.description}</p>
-                        ${includesHtml}
-                    </div>
-                </div>`;
-            } else {
-                return `<div class="menu-item bento-item">
-                    <div class="menu-item-content">
-                        <div class="menu-item-header">
-                            <span class="menu-item-name">${item.name}${badge}</span>
-                            <span class="menu-item-price">${item.price}</span>
-                        </div>
-                        <p class="menu-item-desc">${item.description}</p>
-                        ${includesHtml}
-                    </div>
-                </div>`;
-            }
-        }
-
-        function renderBentoSection(title, items) {
-            let html = title ? `<h3 class="section-title">${title}</h3>` : '';
-            items.forEach(item => html += renderBentoItem(item));
-            return html;
-        }
-
-        function renderSection(title, items, priceType = 'simple', sizeLabels = null, paxLabels = null) {
+        function renderSection(title, items, priceType = 'simple', sizeLabels = null) {
             let html = title ? `<h3 class="section-title">${title}</h3>` : '';
             if (sizeLabels) html += `<div class="size-labels">${sizeLabels}</div>`;
-            if (paxLabels) html += `<div class="pax-labels">${paxLabels}</div>`;
             items.forEach(item => html += renderItem(item, priceType));
             return html;
         }
@@ -346,51 +280,36 @@
                     <p class="category-subtitle">Best Seller & Asian Favorites</p>
                 </div>
                 <div class="menu-items">
-                    ${renderSection('Signature Fried Rice Collection', data.signatureFriedRiceCollection)}
-                    ${renderSection('Wok Street Noodle House', data.wokStreetNoodleHouse)}
-                    ${renderSection('Wok Tossed Specialties', data.wokTossedSpecialties, 'stirfry', 'w/Rice | Double', '&nbsp; | 2-3 pax')}
+                    ${renderSection('Fried Rice Meals', data.friedRiceMeals)}
+                    ${renderSection('Asian Noodles', data.asianNoodles)}
+                    ${renderSection('Asian Stir Fry', data.asianStirFry, 'stirfry', 'w/Rice | Double | Family')}
                 </div>
                 <div class="page-indicator">
                     <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
                 </div>
             </section>`;
 
-            // Page 2: Bento Meals
+            // Page 2: Sides, Drinks & More
             let page2 = `<section class="menu-page" id="page2">
-                <div class="page-header">
-                    <div class="logo">Pedro's Classic and <span>Asian Cuisine</span></div>
-                    <h1 class="category-title">Bento Meals</h1>
-                    <p class="category-subtitle">Complete Meal Combos</p>
-                </div>
-                <div class="menu-items">
-                    ${renderBentoSection('Bento Boxes', data.bentoBoxes)}
-                </div>
-                <div class="page-indicator">
-                    <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
-                </div>
-            </section>`;
-
-            // Page 3: Sides, Drinks & More
-            let page3 = `<section class="menu-page" id="page3">
                 <div class="page-header">
                     <div class="logo">Pedro's <span>Cuisine</span></div>
                     <h1 class="category-title">Sides, Drinks & More</h1>
                     <p class="category-subtitle">Rice, Beverages & Extras</p>
                 </div>
                 <div class="menu-items">
-                    ${renderSection('Rice Bowls & Basics', data.riceBowlsAndBasics, 'right')}
-                    ${renderSection('Sharing Platters', data.sharingPlatters, 'platter', '2-3 pax | 3-5 pax')}
-                    ${renderSection('Flame Grill Selection', data.flameGrillSelection, 'grill')}
-                    ${renderSection('Sandwich Atelier', data.sandwichAtelier)}
-                    ${renderSection('Signature Rice Upgrades', data.signatureRiceUpgrades, 'right')}
-                    ${renderSection('Refreshments & House Drinks', data.refreshmentsAndHouseDrinks, 'right')}
+                    ${renderSection('Fried Rice Solo', data.friedRiceSolo, 'right')}
+                    ${renderSection('Fried Rice Platter', data.friedRicePlatter, 'platter', 'Double | 2-3 pax | 3-5 pax')}
+                    ${renderSection('Grill Master', data.grillMaster, 'grill')}
+                    ${renderSection('Sandwich', data.sandwich)}
+                    ${renderSection('Rice Upgrade', data.riceUpgrade, 'right')}
+                    ${renderSection('Beverages / Fruit Soda', data.beverages, 'right')}
                 </div>
                 <div class="page-indicator">
                     <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
                 </div>
             </section>`;
 
-            container.innerHTML = page1 + page2 + page3;
+            container.innerHTML = page1 + page2;
             setupPageObserver();
             setupPageTabs();
         }
