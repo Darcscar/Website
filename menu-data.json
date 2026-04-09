@@ -1,12 +1,12 @@
 {
-  "wokStreetNoodleHouse": [
+  "asianNoodles": [
     { "name": "Pad Thai", "price": 199, "badge": "Best Seller" },
     { "name": "Lo Mein", "price": 149 },
     { "name": "Beef Pho", "price": 219 },
     { "name": "House Special Noodles", "price": 199 }
   ],
 
-  "signatureFriedRiceCollection": [
+  "friedRiceMeals": [
     { "name": "Yangchow Rice With Lechon Kawali", "price": 189, "badge": "Best Seller", "freebie": "Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
     { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller", "freebie": "Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
     { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller", "freebie": "Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
@@ -16,7 +16,7 @@
     { "name": "Beef Gyudon", "price": 199, "badge": "Best Seller", "freebie": "Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" }
   ],
 
-  "wokTossedSpecialties": [
+  "asianStirFry": [
     { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 349, "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
 
     { "name": "Orange Chicken", "withRice": 159, "double": 289, "badge": "Best Seller", "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
@@ -46,7 +46,7 @@
     { "name": "Stir Fry Cabbage with Egg", "withRice": 129, "double": 209, "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" }
   ],
 
-  "riceBowlsAndBasics": [
+  "friedRiceSolo": [
     { "name": "Plain Rice", "price": 25 },
     { "name": "Egg Fried Rice", "price": 69 },
     { "name": "Yangchow Fried Rice - Chicken", "price": 89 },
@@ -55,7 +55,7 @@
     { "name": "Kimchi Fried Rice", "price": 99 }
   ],
 
-  "sharingPlatters": [
+  "friedRicePlatter": [
     { "name": "Egg Fried Rice", "double": 159, "twoToThree": 219, "threeToFive": 309 },
     { "name": "Nasi Goreng - Chicken", "double": 269, "twoToThree": 369, "threeToFive": 529 },
     { "name": "Yangchow - Chicken", "double": 219, "twoToThree": 309, "threeToFive": 429 },
@@ -64,7 +64,7 @@
     { "name": "Kimchi - Chicken", "double": 219, "twoToThree": 319, "threeToFive": 439 }
   ],
 
-  "refreshmentsAndHouseDrinks": [
+  "beverages": [
     { "name": "Vietnamese Coffee", "price": 139 },
     { "name": "Coconut Coffee", "price": 159 },
     { "name": "Peach Mango Soda", "price": 99 },
@@ -78,11 +78,11 @@
     { "name": "Peach Mango Pitcher", "price": 179 }
   ],
 
-  "flameGrillSelection": [
+  "grillMaster": [
     { "name": "Peri-Peri Chicken w/ Bukhari Rice", "half": 465, "whole": 670 }
   ],
 
-  "sandwichAtelier": [
+  "sandwich": [
     { "name": "Philly Cheesesteak", "price": 249 }
   ],
 
@@ -153,7 +153,7 @@
     }
   ],
 
-  "signatureRiceUpgrades": [
+  "riceUpgrade": [
     { "name": "Egg Fried Rice", "price": "+30" },
     { "name": "Yangchow Fried Rice", "price": "+45" },
     { "name": "Kimchi Fried Rice", "price": "+55" }
