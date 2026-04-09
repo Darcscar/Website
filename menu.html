@@ -105,7 +105,7 @@
         @media (min-width: 768px) {
             .menu-page { padding: 1.5rem 2rem; }
             .menu-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-            .section-title, .size-labels { grid-column: span 2; }
+            .section-title, .size-labels, .menu-items > .freebie { grid-column: span 2; }
             .category-title { font-size: 2rem; }
         }
         @media (max-height: 700px) {
@@ -264,8 +264,9 @@
             }
         }
 
-        function renderSection(title, items, priceType = 'simple', sizeLabels = null) {
+        function renderSection(title, items, priceType = 'simple', sizeLabels = null, freeNote = null) {
             let html = title ? `<h3 class="section-title">${title}</h3>` : '';
+            if (freeNote) html += `<p class="freebie" style="margin-bottom: 0.3rem;">${freeNote}</p>`;
             if (sizeLabels) html += `<div class="size-labels">${sizeLabels}</div>`;
             items.forEach(item => html += renderItem(item, priceType));
             return html;
@@ -282,9 +283,9 @@
                     <p class="category-subtitle">Best Seller & Asian Favorites</p>
                 </div>
                 <div class="menu-items">
-                    ${renderSection('Fried Rice Meals', data.friedRiceMeals)}
-                    ${renderSection('Asian Noodles', data.asianNoodles)}
-                    ${renderSection('Asian Stir Fry', data.asianStirFry, 'stirfry', 'w/Rice | Double | Family')}
+                    ${renderSection('Signature Fried Rice Collection', data.friedRiceMeals, 'simple', null, 'Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade')}
+                    ${renderSection('Wok Street Noodle House', data.asianNoodles)}
+                    ${renderSection('Wok Tossed Specialties', data.asianStirFry, 'stirfry', 'w/Rice | Double | Family', 'w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade')}
                 </div>
                 <div class="page-indicator">
                     <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>

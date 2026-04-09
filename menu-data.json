@@ -7,43 +7,43 @@
   ],
 
   "friedRiceMeals": [
-    { "name": "Yangchow Rice With Lechon Kawali", "price": 189, "badge": "Best Seller", "freebie": "Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
-    { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller", "freebie": "Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
-    { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller", "freebie": "Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
-    { "name": "BBQ Chicken Wings", "price": 169, "badge": "Best Seller", "freebie": "Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
-    { "name": "Honey Butter Garlic Wings", "price": 169, "badge": "Best Seller", "freebie": "Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
-    { "name": "Buffalo Wings", "price": 169, "badge": "Best Seller", "freebie": "Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
-    { "name": "Beef Gyudon", "price": 199, "badge": "Best Seller", "freebie": "Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" }
+    { "name": "Yangchow Rice With Lechon Kawali", "price": 189, "badge": "Best Seller" },
+    { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller" },
+    { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
+    { "name": "BBQ Chicken Wings", "price": 169, "badge": "Best Seller" },
+    { "name": "Honey Butter Garlic Wings", "price": 169, "badge": "Best Seller" },
+    { "name": "Buffalo Wings", "price": 169, "badge": "Best Seller" },
+    { "name": "Beef Gyudon", "price": 199, "badge": "Best Seller" }
   ],
 
   "asianStirFry": [
-    { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 349, "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 349 },
 
-    { "name": "Orange Chicken", "withRice": 159, "double": 289, "badge": "Best Seller", "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Orange Chicken", "withRice": 159, "double": 289, "badge": "Best Seller" },
 
-    { "name": "Lemon Chicken", "withRice": 159, "double": 289, "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Lemon Chicken", "withRice": 159, "double": 289 },
 
-    { "name": "Pad Kra Pao", "withRice": 159, "double": 299, "badge": "Best Seller", "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Pad Kra Pao", "withRice": 159, "double": 299, "badge": "Best Seller" },
 
-    { "name": "Sweet & Spicy Pork Ribs", "withRice": 209, "double": 379, "badge": "Best Seller", "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Sweet & Spicy Pork Ribs", "withRice": 209, "double": 379, "badge": "Best Seller" },
 
-    { "name": "Squid in Bell Pepper", "withRice": 189, "double": 349, "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Squid in Bell Pepper", "withRice": 189, "double": 349 },
 
-    { "name": "Squid w/ Veggie", "withRice": 189, "double": 349, "badge": "Best Seller", "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Squid w/ Veggie", "withRice": 189, "double": 349, "badge": "Best Seller" },
 
-    { "name": "Krapao Moo Krob", "withRice": 209, "double": 379, "badge": "Best Seller", "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Krapao Moo Krob", "withRice": 209, "double": 379, "badge": "Best Seller" },
 
-    { "name": "Kung Pao Chicken", "withRice": 159, "double": 289, "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Kung Pao Chicken", "withRice": 159, "double": 289 },
 
-    { "name": "General Tso Chicken", "withRice": 169, "double": 289, "badge": "Best Seller", "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "General Tso Chicken", "withRice": 169, "double": 289, "badge": "Best Seller" },
 
-    { "name": "Spicy Garlic Wings", "withRice": 169, "double": 299, "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Spicy Garlic Wings", "withRice": 169, "double": 299 },
 
-    { "name": "Krapao Squid", "withRice": 189, "double": 339, "badge": "Best Seller", "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Krapao Squid", "withRice": 189, "double": 339, "badge": "Best Seller" },
 
-    { "name": "Mapo Tofu", "withRice": 149, "double": 259, "badge": "Best Seller", "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" },
+    { "name": "Mapo Tofu", "withRice": 149, "double": 259, "badge": "Best Seller" },
 
-    { "name": "Stir Fry Cabbage with Egg", "withRice": 129, "double": 209, "freebie": "w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade" }
+    { "name": "Stir Fry Cabbage with Egg", "withRice": 129, "double": 209 }
   ],
 
   "friedRiceSolo": [
