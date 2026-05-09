@@ -7,7 +7,7 @@
   ],
 
   "friedRiceMeals": [
-    { "name": "Yangchow Rice With Lechon Kawali", "price": 189, "badge": "Best Seller" },
+    { "name": "Lechon Kawali", "price": 189, "badge": "Best Seller" },
     { "name": "Chicken Fillet", "price": 169, "badge": "Best Seller" },
     { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
     { "name": "BBQ Chicken Wings", "price": 159, "badge": "Best Seller" },
@@ -59,17 +59,11 @@
   ],
 
   "beverages": [
-    { "name": "Vietnamese Coffee", "price": 139 },
-    { "name": "Coconut Coffee", "price": 159 },
-    { "name": "Peach Mango Soda", "price": 99 },
-    { "name": "Bottled Water", "price": 20 },
-    { "name": "SanMig Light", "price": 75 },
-    { "name": "Coke", "price": 30 },
-    { "name": "Cucumber Lemonade", "price": 49 },
-    { "name": "Strawberry Soda", "price": 49 },
-    { "name": "Blueberry Soda", "price": 49 },
-    { "name": "Pitcher (All Flavors)", "price": 99 },
-    { "name": "Peach Mango Pitcher", "price": 179 }
+    { "name": "Coconut Coffee", "price": 149 },
+    { "name": "Vietnamese Coffee", "price": 149 },
+    { "name": "Arctic Citrus Cloud", "price": 129 },
+    { "name": "Peach Mango Juice", "price": 129 },
+    { "name": "Blue Lemonade Arctic Cooler", "price": 129 }
   ],
 
   "grillMaster": [
