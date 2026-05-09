@@ -88,7 +88,7 @@
         .page-tab {
             flex: 1; padding: 0.75rem 1rem; text-align: center;
             background: transparent; border: none; color: #888;
-            font-family: 'Poppins', sans-serif; font-size: 0.85rem;
+            font-family: 'Poppins', sans-serif; font-size: 0.75rem;
             cursor: pointer; transition: all 0.3s ease;
             border-radius: 8px; margin: 0 0.25rem;
         }
@@ -126,6 +126,7 @@
     <div class="page-tabs">
         <button class="page-tab active" data-page="page1">Main Dishes</button>
         <button class="page-tab" data-page="page2">Sides & Drinks</button>
+        <button class="page-tab" data-page="page3">Bento Deals</button>
     </div>
 
     <script>
@@ -165,7 +166,12 @@
             "Yangchow Fried Rice - Chicken": "images/Fried Rice Solo/yangchow chicken.jpg",
             "Yangchow Fried Rice - Pork": "images/Fried Rice Solo/yangchow pork.jpg",
             "Egg Fried Rice": "images/Fried Rice Solo/egg fried rice.jpg",
-            "Philly Cheesesteak": "images/Sandwich/philly.jpg"
+            "Philly Cheesesteak": "images/Sandwich/philly.jpg",
+            "General Tso's Bento": "images/Bento Deals/general tso bento.jpg",
+            "Orange Chicken Bento": "images/Bento Deals/orange chicken bento.jpg",
+            "Wings Bento": "images/Bento Deals/wings bento.jpg",
+            "Krapao Moo Krob Bento": "images/Asian Stir Fry/Krapao Moo Krob.jpg",
+            "Ribs Bento": "images/Bento Deals/pork ribs bento.jpg"
         };
 
         const descriptions = {
@@ -264,6 +270,42 @@
             }
         }
 
+        function renderBentoItem(item) {
+            const badge = item.badge ? `<span class="badge">${item.badge}</span>` : '';
+            const img = images[item.name];
+            const includes = item.includes;
+            const mainText = Array.isArray(includes.main) ? includes.main.join(' / ') : includes.main;
+            const riceText = Array.isArray(includes.rice) ? includes.rice.join(' or ') : includes.rice;
+            const sideText = includes.side.join(' or ');
+            const drinkText = includes.drink.join(', ');
+            const desc = `${mainText} + ${riceText} + ${sideText} + ${includes.soup} + Drink`;
+
+            if (img) {
+                return `<div class="menu-item">
+                    <img src="${img}" alt="${item.name}" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <span class="menu-item-name">${item.name}${badge}</span>
+                            <span class="menu-item-price">${item.price}</span>
+                        </div>
+                        <p class="menu-item-desc">${item.description}</p>
+                        <span class="freebie">Drink: ${drinkText}</span>
+                    </div>
+                </div>`;
+            } else {
+                return `<div class="menu-item">
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <span class="menu-item-name">${item.name}${badge}</span>
+                            <span class="menu-item-price">${item.price}</span>
+                        </div>
+                        <p class="menu-item-desc">${item.description}</p>
+                        <span class="freebie">Drink: ${drinkText}</span>
+                    </div>
+                </div>`;
+            }
+        }
+
         function renderSection(title, items, priceType = 'simple', sizeLabels = null, freeNote = null) {
             let html = title ? `<h3 class="section-title">${title}</h3>` : '';
             if (freeNote) html += `<p class="freebie" style="margin-bottom: 0.3rem;">${freeNote}</p>`;
@@ -283,9 +325,9 @@
                     <p class="category-subtitle">Best Seller & Asian Favorites</p>
                 </div>
                 <div class="menu-items">
-                    ${renderSection('Signature Fried Rice Collection', data.friedRiceMeals, 'simple', null, 'Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade')}
+                    ${renderSection('Signature Fried Rice Collection', data.friedRiceMeals)}
                     ${renderSection('Wok Street Noodle House', data.asianNoodles)}
-                    ${renderSection('Wok Tossed Specialties', data.asianStirFry, 'stirfry', 'w/Rice | Double', 'w/Rice includes Free Drink: Cucumber Lemonade, Ice Tea, or Blue Lemonade')}
+                    ${renderSection('Wok Tossed Specialties', data.asianStirFry, 'stirfry', 'w/Rice | Double')}
                 </div>
                 <div class="page-indicator">
                     <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
@@ -312,7 +354,26 @@
                 </div>
             </section>`;
 
-            container.innerHTML = page1 + page2;
+            // Page 3: Bento Deals
+            let bentoItems = '';
+            data.bentoBoxes.forEach(item => bentoItems += renderBentoItem(item));
+
+            let page3 = `<section class="menu-page" id="page3">
+                <div class="page-header">
+                    <div class="logo">Pedro's <span>Cuisine</span></div>
+                    <h1 class="category-title">Bento Box Deals</h1>
+                    <p class="category-subtitle">Complete Meal Combos</p>
+                </div>
+                <div class="menu-items">
+                    <p class="freebie" style="margin-bottom: 0.3rem; text-align: center;">Each Bento includes: Main + Rice + Side + Miso Soup + Drink</p>
+                    ${bentoItems}
+                </div>
+                <div class="page-indicator">
+                    <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
+                </div>
+            </section>`;
+
+            container.innerHTML = page1 + page2 + page3;
             setupPageObserver();
             setupPageTabs();
         }
