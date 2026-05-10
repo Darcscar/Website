@@ -1,6 +1,7 @@
 {
   "asianNoodles": [
-    { "name": "Pad Thai", "price": 199, "badge": "Best Seller" },
+    { "name": "Classic Pad Thai", "price": 199, "badge": "Best Seller" },
+    { "name": "Chicken Pad Thai", "price": 179 },
     { "name": "Lo Mein", "price": 169 },
     { "name": "Beef Pho", "price": 219 },
     { "name": "House Special Noodles", "price": 199 }
