@@ -19,27 +19,29 @@
   ],
 
   "asianStirFry": [
-    { "name": "Spicy Garlic Pork Thai Style", "withRice": 189, "double": 358 },
+    { "name": "Spicy Garlic Pork Thai Style", "withRice": 199, "double": 368 },
 
-    { "name": "Orange Chicken", "withRice": 159, "double": 298, "badge": "Best Seller" },
+    { "name": "Orange Chicken", "withRice": 169, "double": 308, "badge": "Best Seller" },
 
-    { "name": "Pad Kra Pao", "withRice": 169, "double": 318, "badge": "Best Seller" },
+    { "name": "Pad Kra Pao", "withRice": 179, "double": 328, "badge": "Best Seller" },
 
-    { "name": "Sweet & Spicy Pork Ribs", "withRice": 209, "double": 398, "badge": "Best Seller" },
+    { "name": "Sweet & Spicy Pork Ribs", "withRice": 219, "double": 408, "badge": "Best Seller" },
 
-    { "name": "Squid in Bell Pepper", "withRice": 179, "double": 338 },
+    { "name": "Squid in Bell Pepper", "withRice": 189, "double": 348 },
 
-    { "name": "Krapao Moo Krob", "withRice": 209, "double": 398, "badge": "Best Seller" },
+    { "name": "Krapao Moo Krob", "withRice": 219, "double": 408, "badge": "Best Seller" },
 
-    { "name": "Kung Pao Chicken", "withRice": 159, "double": 298 },
+    { "name": "Kung Pao Chicken", "withRice": 169, "double": 308 },
 
-    { "name": "General Tso Chicken", "withRice": 159, "double": 298, "badge": "Best Seller" },
+    { "name": "General Tso Chicken", "withRice": 169, "double": 308, "badge": "Best Seller" },
 
-    { "name": "Krapao Squid", "withRice": 179, "double": 338, "badge": "Best Seller" },
+    { "name": "Krapao Squid", "withRice": 189, "double": 348, "badge": "Best Seller" },
 
-    { "name": "Mapo Tofu", "withRice": 159, "double": 298, "badge": "Best Seller" },
+    { "name": "Mapo Tofu", "withRice": 169, "double": 308, "badge": "Best Seller" },
 
-    { "name": "Stir Fry Cabbage with Egg", "withRice": 129, "double": 238 }
+    { "name": "Stir Fry Cabbage with Egg", "withRice": 139, "double": 248 },
+
+    { "name": "Sesame Chicken", "withRice": 169, "double": 318 }
   ],
 
   "friedRiceSolo": [
