@@ -19,29 +19,21 @@
   ],
 
   "asianStirFry": [
-    { "name": "Spicy Garlic Pork Thai Style", "withRice": 199, "double": 368 },
-
     { "name": "Orange Chicken", "withRice": 169, "double": 308, "badge": "Best Seller" },
+    { "name": "General Tso Chicken", "withRice": 169, "double": 308, "badge": "Best Seller" },
+    { "name": "Kung Pao Chicken", "withRice": 169, "double": 308 },
+    { "name": "Sesame Chicken", "withRice": 169, "double": 318 },
 
+    { "name": "Spicy Garlic Pork Thai Style", "withRice": 199, "double": 368 },
+    { "name": "Sweet & Spicy Pork Ribs", "withRice": 219, "double": 408, "badge": "Best Seller" },
+    { "name": "Krapao Moo Krob", "withRice": 219, "double": 408, "badge": "Best Seller" },
     { "name": "Pad Kra Pao", "withRice": 179, "double": 328, "badge": "Best Seller" },
 
-    { "name": "Sweet & Spicy Pork Ribs", "withRice": 219, "double": 408, "badge": "Best Seller" },
-
     { "name": "Squid in Bell Pepper", "withRice": 189, "double": 348 },
-
-    { "name": "Krapao Moo Krob", "withRice": 219, "double": 408, "badge": "Best Seller" },
-
-    { "name": "Kung Pao Chicken", "withRice": 169, "double": 308 },
-
-    { "name": "General Tso Chicken", "withRice": 169, "double": 308, "badge": "Best Seller" },
-
     { "name": "Krapao Squid", "withRice": 189, "double": 348, "badge": "Best Seller" },
 
     { "name": "Mapo Tofu", "withRice": 169, "double": 308, "badge": "Best Seller" },
-
-    { "name": "Stir Fry Cabbage with Egg", "withRice": 139, "double": 248 },
-
-    { "name": "Sesame Chicken", "withRice": 169, "double": 318 }
+    { "name": "Stir Fry Cabbage with Egg", "withRice": 139, "double": 248 }
   ],
 
   "friedRiceSolo": [
