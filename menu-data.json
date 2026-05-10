@@ -13,7 +13,8 @@
     { "name": "BBQ Chicken Wings", "price": 159, "badge": "Best Seller" },
     { "name": "Honey Butter Garlic Wings", "price": 159, "badge": "Best Seller" },
     { "name": "Buffalo Wings", "price": 159, "badge": "Best Seller" },
-    { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller" }
+    { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller" },
+    { "name": "Nasi Goreng Chicken", "price": 129 }
   ],
 
   "asianStirFry": [
