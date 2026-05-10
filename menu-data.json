@@ -15,7 +15,7 @@
     { "name": "Honey Butter Garlic Wings", "price": 159, "badge": "Best Seller" },
     { "name": "Buffalo Wings", "price": 159, "badge": "Best Seller" },
     { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller" },
-    { "name": "Nasi Goreng Chicken", "price": 129 }
+    { "name": "Nasi Goreng Chicken", "price": 119 }
   ],
 
   "asianStirFry": [
@@ -49,7 +49,6 @@
     { "name": "Egg Fried Rice", "price": 69 },
     { "name": "Yangchow Fried Rice - Chicken", "price": 89 },
     { "name": "Yangchow Fried Rice - Pork", "price": 89 },
-    { "name": "Nasi Goreng Chicken", "price": 99 },
     { "name": "Kimchi Fried Rice", "price": 99 }
   ],
 
