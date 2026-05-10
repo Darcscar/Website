@@ -84,6 +84,18 @@
       }
     },
     {
+      "name": "Sesame Chicken Bento",
+      "price": 219,
+      "description": "Crispy sesame glazed chicken with Egg Fried Rice",
+      "includes": {
+        "main": "Sesame Chicken",
+        "rice": "Egg Fried Rice",
+        "side": ["Stir Fry Veggie", "Mapo Tofu"],
+        "soup": "Miso Soup",
+        "drink": ["Coke", "Cucumber Lemonade", "Strawberry Soda", "Blueberry Soda"]
+      }
+    },
+    {
       "name": "Orange Chicken Bento",
       "price": 219,
       "badge": "Popular",
