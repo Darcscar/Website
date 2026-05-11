@@ -13,27 +13,23 @@
     { "name": "Pork Tonkatsu", "price": 179, "badge": "Best Seller" },
     { "name": "BBQ Chicken Wings", "price": 159, "badge": "Best Seller" },
     { "name": "Honey Butter Garlic Wings", "price": 159, "badge": "Best Seller" },
-    { "name": "Buffalo Wings", "price": 159, "badge": "Best Seller" },
+    { "name": "Chicken Tender", "price": 159, "badge": "Best Seller" },
     { "name": "Beef Gyudon", "price": 189, "badge": "Best Seller" },
     { "name": "Nasi Goreng Chicken", "price": 119 }
   ],
 
   "asianStirFry": [
-    { "name": "Orange Chicken", "withRice": 169, "double": 308, "badge": "Best Seller" },
-    { "name": "General Tso Chicken", "withRice": 169, "double": 308, "badge": "Best Seller" },
-    { "name": "Kung Pao Chicken", "withRice": 169, "double": 308 },
-    { "name": "Sesame Chicken", "withRice": 169, "double": 318 },
-
-    { "name": "Spicy Garlic Pork Thai Style", "withRice": 199, "double": 368 },
-    { "name": "Sweet & Spicy Pork Ribs", "withRice": 219, "double": 408, "badge": "Best Seller" },
-    { "name": "Krapao Moo Krob", "withRice": 219, "double": 408, "badge": "Best Seller" },
-    { "name": "Pad Kra Pao", "withRice": 179, "double": 328, "badge": "Best Seller" },
-
-    { "name": "Squid in Bell Pepper", "withRice": 189, "double": 348 },
-    { "name": "Krapao Squid", "withRice": 189, "double": 348, "badge": "Best Seller" },
-
-    { "name": "Mapo Tofu", "withRice": 169, "double": 308, "badge": "Best Seller" },
-    { "name": "Stir Fry Cabbage with Egg", "withRice": 139, "double": 248 }
+    { "name": "Spicy Garlic Pork Thai Style", "withRice": 189, "double": 349 },
+    { "name": "Orange Chicken", "withRice": 159, "double": 289, "badge": "Best Seller" },
+    { "name": "Pad Kra Pao", "withRice": 169, "double": 318, "badge": "Best Seller" },
+    { "name": "Sweet & Spicy Pork Ribs", "withRice": 209, "double": 379, "badge": "Best Seller" },
+    { "name": "Squid in Bell Pepper", "withRice": 179, "double": 349 },
+    { "name": "Krapao Moo Krob", "withRice": 209, "double": 379, "badge": "Best Seller" },
+    { "name": "Kung Pao Chicken", "withRice": 159, "double": 289 },
+    { "name": "General Tso Chicken", "withRice": 159, "double": 289, "badge": "Best Seller" },
+    { "name": "Krapao Squid", "withRice": 179, "double": 339, "badge": "Best Seller" },
+    { "name": "Mapo Tofu", "withRice": 159, "double": 259, "badge": "Best Seller" },
+    { "name": "Stir Fry Cabbage with Egg", "withRice": 129, "double": 209 }
   ],
 
   "friedRiceSolo": [
@@ -112,9 +108,9 @@
     {
       "name": "Wings Bento",
       "price": 229,
-      "description": "BBQ, Honey Butter Garlic, or Buffalo wings with Egg Fried Rice",
+      "description": "BBQ, Honey Butter Garlic Wings, or Chicken Tender with Egg Fried Rice",
       "includes": {
-        "main": ["BBQ Chicken Wings", "Honey Butter Garlic Wings", "Buffalo Wings"],
+        "main": ["BBQ Chicken Wings", "Honey Butter Garlic Wings", "Chicken Tender"],
         "rice": "Egg Fried Rice",
         "side": ["Stir Fry Veggie", "Mapo Tofu"],
         "soup": "Miso Soup",
