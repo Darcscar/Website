@@ -238,7 +238,7 @@
             } else if (priceType === 'stirfry') {
                 price = `${item.withRice} | ${item.double}`;
             } else if (priceType === 'platter') {
-                price = `${item.double} | ${item.twoToThree} | ${item.threeToFive}`;
+                price = `${item.double} | ${item.family}`;
             } else if (priceType === 'grill') {
                 price = `Half: ${item.half} | Whole: ${item.whole}`;
             }
@@ -364,7 +364,7 @@
                 </div>
                 <div class="menu-items">
                     ${renderSection('Fried Rice Solo', data.friedRiceSolo, 'right')}
-                    ${renderSection('Fried Rice Platter', data.friedRicePlatter, 'platter', 'Double | 2-3 pax | 3-5 pax')}
+                    ${renderSection('Fried Rice Platter', data.friedRicePlatter, 'platter', 'Double | Family (3-5 pax)')}
                     ${renderSection('Grill Master', data.grillMaster, 'grill')}
                     ${renderSection('Sandwich', data.sandwich)}
                     ${renderSection('Rice Upgrade', data.riceUpgrade, 'right')}

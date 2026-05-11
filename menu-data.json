@@ -45,12 +45,13 @@
   ],
 
   "friedRicePlatter": [
-    { "name": "Egg Fried Rice", "double": 159, "twoToThree": 219, "threeToFive": 309 },
-    { "name": "Nasi Goreng - Chicken", "double": 269, "twoToThree": 369, "threeToFive": 529 },
-    { "name": "Yangchow - Chicken", "double": 219, "twoToThree": 309, "threeToFive": 429 },
-    { "name": "Yangchow - Pork", "double": 219, "twoToThree": 309, "threeToFive": 429 },
-    { "name": "Kimchi - Pork", "double": 219, "twoToThree": 319, "threeToFive": 439 },
-    { "name": "Kimchi - Chicken", "double": 219, "twoToThree": 319, "threeToFive": 439 }
+    { "name": "Egg Fried Rice", "double": 159, "family": 309 },
+    { "name": "Nasi Goreng - Chicken", "double": 269, "family": 529 },
+    { "name": "Yangchow - Chicken", "double": 219, "family": 429 },
+    { "name": "Yangchow - Pork", "double": 219, "family": 429 },
+    { "name": "Kimchi - Pork", "double": 219, "family": 439 },
+    { "name": "Kimchi - Chicken", "double": 219, "family": 439 },
+    { "name": "House Special Fried Rice", "double": 279, "family": 489 }
   ],
 
   "beverages": [
