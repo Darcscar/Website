@@ -51,11 +51,11 @@
   ],
 
   "beverages": [
-    { "name": "Coconut Coffee", "price": 149 },
-    { "name": "Vietnamese Coffee", "price": 149 },
-    { "name": "Arctic Citrus Cloud", "price": 129 },
-    { "name": "Peach Mango Juice", "price": 129 },
-    { "name": "Blue Lemonade Arctic Cooler", "price": 129 }
+    { "name": "Coconut Coffee", "price": 129 },
+    { "name": "Vietnamese Coffee", "price": 129 },
+    { "name": "Arctic Citrus Cloud", "price": 99 },
+    { "name": "Peach Mango Juice", "price": 99 },
+    { "name": "Blue Lemonade Arctic Cooler", "price": 99 }
   ],
 
   "grillMaster": [
