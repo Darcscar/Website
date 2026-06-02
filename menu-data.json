@@ -13,7 +13,7 @@
     { "name": "Pork Tonkatsu", "price": 169, "badge": "Best Seller" },
     { "name": "BBQ Chicken Wings", "price": 149, "badge": "Best Seller" },
     { "name": "Honey Butter Garlic Wings", "price": 149, "badge": "Best Seller" },
-    { "name": "Chicken Tender", "price": 149, "badge": "Best Seller" },
+    { "name": "Dynamite Chicken", "price": 159, "badge": "Best Seller" },
     { "name": "Beef Gyudon", "price": 179, "badge": "Best Seller" },
     { "name": "Nasi Goreng Chicken", "price": 109 }
   ],
@@ -108,9 +108,9 @@
     {
       "name": "Wings Bento",
       "price": 229,
-      "description": "BBQ, Honey Butter Garlic Wings, or Chicken Tender with Egg Fried Rice",
+      "description": "BBQ, Honey Butter Garlic Wings, or Dynamite Chicken with Egg Fried Rice",
       "includes": {
-        "main": ["BBQ Chicken Wings", "Honey Butter Garlic Wings", "Chicken Tender"],
+        "main": ["BBQ Chicken Wings", "Honey Butter Garlic Wings", "Dynamite Chicken"],
         "rice": "Egg Fried Rice",
         "side": ["Stir Fry Veggie", "Mapo Tofu"],
         "soup": "Miso Soup",
