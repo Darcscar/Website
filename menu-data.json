@@ -29,7 +29,7 @@
     { "name": "General Tso Chicken", "withRice": 149, "double": 279, "badge": "Best Seller" },
     { "name": "Krapao Squid", "withRice": 169, "double": 329, "badge": "Best Seller" },
     { "name": "Mapo Tofu", "withRice": 149, "double": 249, "badge": "Best Seller" },
-    { "name": "Stir Fry Cabbage with Egg", "withRice": 119, "double": 199 }
+    { "name": "Stir Fry Cabbage with Egg", "withRice": 139, "double": 219 }
   ],
 
   "friedRiceSolo": [
@@ -53,9 +53,9 @@
   "beverages": [
     { "name": "Coconut Coffee", "price": 129 },
     { "name": "Vietnamese Coffee", "price": 129 },
-    { "name": "Arctic Citrus Cloud", "price": 99 },
-    { "name": "Peach Mango Juice", "price": 99 },
-    { "name": "Blue Lemonade Arctic Cooler", "price": 99 }
+    { "name": "Arctic Citrus Cloud", "price": 79 },
+    { "name": "Peach Mango Juice", "price": 89 },
+    { "name": "Blue Lemonade Arctic Cooler", "price": 79 }
   ],
 
   "grillMaster": [
@@ -69,7 +69,7 @@
   "bentoBoxes": [
     {
       "name": "General Tso's Bento",
-      "price": 219,
+      "price": 239,
       "badge": "Best Seller",
       "description": "Sweet & spicy crispy chicken with Egg Fried Rice",
       "includes": {
@@ -82,7 +82,7 @@
     },
     {
       "name": "Sesame Chicken Bento",
-      "price": 219,
+      "price": 239,
       "description": "Crispy sesame glazed chicken with Egg Fried Rice",
       "includes": {
         "main": "Sesame Chicken",
@@ -94,7 +94,7 @@
     },
     {
       "name": "Orange Chicken Bento",
-      "price": 219,
+      "price": 239,
       "badge": "Popular",
       "description": "Tangy citrus glaze chicken with Egg Fried Rice",
       "includes": {
@@ -107,7 +107,7 @@
     },
     {
       "name": "Wings Bento",
-      "price": 229,
+      "price": 249,
       "description": "BBQ, Honey Butter Garlic Wings, or Dynamite Chicken with Egg Fried Rice",
       "includes": {
         "main": ["BBQ Chicken Wings", "Honey Butter Garlic Wings", "Dynamite Chicken"],
@@ -119,7 +119,7 @@
     },
     {
       "name": "Krapao Moo Krob Bento",
-      "price": 249,
+      "price": 269,
       "badge": "Best Seller",
       "description": "Crispy pork belly with holy basil on Plain Rice",
       "includes": {
