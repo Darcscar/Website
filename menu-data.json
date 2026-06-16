@@ -1,21 +1,21 @@
 {
   "asianNoodles": [
-    { "name": "Classic Pad Thai", "price": 199, "badge": "Best Seller" },
-    { "name": "Chicken Pad Thai", "price": 179 },
-    { "name": "Lo Mein", "price": 169 },
-    { "name": "Beef Pho", "price": 219 },
-    { "name": "House Special Noodles", "price": 199 }
+    { "name": "Classic Pad Thai", "price": 179, "badge": "Best Seller" },
+    { "name": "Chicken Pad Thai", "price": 159 },
+    { "name": "Lo Mein", "price": 149 },
+    { "name": "Beef Pho", "price": 199 },
+    { "name": "House Special Noodles", "price": 179 }
   ],
 
   "friedRiceMeals": [
-    { "name": "Lechon Kawali", "price": 179, "badge": "Best Seller" },
-    { "name": "Chicken Fillet", "price": 159, "badge": "Best Seller" },
-    { "name": "Pork Tonkatsu", "price": 169, "badge": "Best Seller" },
-    { "name": "BBQ Chicken Wings", "price": 149, "badge": "Best Seller" },
-    { "name": "Honey Butter Garlic Wings", "price": 149, "badge": "Best Seller" },
-    { "name": "Dynamite Chicken", "price": 159, "badge": "Best Seller" },
-    { "name": "Beef Gyudon", "price": 179, "badge": "Best Seller" },
-    { "name": "Nasi Goreng Chicken", "price": 109 }
+    { "name": "Lechon Kawali", "price": 159, "badge": "Best Seller" },
+    { "name": "Chicken Fillet", "price": 139, "badge": "Best Seller" },
+    { "name": "Pork Tonkatsu", "price": 149, "badge": "Best Seller" },
+    { "name": "BBQ Chicken Wings", "price": 129, "badge": "Best Seller" },
+    { "name": "Honey Butter Garlic Wings", "price": 129, "badge": "Best Seller" },
+    { "name": "Dynamite Chicken", "price": 139, "badge": "Best Seller" },
+    { "name": "Beef Gyudon", "price": 159, "badge": "Best Seller" },
+    { "name": "Nasi Goreng", "price": 99 }
   ],
 
   "asianStirFry": [
