@@ -8,28 +8,30 @@
   ],
 
   "friedRiceMeals": [
-    { "name": "Lechon Kawali", "price": 159, "badge": "Best Seller" },
+    { "name": "Lechon Kawali", "price": 169, "badge": "Best Seller" },
     { "name": "Chicken Fillet", "price": 139, "badge": "Best Seller" },
-    { "name": "Pork Tonkatsu", "price": 149, "badge": "Best Seller" },
-    { "name": "BBQ Chicken Wings", "price": 129, "badge": "Best Seller" },
-    { "name": "Honey Butter Garlic Wings", "price": 129, "badge": "Best Seller" },
+    { "name": "Pork Tonkatsu", "price": 159, "badge": "Best Seller" },
+    { "name": "BBQ Chicken Wings", "price": 149, "badge": "Best Seller" },
+    { "name": "Honey Butter Garlic Wings", "price": 149, "badge": "Best Seller" },
     { "name": "Dynamite Chicken", "price": 139, "badge": "Best Seller" },
-    { "name": "Beef Gyudon", "price": 159, "badge": "Best Seller" },
+    { "name": "Beef Gyudon", "price": 179, "badge": "Best Seller" },
     { "name": "Nasi Goreng", "price": 99 }
   ],
 
   "asianStirFry": [
-    { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 349 },
     { "name": "Orange Chicken", "withRice": 149, "double": 279, "badge": "Best Seller" },
-    { "name": "Pad Kra Pao", "withRice": 159, "double": 308, "badge": "Best Seller" },
-    { "name": "Sweet & Spicy Pork Ribs", "withRice": 179, "double": 349, "badge": "Best Seller" },
-    { "name": "Squid in Bell Pepper", "withRice": 169, "double": 339 },
-    { "name": "Krapao Moo Krob", "withRice": 179, "double": 349, "badge": "Best Seller" },
     { "name": "Kung Pao Chicken", "withRice": 149, "double": 279 },
     { "name": "General Tso Chicken", "withRice": 149, "double": 279, "badge": "Best Seller" },
+    { "name": "Sesame Chicken", "withRice": 149, "double": 279, "badge": "Best Seller" },
+    { "name": "Pad Kra Pao", "withRice": 159, "double": 308, "badge": "Best Seller" },
+    { "name": "Spicy Garlic Pork Thai Style", "withRice": 179, "double": 349 },
+    { "name": "Sweet & Spicy Pork Ribs", "withRice": 179, "double": 349, "badge": "Best Seller" },
+    { "name": "Krapao Moo Krob", "withRice": 179, "double": 349, "badge": "Best Seller" },
+    { "name": "Squid in Bell Pepper", "withRice": 169, "double": 339 },
     { "name": "Krapao Squid", "withRice": 169, "double": 329, "badge": "Best Seller" },
     { "name": "Mapo Tofu", "withRice": 149, "double": 249, "badge": "Best Seller" },
-    { "name": "Stir Fry Cabbage with Egg", "withRice": 139, "double": 219 }
+    { "name": "Stir Fry Cabbage with Egg", "withRice": 139, "double": 219 },
+    { "name": "Braised Tofu w/ Pork Belly", "withRice": 119, "double": 219 }
   ],
 
   "friedRiceSolo": [
