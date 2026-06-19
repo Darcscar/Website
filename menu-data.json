@@ -9,11 +9,11 @@
 
   "friedRiceMeals": [
     { "name": "Lechon Kawali", "price": 169, "badge": "Best Seller" },
-    { "name": "Chicken Fillet", "price": 139, "badge": "Best Seller" },
+    { "name": "Chicken Fillet", "price": 149, "badge": "Best Seller" },
     { "name": "Pork Tonkatsu", "price": 159, "badge": "Best Seller" },
     { "name": "BBQ Chicken Wings", "price": 149, "badge": "Best Seller" },
     { "name": "Honey Butter Garlic Wings", "price": 149, "badge": "Best Seller" },
-    { "name": "Dynamite Chicken", "price": 139, "badge": "Best Seller" },
+    { "name": "Dynamite Chicken", "price": 149, "badge": "Best Seller" },
     { "name": "Beef Gyudon", "price": 179, "badge": "Best Seller" },
     { "name": "Nasi Goreng", "price": 99 }
   ],
