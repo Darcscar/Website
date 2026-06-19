@@ -4,7 +4,8 @@
     { "name": "Chicken Pad Thai", "price": 159 },
     { "name": "Lo Mein", "price": 149 },
     { "name": "Beef Pho", "price": 199 },
-    { "name": "House Special Noodles", "price": 179 }
+    { "name": "House Special Noodles", "price": 179 },
+    { "name": "Kung Pao Chicken Noodles", "price": 159 }
   ],
 
   "friedRiceMeals": [
