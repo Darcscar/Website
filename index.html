@@ -590,6 +590,87 @@
             font-size: 0.85rem;
         }
 
+        /* Reviews Slider */
+        .reviews-slider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .reviews-viewport {
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .reviews-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+
+        .reviews-track .review-card {
+            flex: 0 0 calc((100% - 4rem) / 3);
+            box-sizing: border-box;
+        }
+
+        .slider-arrow {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .slider-arrow:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .slider-arrow svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--gold);
+            transition: fill 0.3s ease;
+        }
+
+        .slider-arrow:hover svg {
+            fill: var(--dark-bg);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slider-dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .slider-dots .dot.active {
+            background: var(--gold);
+            transform: scale(1.2);
+        }
+
         /* Contact Section */
         .contact {
             padding: 6rem 2rem;
@@ -885,6 +966,10 @@
             .reviews-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .reviews-track .review-card {
+                flex: 0 0 calc((100% - 2rem) / 2);
+            }
         }
 
         @media (max-width: 768px) {
@@ -936,6 +1021,19 @@
 
             .reviews-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .reviews-track {
+                gap: 1rem;
+            }
+
+            .reviews-track .review-card {
+                flex: 0 0 100%;
+            }
+
+            .slider-arrow {
+                width: 40px;
+                height: 40px;
             }
 
             .contact-grid {
@@ -1022,7 +1120,7 @@
     <section id="home" class="hero">
         <div class="hero-bg"></div>
         <div class="hero-image">
-            <img src="images/General Tso.jpg" alt="Delicious Asian cuisine">
+            <img src="images/Asian Stir Fry/General Tso.jpg" alt="Delicious Asian cuisine">
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -1175,41 +1273,195 @@
                 <h2 class="section-title">What Our Customers Say</h2>
                 <div class="section-divider"></div>
             </div>
-            <div class="reviews-grid">
-                <div class="review-card animate-on-scroll">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"The General Tso's Chicken is absolutely amazing! Perfectly crispy and the sauce has just the right balance of sweet and spicy. This is now my go-to place for Asian food in Lucena!"</p>
-                    <div class="review-author">
-                        <div class="review-avatar">M</div>
-                        <div class="review-author-info">
-                            <h4>Maria Santos</h4>
-                            <span>Regular Customer</span>
+            <div class="reviews-slider animate-on-scroll">
+                <button class="slider-arrow slider-prev" aria-label="Previous reviews">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                </button>
+                <div class="reviews-viewport">
+                    <div class="reviews-track">
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Yummy and affordable foodies, my kids loved it esp. the orange chicken, Pad Thai (chicken) ❤️"</p>
+                            <div class="review-author">
+                                <div class="review-avatar">M</div>
+                                <div class="review-author-info">
+                                    <h4>Maricris</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Taste is very authentic 😋 — the Orange Chicken is a must-try!"</p>
+                            <div class="review-author">
+                                <div class="review-avatar">K</div>
+                                <div class="review-author-info">
+                                    <h4>Kim</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"I luvvv their pad thai! Sarap :)"</p>
+                            <div class="review-author">
+                                <div class="review-avatar">A</div>
+                                <div class="review-author-info">
+                                    <h4>Alyssa</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Sarap ng pad thai nila, must try!"</p>
+                            <div class="review-author">
+                                <div class="review-avatar">R</div>
+                                <div class="review-author-info">
+                                    <h4>Rohaimah</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Didn't expect much because of the mixed reviews, but we loved everything we ordered. Everything. #supportlocal"</p>
+                            <div class="review-author">
+                                <div class="review-avatar">L</div>
+                                <div class="review-author-info">
+                                    <h4>Loreen</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Grabe, ang sarap! General Tso chicken pang Panda Express ang quality. Bitin na bitin ako. I love this resto."</p>
+                            <div class="review-author">
+                                <div class="review-avatar">B</div>
+                                <div class="review-author-info">
+                                    <h4>Brian</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"All meals ordered were tasty, personal fave is pad thai and nasi goreng — will order again."</p>
+                            <div class="review-author">
+                                <div class="review-avatar">L</div>
+                                <div class="review-author-info">
+                                    <h4>Louise</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Sarap!!!"</p>
+                            <div class="review-author">
+                                <div class="review-avatar">C</div>
+                                <div class="review-author-info">
+                                    <h4>Christiana</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Masarap, 5/5 din sa packaging at secured."</p>
+                            <div class="review-author">
+                                <div class="review-avatar">C</div>
+                                <div class="review-author-info">
+                                    <h4>Carstine</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Masarap. Especially pad thai."</p>
+                            <div class="review-author">
+                                <div class="review-avatar">A</div>
+                                <div class="review-author-info">
+                                    <h4>Arvin</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Yum!! Lalo yung Peri Peri. ❤️"</p>
+                            <div class="review-author">
+                                <div class="review-avatar">M</div>
+                                <div class="review-author-info">
+                                    <h4>Michelle</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"1st time here in fair, ang sarap!"</p>
+                            <div class="review-author">
+                                <div class="review-avatar">K</div>
+                                <div class="review-author-info">
+                                    <h4>KC</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Always masarap! In fair lahat ng naorder ko panalo."</p>
+                            <div class="review-author">
+                                <div class="review-avatar">K</div>
+                                <div class="review-author-info">
+                                    <h4>KC</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Yum!"</p>
+                            <div class="review-author">
+                                <div class="review-avatar">C</div>
+                                <div class="review-author-info">
+                                    <h4>Casey</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"2nd time to order, consistent. Masarap."</p>
+                            <div class="review-author">
+                                <div class="review-avatar">Y</div>
+                                <div class="review-author-info">
+                                    <h4>Yanah</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Masarap and very recommended 💯"</p>
+                            <div class="review-author">
+                                <div class="review-avatar">E</div>
+                                <div class="review-author-info">
+                                    <h4>Emmanuel</h4>
+                                    <span>Foodpanda Customer</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="review-card animate-on-scroll">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"I ordered for our family gathering and everyone loved it! The Pad Kra Pao with the fried egg on top was authentic Thai flavor. Will definitely order again!"</p>
-                    <div class="review-author">
-                        <div class="review-avatar">J</div>
-                        <div class="review-author-info">
-                            <h4>Juan dela Cruz</h4>
-                            <span>Foodpanda Customer</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-card animate-on-scroll">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Best Asian fusion in the city! The Black Pepper Beef is tender and flavorful. Fast delivery and the food arrived hot. Highly recommended!"</p>
-                    <div class="review-author">
-                        <div class="review-avatar">A</div>
-                        <div class="review-author-info">
-                            <h4>Ana Reyes</h4>
-                            <span>Verified Customer</span>
-                        </div>
-                    </div>
-                </div>
+                <button class="slider-arrow slider-next" aria-label="Next reviews">
+                    <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+                </button>
             </div>
+            <div class="slider-dots" aria-hidden="true"></div>
         </div>
     </section>
 
@@ -1377,6 +1629,92 @@
                 }
             });
         });
+
+        // Reviews Slider
+        (function () {
+            const track = document.querySelector('.reviews-track');
+            const cards = Array.from(document.querySelectorAll('.reviews-track .review-card'));
+            const prevBtn = document.querySelector('.slider-prev');
+            const nextBtn = document.querySelector('.slider-next');
+            const dotsContainer = document.querySelector('.slider-dots');
+            if (!track || !cards.length) return;
+
+            let index = 0;
+            let autoplayTimer;
+
+            function cardsPerView() {
+                if (window.innerWidth <= 768) return 1;
+                if (window.innerWidth <= 1024) return 2;
+                return 3;
+            }
+
+            function maxIndex() {
+                return Math.max(0, cards.length - cardsPerView());
+            }
+
+            function buildDots() {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i <= maxIndex(); i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'dot' + (i === index ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                    dot.addEventListener('click', () => goTo(i));
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function update() {
+                const card = cards[0];
+                const style = getComputedStyle(track);
+                const gap = parseFloat(style.columnGap || style.gap) || 0;
+                const step = card.getBoundingClientRect().width + gap;
+                track.style.transform = 'translateX(' + (-index * step) + 'px)';
+                dotsContainer.querySelectorAll('.dot').forEach((d, i) => {
+                    d.classList.toggle('active', i === index);
+                });
+            }
+
+            function goTo(i) {
+                index = Math.max(0, Math.min(i, maxIndex()));
+                update();
+            }
+
+            function next() {
+                index = index >= maxIndex() ? 0 : index + 1;
+                update();
+            }
+
+            function prev() {
+                index = index <= 0 ? maxIndex() : index - 1;
+                update();
+            }
+
+            function startAutoplay() {
+                stopAutoplay();
+                autoplayTimer = setInterval(next, 5000);
+            }
+
+            function stopAutoplay() {
+                clearInterval(autoplayTimer);
+            }
+
+            nextBtn.addEventListener('click', () => { next(); startAutoplay(); });
+            prevBtn.addEventListener('click', () => { prev(); startAutoplay(); });
+
+            const slider = document.querySelector('.reviews-slider');
+            slider.addEventListener('mouseenter', stopAutoplay);
+            slider.addEventListener('mouseleave', startAutoplay);
+
+            window.addEventListener('resize', () => {
+                index = Math.min(index, maxIndex());
+                buildDots();
+                update();
+            });
+
+            buildDots();
+            update();
+            startAutoplay();
+        })();
 
     </script>
 </body>
