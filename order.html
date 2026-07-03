@@ -365,6 +365,7 @@
         let items = [], cats = [], variations = {}, store = {};
         let step = "menu", activeCat = null, search = "", pickerId = null;
         let form = { name:"", phone:"", type:"pickup", address:"", lat:null, lng:null, pay:"cod", ref:"", notes:"" };
+        window._f = form; // inline oninput handlers run in global scope
         let formError = null, submitting = false, locating = false, doneNumber = null;
         let cart = [];
         try { cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]"); } catch { cart = []; }
@@ -615,7 +616,7 @@
             const delivery = form.type === "delivery" ? `
                 <div class="fld">
                     <label>Delivery Address *</label>
-                    <textarea rows="3" placeholder="House no., street, barangay, city" oninput="form.address=this.value">${esc(form.address)}</textarea>
+                    <textarea rows="3" placeholder="House no., street, barangay, city" oninput="_f.address=this.value">${esc(form.address)}</textarea>
                     <button class="gpsbtn" onclick="_gps()">${locating ? "Getting your location…" : "📍 Use my location (GPS)"}</button>
                     ${form.lat ? `<div class="gpsnote">✓ GPS pin saved — our rider will find you exactly</div>` : ""}
                 </div>` : "";
@@ -624,7 +625,7 @@
                 <div class="gbox">
                     <div style="font-size:0.85rem">Send <strong>${peso(cartTotal())}</strong> to our GCash${store.gcash_number ? ` number <strong>${esc(store.gcash_number)}</strong>` : ""}, then enter the reference number below.</div>
                     ${store.gcash_qr_code ? `<img src="${esc(store.gcash_qr_code)}" alt="GCash QR" />` : ""}
-                    <input placeholder="GCash reference number *" value="${esc(form.ref)}" oninput="form.ref=this.value" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font:inherit;font-size:16px;" />
+                    <input placeholder="GCash reference number *" value="${esc(form.ref)}" oninput="_f.ref=this.value" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font:inherit;font-size:16px;" />
                 </div>` : "";
 
             return `
@@ -634,9 +635,9 @@
                     <div class="ctotal"><span>Total</span><span class="amt">${peso(cartTotal())}</span></div>
                 </div>
                 <div class="fld"><label>Your Name *</label>
-                    <input placeholder="Juan dela Cruz" value="${esc(form.name)}" oninput="form.name=this.value" /></div>
+                    <input placeholder="Juan dela Cruz" value="${esc(form.name)}" oninput="_f.name=this.value" /></div>
                 <div class="fld"><label>Phone Number *</label>
-                    <input type="tel" placeholder="09XX XXX XXXX" value="${esc(form.phone)}" oninput="form.phone=this.value" /></div>
+                    <input type="tel" placeholder="09XX XXX XXXX" value="${esc(form.phone)}" oninput="_f.phone=this.value" /></div>
                 <div class="fld"><label>Order Type</label>
                     <div class="segs">
                         <button class="seg ${form.type === "pickup" ? "active" : ""}" onclick="_set('type','pickup')">Pick Up</button>
@@ -650,7 +651,7 @@
                     </div>
                     ${gcash}</div>
                 <div class="fld"><label>Special Instructions</label>
-                    <textarea rows="2" placeholder="Optional — allergies, landmarks, requests…" oninput="form.notes=this.value">${esc(form.notes)}</textarea></div>
+                    <textarea rows="2" placeholder="Optional — allergies, landmarks, requests…" oninput="_f.notes=this.value">${esc(form.notes)}</textarea></div>
                 ${formError ? `<div class="err">${esc(formError)}</div>` : ""}
                 <button class="placebtn" onclick="_place()" ${submitting || cart.length === 0 ? "disabled" : ""}>
                     ${submitting ? "Placing order…" : `Place Order · ${peso(cartTotal())}`}
