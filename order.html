@@ -158,6 +158,31 @@
         .cat-tile .tcount {
             font-size: 0.68rem; opacity: 0.85; font-weight: 500;
         }
+        .cat-select {
+            display: flex; align-items: center; gap: 8px;
+            background: var(--charcoal); color: #fff;
+            border: none; border-radius: 999px;
+            padding: 9px 16px;
+            font: inherit; font-size: 0.88rem; font-weight: 600;
+            cursor: pointer;
+            max-width: 100%;
+        }
+        .cat-select .caret { color: var(--gold); font-size: 0.7rem; }
+        .cat-select .cname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .prow {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%;
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 13px 14px;
+            margin-bottom: 8px;
+            font: inherit; font-size: 0.9rem; font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer; text-align: left;
+        }
+        .prow.current { background: var(--primary-red); border-color: var(--primary-red); color: #fff; }
+        .prow .pcount { font-size: 0.72rem; font-weight: 500; opacity: 0.7; }
         .section-label {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem; color: var(--charcoal);
@@ -509,6 +534,10 @@
             scrollTop();
         };
         window._cats = () => { activeCat = null; search = ""; render(); scrollTop(); };
+        let catPickerOpen = false;
+        window._openCats = () => { catPickerOpen = true; render(); };
+        window._closeCats = () => { catPickerOpen = false; render(); };
+        window._pickCat = id => { catPickerOpen = false; window._cat(id); };
         window._search = val => { search = val; renderMenuOnly(); };
 
         window._go = s => { step = s; formError = null; render(); scrollTop(); };
@@ -652,10 +681,29 @@
             const cat = cats.find(c => c.id === activeCat);
             const list = items.filter(it => it.category_id === activeCat);
             return `<div class="cat-head">
-                        <button class="cat-back" onclick="_cats()">← All Categories</button>
-                        <h2 class="cat-title">${esc(cat ? cat.name : "")}</h2>
+                        <button class="cat-back" onclick="_cats()" aria-label="All categories">←</button>
+                        <button class="cat-select" onclick="_openCats()" aria-label="Switch category">
+                            <span class="cname">${esc(cat ? cat.name : "")}</span>
+                            <span class="caret">▼</span>
+                        </button>
                     </div>
                     <div class="grid">${list.map(cardHtml).join("")}</div>`;
+        }
+
+        function catPickerHtml() {
+            if (!catPickerOpen) return "";
+            const rows = cats.map(c => {
+                const n = items.filter(it => it.category_id === c.id).length;
+                return `<button class="prow ${c.id === activeCat ? "current" : ""}" onclick="_pickCat('${c.id}')">
+                    <span>${esc(c.name)}</span><span class="pcount">${n} dishes</span>
+                </button>`;
+            }).join("");
+            return `<div class="overlay" onclick="_closeCats()"></div>
+                <div class="sheet" style="max-height:75dvh;overflow-y:auto">
+                    <button class="close" onclick="_closeCats()">✕</button>
+                    <h3>Categories</h3>
+                    ${rows}
+                </div>`;
         }
 
         function pickerHtml() {
@@ -688,12 +736,11 @@
         function menuHtml() {
             return `
                 <input class="search" placeholder="Search the menu…" value="${esc(search)}" oninput="_search(this.value)" />
-                ${activeCat && !search ? `<div class="chipsbar"><div class="chips">${cats.map(c =>
-                    `<button class="chip ${c.id === activeCat ? "active" : ""}" data-cat="${c.id}" onclick="_cat('${c.id}')">${esc(c.name)}</button>`
-                ).join("")}</div></div>` : ""}
+
                 <div id="menu-grid">${menuGridHtml()}</div>
                 <div class="foot">Prices are live from Pedro's POS · Powered by DarcSoft Inc.</div>
                 ${pickerHtml()}
+                ${catPickerHtml()}
                 ${cartCount() > 0 ? `<div class="cartbar"><button onclick="_go('checkout')">
                     <span>🛍 ${cartCount()} item${cartCount() !== 1 ? "s" : ""}</span>
                     <span class="total">Checkout · ${peso(cartTotal())}</span>
