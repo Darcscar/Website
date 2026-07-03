@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Order Online | Pedro's Classic & Asian Cuisine</title>
+    <meta name="description" content="Order your favorite Pedro's dishes online for pickup or delivery." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-red: #C41E3A;
+            --dark-red: #8B0000;
+            --gold: #D4AF37;
+            --light-gold: #F4E4BC;
+            --charcoal: #2C2C2C;
+            --dark-bg: #1a1a1a;
+            --cream: #FFF8F0;
+            --text-dark: #333333;
+            --text-light: #F5F5F5;
+            --border: #E8DCC8;
+        }
+
+        html, body { height: 100%; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background: var(--cream);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            height: 100dvh;
+        }
+
+        /* ── Header ─────────────────────────────────────── */
+        .topbar {
+            flex-shrink: 0;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+            z-index: 20;
+        }
+        .topbar .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+        }
+        .topbar a.back {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.8rem;
+            opacity: 0.85;
+        }
+        .topbar a.back:hover { opacity: 1; }
+
+        /* ── Scroll area ────────────────────────────────── */
+        #scroller {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+        }
+        .wrap { max-width: 860px; margin: 0 auto; padding: 18px 16px 120px; }
+
+        /* ── Search + chips ─────────────────────────────── */
+        .search {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font: inherit;
+            font-size: 0.9rem;
+            background: #fff;
+            outline: none;
+            margin-bottom: 12px;
+        }
+        .search:focus { border-color: var(--gold); }
+        .chips {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin: 0 -16px 8px;
+            padding-left: 16px;
+            padding-right: 16px;
+            scrollbar-width: none;
+        }
+        .chips::-webkit-scrollbar { display: none; }
+        .chip {
+            flex-shrink: 0;
+            padding: 9px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: #fff;
+            font: inherit;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .chip.active { background: var(--primary-red); border-color: var(--primary-red); color: #fff; }
+
+        /* ── Cards ──────────────────────────────────────── */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        @media (min-width: 640px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+        .card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .card .photo {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: #F1E8D8;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .card .photo img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .card .photo:active { opacity: 0.85; }
+        .badge {
+            position: absolute;
+            top: 8px; left: 8px;
+            background: var(--gold);
+            color: var(--charcoal);
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 999px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+        }
+        .card .body { padding: 10px 12px 12px; display: flex; flex-direction: column; flex: 1; }
+        .card .name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.25;
+            min-height: 2.2em;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 4px;
+        }
+        .card .row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+        .price { font-weight: 700; color: var(--primary-red); font-size: 0.9rem; }
+        .price .from { font-size: 0.62rem; font-weight: 500; color: #8a8a8a; }
+
+        .round {
+            height: 32px; min-width: 32px;
+            border-radius: 999px;
+            border: none;
+            background: var(--primary-red);
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 10px;
+        }
+        .round.ghost { background: #EFE6D6; color: var(--text-dark); }
+        .stepper { display: flex; align-items: center; gap: 7px; }
+        .stepper .qty { font-weight: 700; font-size: 0.9rem; min-width: 14px; text-align: center; }
+
+        /* ── Cart bar ───────────────────────────────────── */
+        .cartbar {
+            position: fixed;
+            left: 0; right: 0; bottom: 0;
+            padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+            background: linear-gradient(transparent, var(--cream) 45%);
+            pointer-events: none;
+            z-index: 30;
+        }
+        .cartbar button {
+            pointer-events: auto;
+            width: 100%;
+            max-width: 860px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            border: none;
+            border-radius: 16px;
+            padding: 15px 20px;
+            font: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 8px 26px rgba(0,0,0,0.3);
+        }
+        .cartbar .total { color: var(--gold); font-weight: 700; font-size: 1rem; }
+
+        /* ── Sheet (size picker) ────────────────────────── */
+        .overlay {
+            position: fixed; inset: 0;
+            background: rgba(20,12,8,0.5);
+            z-index: 40;
+        }
+        .sheet {
+            position: fixed;
+            left: 0; right: 0; bottom: 0;
+            max-width: 860px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 18px 18px 0 0;
+            padding: 20px 18px calc(20px + env(safe-area-inset-bottom));
+            z-index: 50;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+        }
+        .sheet h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 14px; }
+        .sheet .close { position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: #999; }
+        .vrow {
+            display: flex; align-items: center; justify-content: space-between;
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+        }
+        .vrow .vname { font-weight: 600; font-size: 0.86rem; }
+        .vrow .vprice { color: var(--primary-red); font-weight: 700; font-size: 0.86rem; }
+        .donebtn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 12px;
+            background: var(--dark-bg);
+            color: var(--gold);
+            font: inherit; font-weight: 600;
+            cursor: pointer;
+            margin-top: 6px;
+        }
+
+        /* ── Checkout ───────────────────────────────────── */
+        .backlink { background:none; border:none; font:inherit; font-size:0.85rem; font-weight:600; color:#8a7a66; cursor:pointer; margin-bottom:14px; }
+        h1.page { font-family:'Playfair Display', serif; font-size:1.4rem; margin-bottom:14px; color: var(--charcoal); }
+        .panel { background:#fff; border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:16px; }
+        .cline { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:6px 0; }
+        .cline .nm { font-size:0.85rem; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .cline .amt { font-weight:600; font-size:0.85rem; }
+        .ctotal { display:flex; justify-content:space-between; border-top:1px solid var(--border); margin-top:8px; padding-top:10px; font-weight:700; }
+        .ctotal .amt { color: var(--primary-red); font-size:1.05rem; }
+        .fld { margin-bottom:14px; }
+        .fld label { display:block; font-size:0.66rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#8a7a66; margin-bottom:6px; }
+        .fld input, .fld textarea {
+            width:100%; padding:12px 14px;
+            border:1px solid var(--border); border-radius:12px;
+            font:inherit; font-size:16px; background:#fff; outline:none; resize:none;
+        }
+        .fld input:focus, .fld textarea:focus { border-color: var(--gold); }
+        .segs { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+        .seg {
+            padding:13px; border-radius:12px; border:1px solid var(--border);
+            background:#fff; font:inherit; font-size:0.85rem; font-weight:600; cursor:pointer;
+        }
+        .seg.active { background: var(--primary-red); border-color: var(--primary-red); color:#fff; }
+        .seg.gcash.active { background:#1877F2; border-color:#1877F2; }
+        .gpsbtn {
+            width:100%; margin-top:8px; padding:12px;
+            border:1.5px solid var(--primary-red); border-radius:12px;
+            background:none; color:var(--primary-red);
+            font:inherit; font-size:0.85rem; font-weight:600; cursor:pointer;
+        }
+        .gpsnote { font-size:0.75rem; color:#2e7d32; margin-top:6px; }
+        .gbox { background:var(--cream); border:1px solid var(--border); border-radius:12px; padding:14px; margin-top:10px; }
+        .gbox img { display:block; width:160px; height:160px; object-fit:contain; margin:10px auto; background:#fff; border-radius:8px; }
+        .err { background:#FDE8E8; border:1px solid #F5C2C2; color:#9B1C1C; border-radius:12px; padding:12px 14px; font-size:0.83rem; margin-bottom:14px; }
+        .placebtn {
+            width:100%; padding:15px; border:none; border-radius:14px;
+            background: var(--primary-red); color:#fff;
+            font:inherit; font-size:1rem; font-weight:700; cursor:pointer;
+        }
+        .placebtn:disabled { opacity:0.55; }
+
+        /* ── Confirmation ───────────────────────────────── */
+        .done-wrap { text-align:center; padding:56px 16px; max-width:430px; margin:0 auto; }
+        .done-ico { width:64px; height:64px; border-radius:50%; background:#DCF5E3; color:#2e7d32; font-size:1.8rem; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; }
+        .done-wrap h1 { font-family:'Playfair Display', serif; font-size:1.5rem; margin-bottom:8px; }
+        .ordno { background:#fff; border:1px solid var(--border); border-radius:16px; padding:18px; margin:18px 0; }
+        .ordno .no { font-size:1.8rem; font-weight:700; color:var(--primary-red); }
+        .muted { color:#8a7a66; font-size:0.85rem; }
+
+        .loading { display:flex; justify-content:center; padding:70px 0; }
+        .spin {
+            width:30px; height:30px; border-radius:50%;
+            border:3px solid var(--gold); border-top-color:transparent;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .empty { text-align:center; padding:60px 0; color:#8a7a66; font-size:0.9rem; }
+        .foot { text-align:center; padding:20px 0 8px; color:#b0a390; font-size:0.72rem; }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <a href="index.html" class="back">← Back to site</a>
+        <a href="index.html" class="brand">Pedro's</a>
+        <span style="width:74px"></span>
+    </header>
+
+    <div id="scroller"><div class="wrap" id="app">
+        <div class="loading"><div class="spin"></div></div>
+    </div></div>
+
+    <script>
+    (() => {
+        const SB_URL = "https://tgawpkpcfrxobgrsysic.supabase.co";
+        const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRnYXdwa3BjZnJ4b2JncnN5c2ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM1ODI5NjQsImV4cCI6MjA2OTE1ODk2NH0.AsNuusVkPzozfCB6QTyLy5cnQUgwmXsjNhNH3hb75Ew";
+        const HEADERS = { apikey: SB_KEY, Authorization: "Bearer " + SB_KEY, "Content-Type": "application/json" };
+        const CART_KEY = "pedrosOrderCart";
+
+        const peso = n => "₱" + Number(n).toFixed(2);
+        const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+        const lineKey = c => c.variation ? c.id + "::" + c.variation : c.id;
+        const lineLabel = c => c.variation ? c.name + " — " + c.variation : c.name;
+
+        // ── State ────────────────────────────────────────
+        let items = [], cats = [], variations = {}, store = {};
+        let step = "menu", activeCat = null, search = "", pickerId = null;
+        let form = { name:"", phone:"", type:"pickup", address:"", lat:null, lng:null, pay:"cod", ref:"", notes:"" };
+        let formError = null, submitting = false, locating = false, doneNumber = null;
+        let cart = [];
+        try { cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]"); } catch { cart = []; }
+
+        const saveCart = () => localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        const cartCount = () => cart.reduce((s,c) => s + c.quantity, 0);
+        const cartTotal = () => cart.reduce((s,c) => s + c.price * c.quantity, 0);
+        const qtyFor = id => cart.filter(c => c.id === id).reduce((s,c) => s + c.quantity, 0);
+        const lineQty = key => cart.find(c => lineKey(c) === key)?.quantity || 0;
+        const varsFor = id => variations[id] || [];
+
+        // ── Data ─────────────────────────────────────────
+        const get = path => fetch(SB_URL + "/rest/v1/" + path, { headers: HEADERS }).then(r => r.json());
+
+        async function load() {
+            const [i, c, v, s] = await Promise.all([
+                get("menu_items?select=*&available=is.true&order=name"),
+                get("menu_categories?select=id,name,sort_order&order=sort_order"),
+                get("menu_item_variations?select=menu_item_id,id,name,price_adjustment&order=price_adjustment"),
+                get("restaurant_settings?select=store_name,store_phone,gcash_number,gcash_qr_code&limit=1"),
+            ]);
+            items = Array.isArray(i) ? i : [];
+            cats = (Array.isArray(c) ? c : []).filter(cat => items.some(it => it.category_id === cat.id));
+            (Array.isArray(v) ? v : []).forEach(row => {
+                (variations[row.menu_item_id] ||= []).push(row);
+            });
+            store = (Array.isArray(s) && s[0]) || {};
+            activeCat = cats[0]?.id || null;
+            // reconcile saved cart with live menu + prices
+            cart = cart.flatMap(cl => {
+                const live = items.find(it => it.id === cl.id);
+                if (!live) return [];
+                if (cl.variation) {
+                    const vv = varsFor(cl.id).find(x => x.name === cl.variation);
+                    return vv ? [{ ...cl, name: live.name, price: Number(vv.price_adjustment) }] : [];
+                }
+                return [{ ...cl, name: live.name, price: Number(live.price) }];
+            });
+            saveCart();
+            render();
+        }
+
+        // ── Cart ops ─────────────────────────────────────
+        function addLine(line) {
+            const key = lineKey(line);
+            const ex = cart.find(c => lineKey(c) === key);
+            if (ex) ex.quantity += 1;
+            else cart.push({ ...line, quantity: 1 });
+            saveCart(); render();
+        }
+        function decLine(key) {
+            cart = cart.map(c => lineKey(c) === key ? { ...c, quantity: c.quantity - 1 } : c).filter(c => c.quantity > 0);
+            saveCart(); render();
+        }
+        window._tap = id => {
+            const it = items.find(x => x.id === id);
+            if (!it) return;
+            if (varsFor(id).length > 0) { pickerId = id; render(); }
+            else addLine({ id: it.id, name: it.name, price: Number(it.price) });
+        };
+        window._dec = key => decLine(key);
+        window._addVar = (id, vname) => {
+            const it = items.find(x => x.id === id);
+            const vv = varsFor(id).find(x => x.name === vname);
+            if (it && vv) addLine({ id, name: it.name, price: Number(vv.price_adjustment), variation: vv.name });
+        };
+        window._decVar = (id, vname) => decLine(id + "::" + vname);
+        window._closePicker = () => { pickerId = null; render(); };
+        window._cat = id => { activeCat = id; search = ""; render(); scrollTop(); };
+        window._search = val => { search = val; renderMenuOnly(); };
+        window._go = s => { step = s; formError = null; render(); scrollTop(); };
+        window._set = (k, val) => { form[k] = val; render(); };
+        window._again = () => { doneNumber = null; step = "menu"; render(); };
+
+        const scrollTop = () => document.getElementById("scroller").scrollTo({ top: 0 });
+
+        // ── GPS ──────────────────────────────────────────
+        window._gps = () => {
+            formError = null;
+            if (!navigator.geolocation) { formError = "Location is not supported by this browser."; render(); return; }
+            if (!window.isSecureContext) { formError = "Location needs a secure (https) connection — please type your address."; render(); return; }
+            locating = true; render();
+            const ok = async pos => {
+                form.lat = pos.coords.latitude; form.lng = pos.coords.longitude;
+                try {
+                    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${form.lat}&lon=${form.lng}&zoom=18`);
+                    const d = await r.json();
+                    if (d?.display_name) form.address = d.display_name;
+                } catch {}
+                locating = false; render();
+            };
+            navigator.geolocation.getCurrentPosition(ok, err => {
+                if (err.code === err.PERMISSION_DENIED) {
+                    locating = false;
+                    formError = "Location permission was denied — allow it in your browser settings, or type your address.";
+                    render(); return;
+                }
+                navigator.geolocation.getCurrentPosition(ok, () => {
+                    locating = false;
+                    formError = "Couldn't get your location right now — please type your address.";
+                    render();
+                }, { enableHighAccuracy: false, timeout: 15000, maximumAge: 60000 });
+            }, { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 });
+        };
+
+        // ── Submit ───────────────────────────────────────
+        window._place = async () => {
+            formError = null;
+            if (!form.name.trim()) formError = "Please enter your name.";
+            else if (!form.phone.trim()) formError = "Please enter your phone number.";
+            else if (form.type === "delivery" && !form.address.trim()) formError = "Please enter your delivery address or use your location.";
+            else if (form.pay === "gcash" && !form.ref.trim()) formError = "Please enter your GCash reference number after sending payment.";
+            if (formError) { render(); return; }
+
+            submitting = true; render();
+            const orderNumber = "WEB-" + Date.now().toString(36).toUpperCase() + Math.floor(Math.random()*36).toString(36).toUpperCase();
+            const orderItems = cart.map(c => ({ name: lineLabel(c), quantity: c.quantity, price: c.price }));
+            const body = {
+                order_number: orderNumber,
+                customer_name: form.name.trim(),
+                customer_phone: form.phone.trim(),
+                order_text: orderItems.map(x => `${x.quantity}x ${x.name}`).join(", "),
+                items: orderItems,
+                special_instructions: form.notes.trim() || null,
+                estimated_total: cartTotal(),
+                order_type: form.type,
+                delivery_address: form.type === "delivery" ? form.address.trim() : null,
+                latitude: form.lat, longitude: form.lng,
+                payment_method: form.pay,
+                payment_reference: form.pay === "gcash" ? form.ref.trim() : null,
+                status: "pending",
+            };
+            const res = await fetch(SB_URL + "/rest/v1/online_orders", {
+                method: "POST", headers: { ...HEADERS, Prefer: "return=minimal" }, body: JSON.stringify(body),
+            });
+            submitting = false;
+            if (res.ok) {
+                doneNumber = orderNumber;
+                cart = []; saveCart();
+                step = "done"; render(); scrollTop();
+            } else {
+                formError = "Something went wrong placing your order. Please try again or call us" + (store.store_phone ? " at " + store.store_phone : "") + ".";
+                render();
+            }
+        };
+
+        // ── Rendering ────────────────────────────────────
+        const app = () => document.getElementById("app");
+
+        function cardHtml(it) {
+            const vs = varsFor(it.id);
+            const hasVars = vs.length > 0;
+            const display = hasVars ? Math.min(...vs.map(v => Number(v.price_adjustment))) : Number(it.price);
+            const qty = qtyFor(it.id);
+            const img = it.image
+                ? `<img src="${esc(it.image)}" alt="${esc(it.name)}" loading="lazy" />`
+                : "";
+            const badge = it.is_best_seller ? `<span class="badge">Best Seller</span>` : "";
+            let action;
+            if (hasVars) {
+                action = qty === 0
+                    ? `<button class="round" onclick="_tap('${it.id}')" aria-label="Choose size for ${esc(it.name)}">+</button>`
+                    : `<button class="round" onclick="_tap('${it.id}')">${qty} ✎</button>`;
+            } else {
+                action = qty === 0
+                    ? `<button class="round" onclick="_tap('${it.id}')" aria-label="Add ${esc(it.name)}">+</button>`
+                    : `<div class="stepper">
+                         <button class="round ghost" onclick="_dec('${it.id}')">−</button>
+                         <span class="qty">${qty}</span>
+                         <button class="round" onclick="_tap('${it.id}')">+</button>
+                       </div>`;
+            }
+            return `<div class="card">
+                <div class="photo" role="button" aria-label="Add ${esc(it.name)}" onclick="_tap('${it.id}')">${img}${badge}</div>
+                <div class="body">
+                    <p class="name" onclick="_tap('${it.id}')">${esc(it.name)}</p>
+                    <div class="row">
+                        <span class="price">${hasVars ? '<span class="from">from </span>' : ""}${peso(display)}</span>
+                        ${action}
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function menuGridHtml() {
+            const list = items.filter(it => {
+                if (search) return it.name.toLowerCase().includes(search.toLowerCase());
+                return !activeCat || it.category_id === activeCat;
+            });
+            if (list.length === 0) return `<div class="empty">No dishes found</div>`;
+            return `<div class="grid">${list.map(cardHtml).join("")}</div>`;
+        }
+
+        function pickerHtml() {
+            if (!pickerId) return "";
+            const it = items.find(x => x.id === pickerId);
+            if (!it) return "";
+            const rows = varsFor(pickerId).map(v => {
+                const q = lineQty(pickerId + "::" + v.name);
+                const ctrl = q === 0
+                    ? `<button class="round" onclick="_addVar('${it.id}','${esc(v.name)}')">+</button>`
+                    : `<div class="stepper">
+                         <button class="round ghost" onclick="_decVar('${it.id}','${esc(v.name)}')">−</button>
+                         <span class="qty">${q}</span>
+                         <button class="round" onclick="_addVar('${it.id}','${esc(v.name)}')">+</button>
+                       </div>`;
+                return `<div class="vrow">
+                    <div><div class="vname">${esc(v.name)}</div><div class="vprice">${peso(v.price_adjustment)}</div></div>
+                    ${ctrl}
+                </div>`;
+            }).join("");
+            return `<div class="overlay" onclick="_closePicker()"></div>
+                <div class="sheet">
+                    <button class="close" onclick="_closePicker()">✕</button>
+                    <h3>${esc(it.name)}</h3>
+                    ${rows}
+                    <button class="donebtn" onclick="_closePicker()">Done</button>
+                </div>`;
+        }
+
+        function menuHtml() {
+            return `
+                <input class="search" placeholder="Search the menu…" value="${esc(search)}" oninput="_search(this.value)" />
+                <div class="chips">${cats.map(c =>
+                    `<button class="chip ${c.id === activeCat && !search ? "active" : ""}" onclick="_cat('${c.id}')">${esc(c.name)}</button>`
+                ).join("")}</div>
+                <div id="menu-grid">${menuGridHtml()}</div>
+                <div class="foot">Prices are live from Pedro's POS · Powered by DarcSoft Inc.</div>
+                ${pickerHtml()}
+                ${cartCount() > 0 ? `<div class="cartbar"><button onclick="_go('checkout')">
+                    <span>🛍 ${cartCount()} item${cartCount() !== 1 ? "s" : ""}</span>
+                    <span class="total">Checkout · ${peso(cartTotal())}</span>
+                </button></div>` : ""}`;
+        }
+
+        function checkoutHtml() {
+            const lines = cart.map(c => `
+                <div class="cline">
+                    <div class="stepper">
+                        <button class="round ghost" onclick="_dec('${lineKey(c)}')">−</button>
+                        <span class="qty">${c.quantity}</span>
+                        <button class="round" onclick="${c.variation ? `_addVar('${c.id}','${esc(c.variation)}')` : `_tap('${c.id}')`}">+</button>
+                    </div>
+                    <span class="nm">${esc(lineLabel(c))}</span>
+                    <span class="amt">${peso(c.price * c.quantity)}</span>
+                </div>`).join("");
+
+            const delivery = form.type === "delivery" ? `
+                <div class="fld">
+                    <label>Delivery Address *</label>
+                    <textarea rows="3" placeholder="House no., street, barangay, city" oninput="form.address=this.value">${esc(form.address)}</textarea>
+                    <button class="gpsbtn" onclick="_gps()">${locating ? "Getting your location…" : "📍 Use my location (GPS)"}</button>
+                    ${form.lat ? `<div class="gpsnote">✓ GPS pin saved — our rider will find you exactly</div>` : ""}
+                </div>` : "";
+
+            const gcash = form.pay === "gcash" ? `
+                <div class="gbox">
+                    <div style="font-size:0.85rem">Send <strong>${peso(cartTotal())}</strong> to our GCash${store.gcash_number ? ` number <strong>${esc(store.gcash_number)}</strong>` : ""}, then enter the reference number below.</div>
+                    ${store.gcash_qr_code ? `<img src="${esc(store.gcash_qr_code)}" alt="GCash QR" />` : ""}
+                    <input placeholder="GCash reference number *" value="${esc(form.ref)}" oninput="form.ref=this.value" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font:inherit;font-size:16px;" />
+                </div>` : "";
+
+            return `
+                <button class="backlink" onclick="_go('menu')">← Back to menu</button>
+                <h1 class="page">Checkout</h1>
+                <div class="panel">${lines}
+                    <div class="ctotal"><span>Total</span><span class="amt">${peso(cartTotal())}</span></div>
+                </div>
+                <div class="fld"><label>Your Name *</label>
+                    <input placeholder="Juan dela Cruz" value="${esc(form.name)}" oninput="form.name=this.value" /></div>
+                <div class="fld"><label>Phone Number *</label>
+                    <input type="tel" placeholder="09XX XXX XXXX" value="${esc(form.phone)}" oninput="form.phone=this.value" /></div>
+                <div class="fld"><label>Order Type</label>
+                    <div class="segs">
+                        <button class="seg ${form.type === "pickup" ? "active" : ""}" onclick="_set('type','pickup')">Pick Up</button>
+                        <button class="seg ${form.type === "delivery" ? "active" : ""}" onclick="_set('type','delivery')">Delivery</button>
+                    </div></div>
+                ${delivery}
+                <div class="fld"><label>Payment</label>
+                    <div class="segs">
+                        <button class="seg ${form.pay === "cod" ? "active" : ""}" onclick="_set('pay','cod')">${form.type === "delivery" ? "Cash on Delivery" : "Pay at Pickup"}</button>
+                        <button class="seg gcash ${form.pay === "gcash" ? "active" : ""}" onclick="_set('pay','gcash')">GCash</button>
+                    </div>
+                    ${gcash}</div>
+                <div class="fld"><label>Special Instructions</label>
+                    <textarea rows="2" placeholder="Optional — allergies, landmarks, requests…" oninput="form.notes=this.value">${esc(form.notes)}</textarea></div>
+                ${formError ? `<div class="err">${esc(formError)}</div>` : ""}
+                <button class="placebtn" onclick="_place()" ${submitting || cart.length === 0 ? "disabled" : ""}>
+                    ${submitting ? "Placing order…" : `Place Order · ${peso(cartTotal())}`}
+                </button>`;
+        }
+
+        function doneHtml() {
+            return `<div class="done-wrap">
+                <div class="done-ico">✓</div>
+                <h1>Order received!</h1>
+                <p class="muted">We'll start preparing it as soon as our staff confirms.</p>
+                <div class="ordno">
+                    <div class="muted" style="text-transform:uppercase;letter-spacing:0.08em;font-size:0.66rem;font-weight:700">Your order number</div>
+                    <div class="no">${esc(doneNumber)}</div>
+                </div>
+                <p class="muted">Keep this number — mention it when you ${form.type === "delivery" ? "receive your delivery" : "pick up your order"}.${store.store_phone ? ` Questions? Call us at <a href="tel:${esc(store.store_phone)}" style="color:var(--primary-red);font-weight:600">${esc(store.store_phone)}</a>.` : ""}</p>
+                <button class="placebtn" style="margin-top:18px" onclick="_again()">Order Again</button>
+            </div>`;
+        }
+
+        function render() {
+            if (step === "done" && doneNumber) app().innerHTML = doneHtml();
+            else if (step === "checkout") app().innerHTML = checkoutHtml();
+            else app().innerHTML = menuHtml();
+        }
+        function renderMenuOnly() {
+            // keep focus in the search box: only refresh the grid
+            const grid = document.getElementById("menu-grid");
+            if (grid) grid.innerHTML = menuGridHtml();
+        }
+
+        load().catch(() => {
+            app().innerHTML = `<div class="empty">Couldn't load the menu right now. Please try again in a moment.</div>`;
+        });
+    })();
+    </script>
+</body>
+</html>
