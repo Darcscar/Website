@@ -329,6 +329,28 @@
 
     <script>
     (() => {
+        // ── Pre-launch gate ──────────────────────────────────────────
+        // While LIVE_FOR_EVERYONE is false, the page shows "Coming Soon"
+        // unless it was opened once with ?preview=pedros2026 (that device
+        // is then remembered as a tester). Set to true to launch.
+        const LIVE_FOR_EVERYONE = false;
+        const PREVIEW_KEY = "pedros2026";
+        const params = new URLSearchParams(location.search);
+        if (params.get("preview") === PREVIEW_KEY) {
+            localStorage.setItem("pedrosOrderPreview", "1");
+        }
+        if (!LIVE_FOR_EVERYONE && localStorage.getItem("pedrosOrderPreview") !== "1") {
+            document.getElementById("app").innerHTML = `
+                <div class="done-wrap">
+                    <div class="done-ico" style="background:#F4E4BC;color:#8B4513;">🍳</div>
+                    <h1>Online ordering is coming soon!</h1>
+                    <p class="muted" style="margin-top:8px">We're putting the finishing touches on it.
+                    In the meantime, call us or order through FoodPanda.</p>
+                    <a href="index.html" class="placebtn" style="display:inline-block;text-decoration:none;margin-top:22px;max-width:240px">Back to the site</a>
+                </div>`;
+            return;
+        }
+
         const SB_URL = "https://tgawpkpcfrxobgrsysic.supabase.co";
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRnYXdwa3BjZnJ4b2JncnN5c2ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM1ODI5NjQsImV4cCI6MjA2OTE1ODk2NH0.AsNuusVkPzozfCB6QTyLy5cnQUgwmXsjNhNH3hb75Ew";
         const HEADERS = { apikey: SB_KEY, Authorization: "Bearer " + SB_KEY, "Content-Type": "application/json" };
