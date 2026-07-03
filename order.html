@@ -105,9 +105,64 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.25rem;
             color: var(--charcoal);
-            margin: 22px 2px 12px;
+            margin: 2px;
         }
-        .cat-title:first-of-type { margin-top: 14px; }
+        .cat-head {
+            display: flex; align-items: center; gap: 10px;
+            margin: 4px 0 12px;
+        }
+        .cat-back {
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 999px; padding: 8px 14px;
+            font: inherit; font-size: 0.8rem; font-weight: 600;
+            color: var(--text-dark); cursor: pointer; white-space: nowrap;
+        }
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 14px;
+        }
+        @media (min-width: 640px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+        .cat-tile {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16 / 10;
+            cursor: pointer;
+            background: var(--charcoal);
+            border: none;
+            padding: 0;
+            text-align: left;
+            width: 100%;
+        }
+        .cat-tile img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.75;
+        }
+        .cat-tile .shade {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.72));
+        }
+        .cat-tile .tlabel {
+            position: absolute; left: 12px; right: 12px; bottom: 10px;
+            color: #fff;
+        }
+        .cat-tile .tname {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700; font-size: 1rem; line-height: 1.2;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+        }
+        .cat-tile .tcount {
+            font-size: 0.68rem; opacity: 0.85; font-weight: 500;
+        }
+        .section-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem; color: var(--charcoal);
+            margin-top: 16px;
+        }
         .chip {
             flex-shrink: 0;
             padding: 9px 16px;
@@ -406,7 +461,7 @@
                 (variations[row.menu_item_id] ||= []).push(row);
             });
             store = (Array.isArray(s) && s[0]) || {};
-            activeCat = cats[0]?.id || null;
+            activeCat = null; // start on the category landing grid
             // reconcile saved cart with live menu + prices
             cart = cart.flatMap(cl => {
                 const live = items.find(it => it.id === cl.id);
@@ -448,51 +503,14 @@
         window._decVar = (id, vname) => decLine(id + "::" + vname);
         window._closePicker = () => { pickerId = null; render(); };
         window._cat = id => {
-            if (search) { search = ""; render(); }
-            const scroller = document.getElementById("scroller");
-            const sec = document.getElementById("sec-" + id);
-            const bar = document.querySelector(".chipsbar");
-            if (sec && scroller) {
-                const top = sec.getBoundingClientRect().top - scroller.getBoundingClientRect().top
-                          + scroller.scrollTop - (bar ? bar.offsetHeight : 0) - 4;
-                scroller.scrollTo({ top }); // instant — smooth gets cancelled by chip centering
-            }
-            setActiveChip(id);
+            if (search) search = "";
+            activeCat = id;
+            render();
+            scrollTop();
         };
+        window._cats = () => { activeCat = null; search = ""; render(); scrollTop(); };
         window._search = val => { search = val; renderMenuOnly(); };
 
-        function setActiveChip(id) {
-            activeCat = id;
-            document.querySelectorAll(".chip").forEach(ch => {
-                const on = ch.dataset.cat === id;
-                ch.classList.toggle("active", on);
-                if (on) {
-                    // center the chip by scrolling only the horizontal chip row
-                    const row = ch.parentElement;
-                    row.scrollTo({ left: ch.offsetLeft - row.clientWidth / 2 + ch.offsetWidth / 2, behavior: "smooth" });
-                }
-            });
-        }
-
-        // Highlight the category currently in view while scrolling
-        let spyTick = false;
-        document.getElementById("scroller").addEventListener("scroll", () => {
-            if (step !== "menu" || search || spyTick) return;
-            spyTick = true;
-            setTimeout(() => {
-                spyTick = false;
-                const scroller = document.getElementById("scroller");
-                const bar = document.querySelector(".chipsbar");
-                const line = scroller.getBoundingClientRect().top + (bar ? bar.offsetHeight : 0) + 40;
-                let current = null;
-                const secs = document.querySelectorAll("[id^='sec-']");
-                secs.forEach(sec => {
-                    if (sec.getBoundingClientRect().top <= line) current = sec.id.slice(4);
-                });
-                if (!current && secs.length) current = secs[0].id.slice(4); // above the first section
-                if (current && current !== activeCat) setActiveChip(current);
-            }, 120);
-        });
         window._go = s => { step = s; formError = null; render(); scrollTop(); };
         window._set = (k, val) => { form[k] = val; render(); };
         window._again = () => { doneNumber = null; step = "menu"; render(); };
@@ -607,19 +625,37 @@
             </div>`;
         }
 
+        function catTileHtml(cat) {
+            const inCat = items.filter(it => it.category_id === cat.id);
+            const photo = inCat.find(it => it.image)?.image;
+            return `<button class="cat-tile" onclick="_cat('${cat.id}')" aria-label="Browse ${esc(cat.name)}">
+                ${photo ? `<img src="${esc(photo)}" alt="" loading="lazy" />` : ""}
+                <span class="shade"></span>
+                <span class="tlabel">
+                    <span class="tname">${esc(cat.name)}</span><br/>
+                    <span class="tcount">${inCat.length} dishes</span>
+                </span>
+            </button>`;
+        }
+
         function menuGridHtml() {
             if (search) {
                 const list = items.filter(it => it.name.toLowerCase().includes(search.toLowerCase()));
                 if (list.length === 0) return `<div class="empty">No dishes found</div>`;
                 return `<div class="grid" style="margin-top:14px">${list.map(cardHtml).join("")}</div>`;
             }
-            // All categories as scrollable sections
-            return cats.map(cat => {
-                const list = items.filter(it => it.category_id === cat.id);
-                if (list.length === 0) return "";
-                return `<h2 class="cat-title" id="sec-${cat.id}">${esc(cat.name)}</h2>
-                        <div class="grid">${list.map(cardHtml).join("")}</div>`;
-            }).join("");
+            if (!activeCat) {
+                // Category landing — every category as a photo tile
+                return `<h2 class="section-label">Our Menu</h2>
+                        <div class="cat-grid">${cats.map(catTileHtml).join("")}</div>`;
+            }
+            const cat = cats.find(c => c.id === activeCat);
+            const list = items.filter(it => it.category_id === activeCat);
+            return `<div class="cat-head">
+                        <button class="cat-back" onclick="_cats()">← All Categories</button>
+                        <h2 class="cat-title">${esc(cat ? cat.name : "")}</h2>
+                    </div>
+                    <div class="grid">${list.map(cardHtml).join("")}</div>`;
         }
 
         function pickerHtml() {
@@ -652,9 +688,9 @@
         function menuHtml() {
             return `
                 <input class="search" placeholder="Search the menu…" value="${esc(search)}" oninput="_search(this.value)" />
-                <div class="chipsbar"><div class="chips">${cats.map(c =>
-                    `<button class="chip ${c.id === activeCat && !search ? "active" : ""}" data-cat="${c.id}" onclick="_cat('${c.id}')">${esc(c.name)}</button>`
-                ).join("")}</div></div>
+                ${activeCat && !search ? `<div class="chipsbar"><div class="chips">${cats.map(c =>
+                    `<button class="chip ${c.id === activeCat ? "active" : ""}" data-cat="${c.id}" onclick="_cat('${c.id}')">${esc(c.name)}</button>`
+                ).join("")}</div></div>` : ""}
                 <div id="menu-grid">${menuGridHtml()}</div>
                 <div class="foot">Prices are live from Pedro's POS · Powered by DarcSoft Inc.</div>
                 ${pickerHtml()}
