@@ -84,17 +84,30 @@
             margin-bottom: 12px;
         }
         .search:focus { border-color: var(--gold); }
+        .chipsbar {
+            position: sticky;
+            top: 0;
+            z-index: 25;
+            background: var(--cream);
+            margin: 0 -16px;
+            padding: 8px 16px 6px;
+            box-shadow: 0 6px 12px -8px rgba(0,0,0,0.15);
+        }
         .chips {
             display: flex;
             gap: 8px;
             overflow-x: auto;
-            padding-bottom: 10px;
-            margin: 0 -16px 8px;
-            padding-left: 16px;
-            padding-right: 16px;
+            padding-bottom: 4px;
             scrollbar-width: none;
         }
         .chips::-webkit-scrollbar { display: none; }
+        .cat-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--charcoal);
+            margin: 22px 2px 12px;
+        }
+        .cat-title:first-of-type { margin-top: 14px; }
         .chip {
             flex-shrink: 0;
             padding: 9px 16px;
@@ -434,8 +447,52 @@
         };
         window._decVar = (id, vname) => decLine(id + "::" + vname);
         window._closePicker = () => { pickerId = null; render(); };
-        window._cat = id => { activeCat = id; search = ""; render(); scrollTop(); };
+        window._cat = id => {
+            if (search) { search = ""; render(); }
+            const scroller = document.getElementById("scroller");
+            const sec = document.getElementById("sec-" + id);
+            const bar = document.querySelector(".chipsbar");
+            if (sec && scroller) {
+                const top = sec.getBoundingClientRect().top - scroller.getBoundingClientRect().top
+                          + scroller.scrollTop - (bar ? bar.offsetHeight : 0) - 4;
+                scroller.scrollTo({ top }); // instant — smooth gets cancelled by chip centering
+            }
+            setActiveChip(id);
+        };
         window._search = val => { search = val; renderMenuOnly(); };
+
+        function setActiveChip(id) {
+            activeCat = id;
+            document.querySelectorAll(".chip").forEach(ch => {
+                const on = ch.dataset.cat === id;
+                ch.classList.toggle("active", on);
+                if (on) {
+                    // center the chip by scrolling only the horizontal chip row
+                    const row = ch.parentElement;
+                    row.scrollTo({ left: ch.offsetLeft - row.clientWidth / 2 + ch.offsetWidth / 2, behavior: "smooth" });
+                }
+            });
+        }
+
+        // Highlight the category currently in view while scrolling
+        let spyTick = false;
+        document.getElementById("scroller").addEventListener("scroll", () => {
+            if (step !== "menu" || search || spyTick) return;
+            spyTick = true;
+            setTimeout(() => {
+                spyTick = false;
+                const scroller = document.getElementById("scroller");
+                const bar = document.querySelector(".chipsbar");
+                const line = scroller.getBoundingClientRect().top + (bar ? bar.offsetHeight : 0) + 40;
+                let current = null;
+                const secs = document.querySelectorAll("[id^='sec-']");
+                secs.forEach(sec => {
+                    if (sec.getBoundingClientRect().top <= line) current = sec.id.slice(4);
+                });
+                if (!current && secs.length) current = secs[0].id.slice(4); // above the first section
+                if (current && current !== activeCat) setActiveChip(current);
+            }, 120);
+        });
         window._go = s => { step = s; formError = null; render(); scrollTop(); };
         window._set = (k, val) => { form[k] = val; render(); };
         window._again = () => { doneNumber = null; step = "menu"; render(); };
@@ -551,12 +608,18 @@
         }
 
         function menuGridHtml() {
-            const list = items.filter(it => {
-                if (search) return it.name.toLowerCase().includes(search.toLowerCase());
-                return !activeCat || it.category_id === activeCat;
-            });
-            if (list.length === 0) return `<div class="empty">No dishes found</div>`;
-            return `<div class="grid">${list.map(cardHtml).join("")}</div>`;
+            if (search) {
+                const list = items.filter(it => it.name.toLowerCase().includes(search.toLowerCase()));
+                if (list.length === 0) return `<div class="empty">No dishes found</div>`;
+                return `<div class="grid" style="margin-top:14px">${list.map(cardHtml).join("")}</div>`;
+            }
+            // All categories as scrollable sections
+            return cats.map(cat => {
+                const list = items.filter(it => it.category_id === cat.id);
+                if (list.length === 0) return "";
+                return `<h2 class="cat-title" id="sec-${cat.id}">${esc(cat.name)}</h2>
+                        <div class="grid">${list.map(cardHtml).join("")}</div>`;
+            }).join("");
         }
 
         function pickerHtml() {
@@ -589,9 +652,9 @@
         function menuHtml() {
             return `
                 <input class="search" placeholder="Search the menu…" value="${esc(search)}" oninput="_search(this.value)" />
-                <div class="chips">${cats.map(c =>
-                    `<button class="chip ${c.id === activeCat && !search ? "active" : ""}" onclick="_cat('${c.id}')">${esc(c.name)}</button>`
-                ).join("")}</div>
+                <div class="chipsbar"><div class="chips">${cats.map(c =>
+                    `<button class="chip ${c.id === activeCat && !search ? "active" : ""}" data-cat="${c.id}" onclick="_cat('${c.id}')">${esc(c.name)}</button>`
+                ).join("")}</div></div>
                 <div id="menu-grid">${menuGridHtml()}</div>
                 <div class="foot">Prices are live from Pedro's POS · Powered by DarcSoft Inc.</div>
                 ${pickerHtml()}
