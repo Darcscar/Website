@@ -457,8 +457,10 @@
         // ── State ────────────────────────────────────────
         let items = [], cats = [], variations = {}, store = {};
         let step = "menu", activeCat = null, search = "", pickerId = null;
-        let form = { name:"", phone:"", type:"pickup", address:"", lat:null, lng:null, pay:"cod", ref:"", notes:"" };
+        let form = { name:"", phone:"", type:"pickup", address:"", lat:null, lng:null, pay:"cod", ref:"", notes:"", hp:"" };
         window._f = form; // inline oninput handlers run in global scope
+        let reviewOpen = false;
+        const pageLoadedAt = Date.now(); // bots submit instantly; humans take seconds
         let formError = null, submitting = false, locating = false, doneNumber = null;
         let cart = [];
         try { cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]"); } catch { cart = []; }
@@ -576,30 +578,81 @@
         };
 
         // ── Submit ───────────────────────────────────────
-        window._place = async () => {
-            formError = null;
-            if (!form.name.trim()) formError = "Please enter your name.";
-            else if (!form.phone.trim()) formError = "Please enter your phone number.";
-            else if (form.type === "delivery" && !form.address.trim()) formError = "Please enter your delivery address or use your location.";
-            else if (form.pay === "gcash" && !form.ref.trim()) formError = "Please enter your GCash reference number after sending payment.";
-            if (formError) { render(); return; }
+        // ── Input hardening ──────────────────────────────
+        const clean = (s, max) => String(s || "")
+            .replace(/[\u0000-\u001F\u007F]/g, "")   // strip control chars
+            .trim()
+            .slice(0, max);
 
+        function sanitizeForm() {
+            form.name    = clean(form.name, 60);
+            form.address = clean(form.address, 200);
+            form.notes   = clean(form.notes, 200);
+            form.phone   = String(form.phone || "").replace(/[^0-9+()\-\s]/g, "").trim().slice(0, 20);
+            form.ref     = String(form.ref || "").replace(/[^A-Za-z0-9\-]/g, "").slice(0, 40);
+        }
+
+        // ── Rate limiting (per browser) ──────────────────
+        const RATE_KEY = "pedrosOrderTimes";
+        function rateCheck() {
+            let times = [];
+            try { times = JSON.parse(localStorage.getItem(RATE_KEY) || "[]"); } catch {}
+            const tenMinAgo = Date.now() - 10 * 60 * 1000;
+            times = times.filter(t => t > tenMinAgo);
+            if (times.length >= 5) return "You've placed several orders recently — please wait a few minutes or call us.";
+            if (times.length && Date.now() - times[times.length - 1] < 20000) return "Please wait a moment before placing another order.";
+            return null;
+        }
+        function rateRecord() {
+            let times = [];
+            try { times = JSON.parse(localStorage.getItem(RATE_KEY) || "[]"); } catch {}
+            times.push(Date.now());
+            localStorage.setItem(RATE_KEY, JSON.stringify(times.slice(-10)));
+        }
+
+        // Step 1: validate + sanitize, then show the review sheet
+        window._place = () => {
+            formError = null;
+            sanitizeForm();
+            if (!form.name) formError = "Please enter your name.";
+            else if (!form.phone || form.phone.replace(/\D/g, "").length < 7) formError = "Please enter a valid phone number.";
+            else if (form.type === "delivery" && !form.address) formError = "Please enter your delivery address or use your location.";
+            else if (form.pay === "gcash" && !form.ref) formError = "Please enter your GCash reference number after sending payment.";
+            else formError = rateCheck();
+            if (formError) { render(); return; }
+            reviewOpen = true;
+            render();
+        };
+        window._closeReview = () => { reviewOpen = false; render(); };
+
+        // Step 2: confirmed — run spam guards, then submit
+        window._confirmPlace = async () => {
+            // Honeypot filled or submitted inhumanly fast → pretend success, send nothing
+            if (form.hp || Date.now() - pageLoadedAt < 3000) {
+                reviewOpen = false;
+                doneNumber = "WEB-" + Date.now().toString(36).toUpperCase();
+                cart = []; saveCart();
+                step = "done"; render(); scrollTop();
+                return;
+            }
+
+            reviewOpen = false;
             submitting = true; render();
             const orderNumber = "WEB-" + Date.now().toString(36).toUpperCase() + Math.floor(Math.random()*36).toString(36).toUpperCase();
             const orderItems = cart.map(c => ({ name: lineLabel(c), quantity: c.quantity, price: c.price }));
             const body = {
                 order_number: orderNumber,
-                customer_name: form.name.trim(),
-                customer_phone: form.phone.trim(),
+                customer_name: form.name,
+                customer_phone: form.phone,
                 order_text: orderItems.map(x => `${x.quantity}x ${x.name}`).join(", "),
                 items: orderItems,
-                special_instructions: form.notes.trim() || null,
+                special_instructions: form.notes || null,
                 estimated_total: cartTotal(),
                 order_type: form.type,
-                delivery_address: form.type === "delivery" ? form.address.trim() : null,
+                delivery_address: form.type === "delivery" ? form.address : null,
                 latitude: form.lat, longitude: form.lng,
                 payment_method: form.pay,
-                payment_reference: form.pay === "gcash" ? form.ref.trim() : null,
+                payment_reference: form.pay === "gcash" ? form.ref : null,
                 status: "pending",
             };
             const res = await fetch(SB_URL + "/rest/v1/online_orders", {
@@ -607,6 +660,7 @@
             });
             submitting = false;
             if (res.ok) {
+                rateRecord();
                 doneNumber = orderNumber;
                 cart = []; saveCart();
                 step = "done"; render(); scrollTop();
@@ -762,7 +816,7 @@
             const delivery = form.type === "delivery" ? `
                 <div class="fld">
                     <label>Delivery Address *</label>
-                    <textarea rows="3" placeholder="House no., street, barangay, city" oninput="_f.address=this.value">${esc(form.address)}</textarea>
+                    <textarea rows="3" maxlength="200" placeholder="House no., street, barangay, city" oninput="_f.address=this.value">${esc(form.address)}</textarea>
                     <button class="gpsbtn" onclick="_gps()">${locating ? "Getting your location…" : "📍 Use my location (GPS)"}</button>
                     ${form.lat ? `<div class="gpsnote">✓ GPS pin saved — our rider will find you exactly</div>` : ""}
                 </div>` : "";
@@ -771,7 +825,7 @@
                 <div class="gbox">
                     <div style="font-size:0.85rem">Send <strong>${peso(cartTotal())}</strong> to our GCash${store.gcash_number ? ` number <strong>${esc(store.gcash_number)}</strong>` : ""}, then enter the reference number below.</div>
                     ${store.gcash_qr_code ? `<img src="${esc(store.gcash_qr_code)}" alt="GCash QR" />` : ""}
-                    <input placeholder="GCash reference number *" value="${esc(form.ref)}" oninput="_f.ref=this.value" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font:inherit;font-size:16px;" />
+                    <input placeholder="GCash reference number *" maxlength="40" value="${esc(form.ref)}" oninput="_f.ref=this.value" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font:inherit;font-size:16px;" />
                 </div>` : "";
 
             return `
@@ -781,9 +835,9 @@
                     <div class="ctotal"><span>Total</span><span class="amt">${peso(cartTotal())}</span></div>
                 </div>
                 <div class="fld"><label>Your Name *</label>
-                    <input placeholder="Juan dela Cruz" value="${esc(form.name)}" oninput="_f.name=this.value" /></div>
+                    <input placeholder="Juan dela Cruz" maxlength="60" value="${esc(form.name)}" oninput="_f.name=this.value" /></div>
                 <div class="fld"><label>Phone Number *</label>
-                    <input type="tel" placeholder="09XX XXX XXXX" value="${esc(form.phone)}" oninput="_f.phone=this.value" /></div>
+                    <input type="tel" placeholder="09XX XXX XXXX" maxlength="20" value="${esc(form.phone)}" oninput="_f.phone=this.value" /></div>
                 <div class="fld"><label>Order Type</label>
                     <div class="segs">
                         <button class="seg ${form.type === "pickup" ? "active" : ""}" onclick="_set('type','pickup')">Pick Up</button>
@@ -797,11 +851,40 @@
                     </div>
                     ${gcash}</div>
                 <div class="fld"><label>Special Instructions</label>
-                    <textarea rows="2" placeholder="Optional — allergies, landmarks, requests…" oninput="_f.notes=this.value">${esc(form.notes)}</textarea></div>
+                    <textarea rows="2" maxlength="200" placeholder="Optional — allergies, landmarks, requests…" oninput="_f.notes=this.value">${esc(form.notes)}</textarea></div>
+                <div style="position:absolute;left:-5000px;top:-5000px;" aria-hidden="true">
+                    <input type="text" name="website_url" tabindex="-1" autocomplete="off" value="${esc(form.hp)}" oninput="_f.hp=this.value" />
+                </div>
                 ${formError ? `<div class="err">${esc(formError)}</div>` : ""}
                 <button class="placebtn" onclick="_place()" ${submitting || cart.length === 0 ? "disabled" : ""}>
-                    ${submitting ? "Placing order…" : `Place Order · ${peso(cartTotal())}`}
-                </button>`;
+                    ${submitting ? "Placing order…" : `Review Order · ${peso(cartTotal())}`}
+                </button>
+                ${reviewHtml()}`;
+        }
+
+        function reviewHtml() {
+            if (!reviewOpen) return "";
+            const lines = cart.map(c => `
+                <div class="cline">
+                    <span class="nm"><strong>${c.quantity}×</strong> ${esc(lineLabel(c))}</span>
+                    <span class="amt">${peso(c.price * c.quantity)}</span>
+                </div>`).join("");
+            return `<div class="overlay" onclick="_closeReview()"></div>
+                <div class="sheet" style="max-height:85dvh;overflow-y:auto">
+                    <button class="close" onclick="_closeReview()">✕</button>
+                    <h3>Confirm your order</h3>
+                    <div class="panel" style="margin-bottom:12px">${lines}
+                        <div class="ctotal"><span>Total</span><span class="amt">${peso(cartTotal())}</span></div>
+                    </div>
+                    <div class="panel" style="margin-bottom:14px;font-size:0.85rem;line-height:1.7">
+                        <div><strong>${esc(form.name)}</strong> · ${esc(form.phone)}</div>
+                        <div>${form.type === "delivery" ? "🛵 Delivery — " + esc(form.address) : "🛍 Pick up at the restaurant"}</div>
+                        <div>${form.pay === "gcash" ? "GCash · Ref " + esc(form.ref) : (form.type === "delivery" ? "Cash on Delivery" : "Pay at Pickup")}</div>
+                        ${form.notes ? `<div style="color:#8a7a66">"${esc(form.notes)}"</div>` : ""}
+                    </div>
+                    <button class="placebtn" onclick="_confirmPlace()">Confirm & Place Order</button>
+                    <button class="donebtn" style="margin-top:8px;background:#fff;color:var(--text-dark);border:1px solid var(--border)" onclick="_closeReview()">Go Back & Edit</button>
+                </div>`;
         }
 
         function doneHtml() {
