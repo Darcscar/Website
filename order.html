@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -525,6 +526,17 @@
         document.addEventListener("visibilitychange", () => {
             if (document.visibilityState === "visible") refreshMenu();
         });
+        // Instant push (sub-second) when the POS flips availability — falls
+        // back silently to the 30s poll if realtime isn't reachable.
+        window.addEventListener("load", () => {
+            try {
+                if (!window.supabase?.createClient) return;
+                const rtc = window.supabase.createClient(SB_URL, SB_KEY);
+                rtc.channel("menu_live")
+                    .on("postgres_changes", { event: "*", schema: "public", table: "menu_items" }, () => refreshMenu())
+                    .subscribe();
+            } catch {}
+        });
 
         // ── Cart ops ─────────────────────────────────────
         function addLine(line) {
@@ -661,6 +673,24 @@
 
             reviewOpen = false;
             submitting = true; render();
+
+            // Final availability check — something may have sold out while
+            // the customer was reviewing
+            try {
+                const ids = [...new Set(cart.map(c => c.id))].join(",");
+                const liveRows = await get(`menu_items?select=id&available=is.true&id=in.(${ids})`);
+                const liveIds = new Set((Array.isArray(liveRows) ? liveRows : []).map(x => x.id));
+                const stillGood = cart.filter(c => liveIds.has(c.id));
+                if (stillGood.length !== cart.length) {
+                    const dropped = cart.filter(c => !liveIds.has(c.id)).map(lineLabel).join(", ");
+                    cart = stillGood; saveCart();
+                    submitting = false;
+                    formError = `Sorry — just sold out: ${dropped}. It was removed from your cart; please review and try again.`;
+                    render();
+                    return;
+                }
+            } catch {}
+
             const orderNumber = "WEB-" + Date.now().toString(36).toUpperCase() + Math.floor(Math.random()*36).toString(36).toUpperCase();
             const orderItems = cart.map(c => ({ name: lineLabel(c), quantity: c.quantity, price: c.price }));
             const body = {
