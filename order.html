@@ -475,21 +475,19 @@
         // ── Data ─────────────────────────────────────────
         const get = path => fetch(SB_URL + "/rest/v1/" + path, { headers: HEADERS }).then(r => r.json());
 
-        async function load() {
-            const [i, c, v, s] = await Promise.all([
+        async function fetchData() {
+            const [i, c, v] = await Promise.all([
                 get("menu_items?select=*&available=is.true&order=name"),
                 get("menu_categories?select=id,name,sort_order&order=sort_order"),
                 get("menu_item_variations?select=menu_item_id,id,name,price_adjustment&order=price_adjustment"),
-                get("restaurant_settings?select=store_name,store_phone,gcash_number,gcash_qr_code&limit=1"),
             ]);
             items = Array.isArray(i) ? i : [];
             cats = (Array.isArray(c) ? c : []).filter(cat => items.some(it => it.category_id === cat.id));
+            variations = {};
             (Array.isArray(v) ? v : []).forEach(row => {
                 (variations[row.menu_item_id] ||= []).push(row);
             });
-            store = (Array.isArray(s) && s[0]) || {};
-            activeCat = null; // start on the category landing grid
-            // reconcile saved cart with live menu + prices
+            // reconcile saved cart with live menu + prices (drops out-of-stock)
             cart = cart.flatMap(cl => {
                 const live = items.find(it => it.id === cl.id);
                 if (!live) return [];
@@ -500,8 +498,33 @@
                 return [{ ...cl, name: live.name, price: Number(live.price) }];
             });
             saveCart();
+        }
+
+        async function load() {
+            await fetchData();
+            const s = await get("restaurant_settings?select=store_name,store_phone,gcash_number,gcash_qr_code&limit=1");
+            store = (Array.isArray(s) && s[0]) || {};
+            activeCat = null; // start on the category landing grid
             render();
         }
+
+        // Live sync: availability/price changes made in the POS appear here
+        // without a reload. Refresh quietly and only re-render when it's safe
+        // (menu view, no sheet open, not mid-typing).
+        async function refreshMenu() {
+            try {
+                const before = JSON.stringify(items.map(x => [x.id, x.price, x.name])) + "|" + JSON.stringify(cart);
+                await fetchData();
+                const after = JSON.stringify(items.map(x => [x.id, x.price, x.name])) + "|" + JSON.stringify(cart);
+                if (before === after) return;
+                const typing = document.activeElement && /INPUT|TEXTAREA/.test(document.activeElement.tagName);
+                if (step === "menu" && !pickerId && !catPickerOpen && !typing) render();
+            } catch {}
+        }
+        setInterval(refreshMenu, 30000);
+        document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "visible") refreshMenu();
+        });
 
         // ── Cart ops ─────────────────────────────────────
         function addLine(line) {
