@@ -501,21 +501,67 @@
             saveCart();
         }
 
+        async function refreshStore() {
+            // select=* so this keeps working whether or not the open/close
+            // migration columns exist yet
+            const s = await get("restaurant_settings?select=*&limit=1");
+            store = (Array.isArray(s) && s[0]) || {};
+        }
+
+        // ── Store open/close ─────────────────────────────
+        // Mirrors the POS + database-trigger rules: manual switch first,
+        // then today's weekly-schedule entry, evaluated in Asia/Manila.
+        function manilaNow() {
+            const d = new Date();
+            const day = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+                .indexOf(d.toLocaleDateString("en-US", { timeZone: "Asia/Manila", weekday: "short" }));
+            const time = d.toLocaleTimeString("en-GB", { timeZone: "Asia/Manila", hourCycle: "h23", hour: "2-digit", minute: "2-digit" });
+            return { day, time };
+        }
+        function storeIsOpen() {
+            if (store.online_ordering_enabled === false) return false;
+            const hours = store.store_hours;
+            if (!Array.isArray(hours) || hours.length === 0) return true;
+            const { day, time } = manilaNow();
+            const entry = hours.find(h => h.day === day);
+            if (!entry) return true;
+            if (entry.closed) return false;
+            if (!entry.open || !entry.close) return true;
+            if (entry.close < entry.open) return time >= entry.open || time < entry.close; // overnight
+            return time >= entry.open && time < entry.close;
+        }
+        function closedHtml() {
+            const msg = store.online_ordering_closed_message
+                || "We're currently closed. Please check back during business hours!";
+            return `<div class="done-wrap">
+                <div class="done-ico" style="background:#F4E4BC;color:#8B4513;">🌙</div>
+                <h1>We're closed right now</h1>
+                <p class="muted" style="margin-top:8px">${esc(msg)}</p>
+                <a href="index.html" class="placebtn" style="display:inline-block;text-decoration:none;margin-top:22px;max-width:240px">Back to the site</a>
+            </div>`;
+        }
+
         async function load() {
             await fetchData();
-            const s = await get("restaurant_settings?select=store_name,store_phone,gcash_number,gcash_qr_code&limit=1");
-            store = (Array.isArray(s) && s[0]) || {};
+            await refreshStore();
             activeCat = null; // start on the category landing grid
             render();
         }
 
         // Live sync: availability/price changes made in the POS appear here
         // without a reload. Refresh quietly and only re-render when it's safe
-        // (menu view, no sheet open, not mid-typing).
+        // (menu view, no sheet open, not mid-typing). Open/close flips always
+        // re-render (except on the confirmation screen or mid-submit).
         async function refreshMenu() {
             try {
+                const wasOpen = storeIsOpen();
                 const before = JSON.stringify(items.map(x => [x.id, x.price, x.name])) + "|" + JSON.stringify(cart);
                 await fetchData();
+                await refreshStore();
+                if (storeIsOpen() !== wasOpen) {
+                    if (step !== "done" && !submitting) render();
+                    return;
+                }
                 const after = JSON.stringify(items.map(x => [x.id, x.price, x.name])) + "|" + JSON.stringify(cart);
                 if (before === after) return;
                 const typing = document.activeElement && /INPUT|TEXTAREA/.test(document.activeElement.tagName);
@@ -534,6 +580,7 @@
                 const rtc = window.supabase.createClient(SB_URL, SB_KEY);
                 rtc.channel("menu_live")
                     .on("postgres_changes", { event: "*", schema: "public", table: "menu_items" }, () => refreshMenu())
+                    .on("postgres_changes", { event: "*", schema: "public", table: "restaurant_settings" }, () => refreshMenu())
                     .subscribe();
             } catch {}
         });
@@ -691,6 +738,10 @@
                 }
             } catch {}
 
+            // Store may have closed while the customer was reviewing
+            try { await refreshStore(); } catch {}
+            if (!storeIsOpen()) { submitting = false; render(); scrollTop(); return; }
+
             const orderNumber = "WEB-" + Date.now().toString(36).toUpperCase() + Math.floor(Math.random()*36).toString(36).toUpperCase();
             const orderItems = cart.map(c => ({ name: lineLabel(c), quantity: c.quantity, price: c.price }));
             const body = {
@@ -718,6 +769,16 @@
                 cart = []; saveCart();
                 step = "done"; render(); scrollTop();
             } else {
+                // The database rejects web orders while the store is closed
+                let closedByServer = false;
+                try { closedByServer = (await res.text()).includes("ORDERING_CLOSED"); } catch {}
+                if (closedByServer) {
+                    try { await refreshStore(); } catch {}
+                    // Trust the server: if our settings still look open, force closed
+                    if (storeIsOpen()) store.online_ordering_enabled = false;
+                    render(); scrollTop();
+                    return;
+                }
                 formError = "Something went wrong placing your order. Please try again or call us" + (store.store_phone ? " at " + store.store_phone : "") + ".";
                 render();
             }
@@ -956,6 +1017,7 @@
 
         function render() {
             if (step === "done" && doneNumber) app().innerHTML = doneHtml();
+            else if (!storeIsOpen()) app().innerHTML = closedHtml();
             else if (step === "checkout") app().innerHTML = checkoutHtml();
             else app().innerHTML = menuHtml();
         }
