@@ -121,18 +121,15 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
     </a>
 
-    <!-- LAUNCH: uncomment when online ordering goes live
     <a href="order.html" title="Order Online"
        style="position: fixed; top: 12px; right: 12px; z-index: 60; background: var(--gold, #D4AF37); color: #2C2C2C; padding: 10px 18px; border-radius: 999px; font-weight: 700; font-size: 0.85rem; text-decoration: none; box-shadow: 0 3px 12px rgba(0,0,0,0.35);">
         Order Online
     </a>
-    -->
 
     <div id="menu-container"></div>
 
     <div class="page-tabs">
         <button class="page-tab active" data-page="page1">Main Dishes</button>
-        <button class="page-tab" data-page="page3">Bento Deals</button>
         <button class="page-tab" data-page="page2">Sides & Drinks</button>
     </div>
 
@@ -176,13 +173,7 @@
             "Yangchow Fried Rice - Chicken": "images/Fried Rice Solo/yangchow chicken.jpg",
             "Yangchow Fried Rice - Pork": "images/Fried Rice Solo/yangchow pork.jpg",
             "Egg Fried Rice": "images/Fried Rice Solo/egg fried rice.jpg",
-            "Philly Cheesesteak": "images/Sandwich/philly.jpg",
-            "General Tso's Bento": "images/Bento Deals/general tso bento.jpg",
-            "Orange Chicken Bento": "images/Bento Deals/orange chicken bento.jpg",
-            "Wings Bento": "images/Bento Deals/wings bento.jpg",
-            "Krapao Moo Krob Bento": "images/Asian Stir Fry/Krapao Moo Krob.jpg",
-            "Ribs Bento": "images/Bento Deals/pork ribs bento.jpg",
-            "Sesame Chicken Bento": "images/Asian Stir Fry/sesame chicken.jpg"
+            "Philly Cheesesteak": "images/Sandwich/philly.jpg"
         };
 
         const descriptions = {
@@ -300,42 +291,6 @@
             }
         }
 
-        function renderBentoItem(item) {
-            const badge = item.badge ? `<span class="badge">${item.badge}</span>` : '';
-            const img = images[item.name];
-            const includes = item.includes;
-            const mainText = Array.isArray(includes.main) ? includes.main.join(' / ') : includes.main;
-            const riceText = Array.isArray(includes.rice) ? includes.rice.join(' or ') : includes.rice;
-            const sideText = includes.side.join(' or ');
-            const drinkText = includes.drink.join(', ');
-            const desc = `${mainText} + ${riceText} + ${sideText} + ${includes.soup} + Drink`;
-
-            if (img) {
-                return `<div class="menu-item">
-                    <img src="${img}" alt="${item.name}" class="menu-item-img">
-                    <div class="menu-item-content">
-                        <div class="menu-item-header">
-                            <span class="menu-item-name">${item.name}${badge}</span>
-                            <span class="menu-item-price">${item.price}</span>
-                        </div>
-                        <p class="menu-item-desc">${item.description}</p>
-                        <span class="freebie">Drink: ${drinkText}</span>
-                    </div>
-                </div>`;
-            } else {
-                return `<div class="menu-item">
-                    <div class="menu-item-content">
-                        <div class="menu-item-header">
-                            <span class="menu-item-name">${item.name}${badge}</span>
-                            <span class="menu-item-price">${item.price}</span>
-                        </div>
-                        <p class="menu-item-desc">${item.description}</p>
-                        <span class="freebie">Drink: ${drinkText}</span>
-                    </div>
-                </div>`;
-            }
-        }
-
         function renderSection(title, items, priceType = 'simple', sizeLabels = null, freeNote = null) {
             let html = title ? `<h3 class="section-title">${title}</h3>` : '';
             if (freeNote) html += `<p class="freebie" style="margin-bottom: 0.3rem;">${freeNote}</p>`;
@@ -384,26 +339,7 @@
                 </div>
             </section>`;
 
-            // Page 3: Bento Deals
-            let bentoItems = '';
-            data.bentoBoxes.forEach(item => bentoItems += renderBentoItem(item));
-
-            let page3 = `<section class="menu-page" id="page3">
-                <div class="page-header">
-                    <div class="logo">Pedro's <span>Cuisine</span></div>
-                    <h1 class="category-title">Bento Box Deals</h1>
-                    <p class="category-subtitle">Complete Meal Combos</p>
-                </div>
-                <div class="menu-items">
-                    <p class="freebie" style="margin-bottom: 0.3rem; text-align: center;">Each Bento includes: Main + Rice + Side + Miso Soup + Drink</p>
-                    ${bentoItems}
-                </div>
-                <div class="page-indicator">
-                    <p style="color: var(--orange); font-size: 0.7rem;">Prices in PHP</p>
-                </div>
-            </section>`;
-
-            container.innerHTML = page1 + page2 + page3;
+            container.innerHTML = page1 + page2;
             setupPageObserver();
             setupPageTabs();
         }

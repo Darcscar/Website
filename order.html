@@ -427,7 +427,7 @@
         // While LIVE_FOR_EVERYONE is false, the page shows "Coming Soon"
         // unless it was opened once with ?preview=pedros2026 (that device
         // is then remembered as a tester). Set to true to launch.
-        const LIVE_FOR_EVERYONE = false;
+        const LIVE_FOR_EVERYONE = true;
         const PREVIEW_KEY = "pedros2026";
         const params = new URLSearchParams(location.search);
         if (params.get("preview") === PREVIEW_KEY) {
