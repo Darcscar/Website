@@ -339,6 +339,13 @@
         }
         .vrow .vname { font-weight: 600; font-size: 0.86rem; }
         .vrow .vprice { color: var(--primary-red); font-weight: 700; font-size: 0.86rem; }
+        .vrow.vgroup { flex-direction: column; align-items: stretch; }
+        .rrow {
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 1px solid var(--border);
+            margin-top: 10px; padding-top: 10px;
+            font-size: 0.84rem;
+        }
         .donebtn {
             width: 100%;
             padding: 13px;
@@ -356,7 +363,7 @@
         h1.page { font-family:'Playfair Display', serif; font-size:1.4rem; margin-bottom:14px; color: var(--charcoal); }
         .panel { background:#fff; border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:16px; }
         .cline { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:6px 0; }
-        .cline .nm { font-size:0.85rem; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .cline .nm { font-size:0.85rem; flex:1; min-width:0; line-height:1.3; overflow-wrap:anywhere; }
         .cline .amt { font-weight:600; font-size:0.85rem; }
         .ctotal { display:flex; justify-content:space-between; border-top:1px solid var(--border); margin-top:8px; padding-top:10px; font-weight:700; }
         .ctotal .amt { color: var(--primary-red); font-size:1.05rem; }
@@ -453,8 +460,12 @@
 
         const peso = n => "₱" + Number(n).toFixed(2);
         const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
-        const lineKey = c => c.variation ? c.id + "::" + c.variation : c.id;
-        const lineLabel = c => c.variation ? c.name + " — " + c.variation : c.name;
+        // Keep in sync with hasRiceChoice() in the POS (src/lib/riceChoice.ts):
+        // Solo Bowl / Double-with-rice sizes get a free Plain or Egg Fried Rice choice.
+        const RICE_OPTIONS = ["Plain Rice", "Egg Fried Rice"];
+        const hasRiceChoice = n => /^(solow?bowl|doublew(ith)?rice)$/.test(String(n).toLowerCase().replace(/[^a-z]/g, ""));
+        const lineKey = c => [c.id, c.variation, c.rice].filter(Boolean).join("::");
+        const lineLabel = c => c.variation ? c.name + " — " + c.variation + (c.rice ? ", " + c.rice : "") : c.name;
 
         // ── State ────────────────────────────────────────
         let items = [], cats = [], variations = {}, store = {};
@@ -495,7 +506,10 @@
                 if (!live) return [];
                 if (cl.variation) {
                     const vv = varsFor(cl.id).find(x => x.name === cl.variation);
-                    return vv ? [{ ...cl, name: live.name, price: Number(vv.price_adjustment) }] : [];
+                    if (!vv) return [];
+                    // Carts saved before the rice choice existed had plain rice
+                    const rice = hasRiceChoice(vv.name) ? (RICE_OPTIONS.includes(cl.rice) ? cl.rice : RICE_OPTIONS[0]) : undefined;
+                    return [{ ...cl, name: live.name, price: Number(vv.price_adjustment), rice }];
                 }
                 return [{ ...cl, name: live.name, price: Number(live.price) }];
             });
@@ -595,12 +609,14 @@
             else if (storeIsOpen()) addLine({ id: it.id, name: it.name, price: Number(it.price) });
         };
         window._dec = key => decLine(key);
-        window._addVar = (id, vname) => {
+        window._addVar = (id, vname, rice) => {
             const it = items.find(x => x.id === id);
             const vv = varsFor(id).find(x => x.name === vname);
-            if (it && vv) addLine({ id, name: it.name, price: Number(vv.price_adjustment), variation: vv.name });
+            if (!it || !vv) return;
+            const r = hasRiceChoice(vv.name) && RICE_OPTIONS.includes(rice) ? rice : undefined;
+            addLine({ id, name: it.name, price: Number(vv.price_adjustment), variation: vv.name, rice: r });
         };
-        window._decVar = (id, vname) => decLine(id + "::" + vname);
+        window._decVar = (id, vname, rice) => decLine(lineKey({ id, variation: vname, rice }));
         window._closePicker = () => { pickerId = null; render(); };
         window._cat = id => {
             if (search) search = "";
@@ -881,22 +897,26 @@
             const it = items.find(x => x.id === pickerId);
             if (!it) return "";
             const open = storeIsOpen();
-            const rows = varsFor(pickerId).map(v => {
-                const q = lineQty(pickerId + "::" + v.name);
-                const ctrl = !open ? "" : q === 0
-                    ? `<button class="round" onclick="_addVar('${it.id}','${esc(v.name)}')">+</button>`
+            const ctrl = (vname, rice) => {
+                if (!open) return "";
+                const args = `'${it.id}','${esc(vname)}'${rice ? `,'${rice}'` : ""}`;
+                const q = lineQty(lineKey({ id: it.id, variation: vname, rice }));
+                return q === 0
+                    ? `<button class="round" onclick="_addVar(${args})">+</button>`
                     : `<div class="stepper">
-                         <button class="round ghost" onclick="_decVar('${it.id}','${esc(v.name)}')">−</button>
+                         <button class="round ghost" onclick="_decVar(${args})">−</button>
                          <span class="qty">${q}</span>
-                         <button class="round" onclick="_addVar('${it.id}','${esc(v.name)}')">+</button>
+                         <button class="round" onclick="_addVar(${args})">+</button>
                        </div>`;
-                return `<div class="vrow">
-                    <div><div class="vname">${esc(v.name)}</div><div class="vprice">${peso(v.price_adjustment)}</div></div>
-                    ${ctrl}
-                </div>`;
+            };
+            const rows = varsFor(pickerId).map(v => {
+                const head = `<div><div class="vname">${esc(v.name)}</div><div class="vprice">${peso(v.price_adjustment)}</div></div>`;
+                if (!hasRiceChoice(v.name)) return `<div class="vrow">${head}${ctrl(v.name)}</div>`;
+                const choices = RICE_OPTIONS.map(r => `<div class="rrow"><span>${r}</span>${ctrl(v.name, r)}</div>`).join("");
+                return `<div class="vrow vgroup">${head}${choices}</div>`;
             }).join("");
             return `<div class="overlay" onclick="_closePicker()"></div>
-                <div class="sheet">
+                <div class="sheet" style="max-height:85dvh;overflow-y:auto">
                     <button class="close" onclick="_closePicker()">✕</button>
                     <h3>${esc(it.name)}</h3>
                     ${rows}
@@ -932,7 +952,7 @@
                     <div class="stepper">
                         <button class="round ghost" onclick="_dec('${lineKey(c)}')">−</button>
                         <span class="qty">${c.quantity}</span>
-                        <button class="round" onclick="${c.variation ? `_addVar('${c.id}','${esc(c.variation)}')` : `_tap('${c.id}')`}">+</button>
+                        <button class="round" onclick="${c.variation ? `_addVar('${c.id}','${esc(c.variation)}'${c.rice ? `,'${c.rice}'` : ""})` : `_tap('${c.id}')`}">+</button>
                     </div>
                     <span class="nm">${esc(lineLabel(c))}</span>
                     <span class="amt">${peso(c.price * c.quantity)}</span>
