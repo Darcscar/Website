@@ -526,6 +526,14 @@
             ]);
             items = Array.isArray(i) ? i : [];
             cats = (Array.isArray(c) ? c : []).filter(cat => items.some(it => it.category_id === cat.id));
+            // Keep in sync with sortDishes() in the POS (src/lib/dishOrder.ts): by category,
+            // then the position set with "Arrange Dishes" in Menu Management, then A–Z.
+            // Dishes without a position (0, or before the dish-order update) go last.
+            const LAST = Number.MAX_SAFE_INTEGER;
+            const catPos = new Map(cats.map((cat, idx) => [cat.id, idx]));
+            const dishPos = it => it.sort_order > 0 ? it.sort_order : LAST;
+            items.sort((a, b) => (catPos.get(a.category_id) ?? LAST) - (catPos.get(b.category_id) ?? LAST)
+                || dishPos(a) - dishPos(b) || a.name.localeCompare(b.name));
             variations = {};
             (Array.isArray(v) ? v : []).forEach(row => {
                 (variations[row.menu_item_id] ||= []).push(row);
