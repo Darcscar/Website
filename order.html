@@ -339,13 +339,31 @@
         }
         .vrow .vname { font-weight: 600; font-size: 0.86rem; }
         .vrow .vprice { color: var(--primary-red); font-weight: 700; font-size: 0.86rem; }
-        .vrow.vgroup { flex-direction: column; align-items: stretch; }
-        .rrow {
-            display: flex; align-items: center; justify-content: space-between;
-            border-top: 1px solid var(--border);
-            margin-top: 10px; padding-top: 10px;
-            font-size: 0.84rem;
+        .vrow .vnote { font-size: 0.72rem; color: #8a7a66; margin-top: 2px; }
+
+        /* ── Rice pop-up ────────────────────────────────── */
+        .ricepop {
+            position: fixed;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            width: min(340px, calc(100% - 32px));
+            background: #fff;
+            border-radius: 18px;
+            padding: 22px 18px 18px;
+            z-index: 70;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.35);
         }
+        .ricepop h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 4px; }
+        .ricepop .muted { margin-bottom: 14px; }
+        .ricebtn {
+            display: block; width: 100%;
+            padding: 15px; margin-bottom: 10px;
+            border: 1.5px solid var(--border); border-radius: 12px;
+            background: var(--cream);
+            font: inherit; font-size: 0.95rem; font-weight: 600; color: var(--text-dark);
+            cursor: pointer;
+        }
+        .ricebtn:active { border-color: var(--primary-red); }
         .donebtn {
             width: 100%;
             padding: 13px;
@@ -466,10 +484,12 @@
         const hasRiceChoice = n => /^(solow?bowl|doublew(ith)?rice)$/.test(String(n).toLowerCase().replace(/[^a-z]/g, ""));
         const lineKey = c => [c.id, c.variation, c.rice].filter(Boolean).join("::");
         const lineLabel = c => c.variation ? c.name + " — " + c.variation + (c.rice ? ", " + c.rice : "") : c.name;
+        const riceSummary = (id, vname) => cart.filter(c => c.id === id && c.variation === vname && c.rice)
+            .map(c => c.quantity + "× " + c.rice).join(", ");
 
         // ── State ────────────────────────────────────────
         let items = [], cats = [], variations = {}, store = {};
-        let step = "menu", activeCat = null, search = "", pickerId = null;
+        let step = "menu", activeCat = null, search = "", pickerId = null, ricePrompt = null;
         let form = { name:"", phone:"", type:"pickup", address:"", lat:null, lng:null, pay:"cod", ref:"", notes:"", hp:"" };
         window._f = form; // inline oninput handlers run in global scope
         let reviewOpen = false;
@@ -617,7 +637,19 @@
             addLine({ id, name: it.name, price: Number(vv.price_adjustment), variation: vv.name, rice: r });
         };
         window._decVar = (id, vname, rice) => decLine(lineKey({ id, variation: vname, rice }));
-        window._closePicker = () => { pickerId = null; render(); };
+        window._closePicker = () => { pickerId = null; ricePrompt = null; render(); };
+        window._askRice = (id, vname) => {
+            if (!storeIsOpen()) return;
+            ricePrompt = { id, vname };
+            render();
+        };
+        window._pickRice = rice => {
+            const p = ricePrompt;
+            ricePrompt = null;
+            if (p) window._addVar(p.id, p.vname, rice);
+            else render();
+        };
+        window._cancelRice = () => { ricePrompt = null; render(); };
         window._cat = id => {
             if (search) search = "";
             activeCat = id;
@@ -897,10 +929,9 @@
             const it = items.find(x => x.id === pickerId);
             if (!it) return "";
             const open = storeIsOpen();
-            const ctrl = (vname, rice) => {
-                if (!open) return "";
-                const args = `'${it.id}','${esc(vname)}'${rice ? `,'${rice}'` : ""}`;
-                const q = lineQty(lineKey({ id: it.id, variation: vname, rice }));
+            const ctrl = vname => {
+                const args = `'${it.id}','${esc(vname)}'`;
+                const q = lineQty(lineKey({ id: it.id, variation: vname }));
                 return q === 0
                     ? `<button class="round" onclick="_addVar(${args})">+</button>`
                     : `<div class="stepper">
@@ -910,10 +941,15 @@
                        </div>`;
             };
             const rows = varsFor(pickerId).map(v => {
-                const head = `<div><div class="vname">${esc(v.name)}</div><div class="vprice">${peso(v.price_adjustment)}</div></div>`;
-                if (!hasRiceChoice(v.name)) return `<div class="vrow">${head}${ctrl(v.name)}</div>`;
-                const choices = RICE_OPTIONS.map(r => `<div class="rrow"><span>${r}</span>${ctrl(v.name, r)}</div>`).join("");
-                return `<div class="vrow vgroup">${head}${choices}</div>`;
+                const rice = hasRiceChoice(v.name);
+                const note = rice ? `<div class="vnote">${esc(riceSummary(it.id, v.name) || "Plain or Egg Fried Rice")}</div>` : "";
+                const action = !open ? "" : rice
+                    ? `<button class="round" onclick="_askRice('${it.id}','${esc(v.name)}')" aria-label="Add ${esc(it.name)} ${esc(v.name)}">+</button>`
+                    : ctrl(v.name);
+                return `<div class="vrow">
+                    <div><div class="vname">${esc(v.name)}</div><div class="vprice">${peso(v.price_adjustment)}</div>${note}</div>
+                    ${action}
+                </div>`;
             }).join("");
             return `<div class="overlay" onclick="_closePicker()"></div>
                 <div class="sheet" style="max-height:85dvh;overflow-y:auto">
@@ -921,6 +957,20 @@
                     <h3>${esc(it.name)}</h3>
                     ${rows}
                     <button class="donebtn" onclick="_closePicker()">${open ? "Done" : "Close"}</button>
+                </div>`;
+        }
+
+        function ricePopHtml() {
+            if (!ricePrompt || !storeIsOpen()) return "";
+            const it = items.find(x => x.id === ricePrompt.id);
+            if (!it) return "";
+            const choices = RICE_OPTIONS.map(r => `<button class="ricebtn" onclick="_pickRice('${r}')">${r}</button>`).join("");
+            return `<div class="overlay" style="z-index:60" onclick="_cancelRice()"></div>
+                <div class="ricepop" role="dialog" aria-modal="true" aria-label="Choose your rice">
+                    <h3>Choose your rice</h3>
+                    <p class="muted">${esc(it.name)} — ${esc(ricePrompt.vname)} · same price for both</p>
+                    ${choices}
+                    <button class="donebtn" style="background:#fff;color:var(--text-dark);border:1px solid var(--border)" onclick="_cancelRice()">Cancel</button>
                 </div>`;
         }
 
@@ -942,6 +992,7 @@
                 <div id="menu-grid">${menuGridHtml()}</div>
                 <div class="foot">Prices are live from Pedro's POS · Powered by DarcSoft Inc.</div>
                 ${pickerHtml()}
+                ${ricePopHtml()}
                 ${catPickerHtml()}
                 ${cartbar}`;
         }
