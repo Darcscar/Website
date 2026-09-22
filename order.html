@@ -308,6 +308,30 @@
             box-shadow: 0 8px 26px rgba(0,0,0,0.3);
         }
         .cartbar .total { color: var(--gold); font-weight: 700; font-size: 1rem; }
+        .cartbar button:disabled { cursor: default; opacity: 0.8; box-shadow: none; }
+
+        /* ── Closed banner (menu stays browsable) ───────── */
+        .closed-banner {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--gold);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+        }
+        .closed-banner .cb-title { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.95rem; color: var(--charcoal); }
+        .closed-banner .cb-msg { font-size: 0.85rem; margin-top: 6px; }
+        .closed-banner .cb-sub { font-size: 0.8rem; color: #8a7a66; margin-top: 8px; }
+        .cb-links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+        .cb-btn {
+            display: flex; align-items: center; justify-content: center;
+            padding: 11px; border-radius: 12px;
+            font-weight: 600; font-size: 0.85rem;
+            color: #fff; text-decoration: none;
+        }
+        .cb-btn.fp { background: #D70F64; }
+        .cb-btn.grab { background: #00B14F; }
+        .cb-call { display: block; text-align: center; margin-top: 10px; font-size: 0.8rem; font-weight: 600; color: var(--primary-red); text-decoration: none; }
 
         /* ── Sheet (size picker) ────────────────────────── */
         .overlay {
@@ -530,14 +554,21 @@
             if (entry.close < entry.open) return time >= entry.open || time < entry.close; // overnight
             return time >= entry.open && time < entry.close;
         }
-        function closedHtml() {
-            const msg = store.online_ordering_closed_message
-                || "We're currently closed. Please check back during business hours!";
-            return `<div class="done-wrap">
-                <div class="done-ico" style="background:#F4E4BC;color:#8B4513;">🌙</div>
-                <h1>We're closed right now</h1>
-                <p class="muted" style="margin-top:8px">${esc(msg)}</p>
-                <a href="index.html" class="placebtn" style="display:inline-block;text-decoration:none;margin-top:22px;max-width:240px">Back to the site</a>
+        // Closed = browse-only: the menu stays visible, ordering is off, and
+        // delivery goes through the partner apps instead.
+        const FOODPANDA_URL = "https://www.foodpanda.ph/restaurant/locg/pedros-classic-and-asian-cuisine-brgy-ibabang-dupay";
+        const GRABFOOD_URL = "https://food.grab.com/ph/en/restaurant/xflames-by-pedros-lucena-delivery/2-C8BJVRC2SE4WSE";
+        function closedBannerHtml() {
+            const msg = store.online_ordering_closed_message;
+            return `<div class="closed-banner" role="status">
+                <div class="cb-title"><span>🌙</span><span>Online ordering is closed right now</span></div>
+                ${msg ? `<p class="cb-msg">${esc(msg)}</p>` : ""}
+                <p class="cb-sub">You can still browse our menu. To order for delivery now:</p>
+                <div class="cb-links">
+                    <a class="cb-btn fp" href="${FOODPANDA_URL}" target="_blank" rel="noopener">Foodpanda</a>
+                    <a class="cb-btn grab" href="${GRABFOOD_URL}" target="_blank" rel="noopener">GrabFood</a>
+                </div>
+                ${store.store_phone ? `<a class="cb-call" href="tel:${esc(store.store_phone)}">or call us at ${esc(store.store_phone)}</a>` : ""}
             </div>`;
         }
 
@@ -587,6 +618,7 @@
 
         // ── Cart ops ─────────────────────────────────────
         function addLine(line) {
+            if (!storeIsOpen()) return;
             const key = lineKey(line);
             const ex = cart.find(c => lineKey(c) === key);
             if (ex) ex.quantity += 1;
@@ -601,7 +633,7 @@
             const it = items.find(x => x.id === id);
             if (!it) return;
             if (varsFor(id).length > 0) { pickerId = id; render(); }
-            else addLine({ id: it.id, name: it.name, price: Number(it.price) });
+            else if (storeIsOpen()) addLine({ id: it.id, name: it.name, price: Number(it.price) });
         };
         window._dec = key => decLine(key);
         window._addVar = (id, vname) => {
@@ -624,7 +656,10 @@
         window._pickCat = id => { catPickerOpen = false; window._cat(id); };
         window._search = val => { search = val; renderMenuOnly(); };
 
-        window._go = s => { step = s; formError = null; render(); scrollTop(); };
+        window._go = s => {
+            if (s === "checkout" && !storeIsOpen()) return;
+            step = s; formError = null; render(); scrollTop();
+        };
         window._set = (k, val) => { form[k] = val; render(); };
         window._again = () => { doneNumber = null; step = "menu"; render(); };
 
@@ -787,7 +822,7 @@
         // ── Rendering ────────────────────────────────────
         const app = () => document.getElementById("app");
 
-        function cardHtml(it) {
+        function cardHtml(it, open) {
             const vs = varsFor(it.id);
             const hasVars = vs.length > 0;
             const display = hasVars ? Math.min(...vs.map(v => Number(v.price_adjustment))) : Number(it.price);
@@ -797,7 +832,11 @@
                 : "";
             const badge = it.is_best_seller ? `<span class="badge">Best Seller</span>` : "";
             let action;
-            if (hasVars) {
+            if (!open) {
+                action = hasVars
+                    ? `<button class="round ghost" onclick="_tap('${it.id}')" aria-label="See sizes for ${esc(it.name)}">Sizes</button>`
+                    : "";
+            } else if (hasVars) {
                 action = qty === 0
                     ? `<button class="round" onclick="_tap('${it.id}')" aria-label="Choose size for ${esc(it.name)}">+</button>`
                     : `<button class="round" onclick="_tap('${it.id}')">${qty} ✎</button>`;
@@ -810,8 +849,11 @@
                          <button class="round" onclick="_tap('${it.id}')">+</button>
                        </div>`;
             }
+            const photoAttrs = open
+                ? `role="button" aria-label="Add ${esc(it.name)}"`
+                : (hasVars ? `role="button" aria-label="See sizes for ${esc(it.name)}"` : "");
             return `<div class="card">
-                <div class="photo" role="button" aria-label="Add ${esc(it.name)}" onclick="_tap('${it.id}')">${img}${badge}</div>
+                <div class="photo" ${photoAttrs} onclick="_tap('${it.id}')">${img}${badge}</div>
                 <div class="body">
                     <p class="name" onclick="_tap('${it.id}')">${esc(it.name)}</p>
                     <div class="row">
@@ -836,10 +878,11 @@
         }
 
         function menuGridHtml() {
+            const open = storeIsOpen();
             if (search) {
                 const list = items.filter(it => it.name.toLowerCase().includes(search.toLowerCase()));
                 if (list.length === 0) return `<div class="empty">No dishes found</div>`;
-                return `<div class="grid" style="margin-top:14px">${list.map(cardHtml).join("")}</div>`;
+                return `<div class="grid" style="margin-top:14px">${list.map(it => cardHtml(it, open)).join("")}</div>`;
             }
             if (!activeCat) {
                 // Category landing — every category as a photo tile
@@ -855,7 +898,7 @@
                             <span class="caret">▼</span>
                         </button>
                     </div>
-                    <div class="grid">${list.map(cardHtml).join("")}</div>`;
+                    <div class="grid">${list.map(it => cardHtml(it, open)).join("")}</div>`;
         }
 
         function catPickerHtml() {
@@ -878,9 +921,10 @@
             if (!pickerId) return "";
             const it = items.find(x => x.id === pickerId);
             if (!it) return "";
+            const open = storeIsOpen();
             const rows = varsFor(pickerId).map(v => {
                 const q = lineQty(pickerId + "::" + v.name);
-                const ctrl = q === 0
+                const ctrl = !open ? "" : q === 0
                     ? `<button class="round" onclick="_addVar('${it.id}','${esc(v.name)}')">+</button>`
                     : `<div class="stepper">
                          <button class="round ghost" onclick="_decVar('${it.id}','${esc(v.name)}')">−</button>
@@ -897,22 +941,31 @@
                     <button class="close" onclick="_closePicker()">✕</button>
                     <h3>${esc(it.name)}</h3>
                     ${rows}
-                    <button class="donebtn" onclick="_closePicker()">Done</button>
+                    <button class="donebtn" onclick="_closePicker()">${open ? "Done" : "Close"}</button>
                 </div>`;
         }
 
         function menuHtml() {
+            const open = storeIsOpen();
+            const n = cartCount();
+            const cartbar = n === 0 ? "" : open
+                ? `<div class="cartbar"><button onclick="_go('checkout')">
+                    <span>🛍 ${n} item${n !== 1 ? "s" : ""}</span>
+                    <span class="total">Checkout · ${peso(cartTotal())}</span>
+                </button></div>`
+                : `<div class="cartbar"><button disabled>
+                    <span>🛍 ${n} item${n !== 1 ? "s" : ""}</span>
+                    <span class="total">Online ordering is closed</span>
+                </button></div>`;
             return `
+                ${open ? "" : closedBannerHtml()}
                 <input class="search" placeholder="Search the menu…" value="${esc(search)}" oninput="_search(this.value)" />
 
                 <div id="menu-grid">${menuGridHtml()}</div>
                 <div class="foot">Prices are live from Pedro's POS · Powered by DarcSoft Inc.</div>
                 ${pickerHtml()}
                 ${catPickerHtml()}
-                ${cartCount() > 0 ? `<div class="cartbar"><button onclick="_go('checkout')">
-                    <span>🛍 ${cartCount()} item${cartCount() !== 1 ? "s" : ""}</span>
-                    <span class="total">Checkout · ${peso(cartTotal())}</span>
-                </button></div>` : ""}`;
+                ${cartbar}`;
         }
 
         function checkoutHtml() {
@@ -1016,8 +1069,8 @@
         }
 
         function render() {
+            if (step === "checkout" && !storeIsOpen()) { step = "menu"; reviewOpen = false; }
             if (step === "done" && doneNumber) app().innerHTML = doneHtml();
-            else if (!storeIsOpen()) app().innerHTML = closedHtml();
             else if (step === "checkout") app().innerHTML = checkoutHtml();
             else app().innerHTML = menuHtml();
         }
