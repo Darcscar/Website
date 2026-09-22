@@ -310,29 +310,6 @@
         .cartbar .total { color: var(--gold); font-weight: 700; font-size: 1rem; }
         .cartbar button:disabled { cursor: default; opacity: 0.8; box-shadow: none; }
 
-        /* ── Closed banner (menu stays browsable) ───────── */
-        .closed-banner {
-            background: #fff;
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--gold);
-            border-radius: 16px;
-            padding: 14px 16px;
-            margin-bottom: 14px;
-        }
-        .closed-banner .cb-title { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.95rem; color: var(--charcoal); }
-        .closed-banner .cb-msg { font-size: 0.85rem; margin-top: 6px; }
-        .closed-banner .cb-sub { font-size: 0.8rem; color: #8a7a66; margin-top: 8px; }
-        .cb-links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-        .cb-btn {
-            display: flex; align-items: center; justify-content: center;
-            padding: 11px; border-radius: 12px;
-            font-weight: 600; font-size: 0.85rem;
-            color: #fff; text-decoration: none;
-        }
-        .cb-btn.fp { background: #D70F64; }
-        .cb-btn.grab { background: #00B14F; }
-        .cb-call { display: block; text-align: center; margin-top: 10px; font-size: 0.8rem; font-weight: 600; color: var(--primary-red); text-decoration: none; }
-
         /* ── Sheet (size picker) ────────────────────────── */
         .overlay {
             position: fixed; inset: 0;
@@ -554,24 +531,6 @@
             if (entry.close < entry.open) return time >= entry.open || time < entry.close; // overnight
             return time >= entry.open && time < entry.close;
         }
-        // Closed = browse-only: the menu stays visible, ordering is off, and
-        // delivery goes through the partner apps instead.
-        const FOODPANDA_URL = "https://www.foodpanda.ph/restaurant/locg/pedros-classic-and-asian-cuisine-brgy-ibabang-dupay";
-        const GRABFOOD_URL = "https://food.grab.com/ph/en/restaurant/xflames-by-pedros-lucena-delivery/2-C8BJVRC2SE4WSE";
-        function closedBannerHtml() {
-            const msg = store.online_ordering_closed_message;
-            return `<div class="closed-banner" role="status">
-                <div class="cb-title"><span>🌙</span><span>Online ordering is closed right now</span></div>
-                ${msg ? `<p class="cb-msg">${esc(msg)}</p>` : ""}
-                <p class="cb-sub">You can still browse our menu. To order for delivery now:</p>
-                <div class="cb-links">
-                    <a class="cb-btn fp" href="${FOODPANDA_URL}" target="_blank" rel="noopener">Foodpanda</a>
-                    <a class="cb-btn grab" href="${GRABFOOD_URL}" target="_blank" rel="noopener">GrabFood</a>
-                </div>
-                ${store.store_phone ? `<a class="cb-call" href="tel:${esc(store.store_phone)}">or call us at ${esc(store.store_phone)}</a>` : ""}
-            </div>`;
-        }
-
         async function load() {
             await fetchData();
             await refreshStore();
@@ -958,7 +917,6 @@
                     <span class="total">Online ordering is closed</span>
                 </button></div>`;
             return `
-                ${open ? "" : closedBannerHtml()}
                 <input class="search" placeholder="Search the menu…" value="${esc(search)}" oninput="_search(this.value)" />
 
                 <div id="menu-grid">${menuGridHtml()}</div>
