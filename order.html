@@ -512,7 +512,7 @@
             const [i, c, v] = await Promise.all([
                 get("menu_items?select=*&available=is.true&order=name"),
                 get("menu_categories?select=id,name,sort_order&order=sort_order"),
-                get("menu_item_variations?select=menu_item_id,id,name,price_adjustment&order=price_adjustment"),
+                get("menu_item_variations?select=menu_item_id,id,name,price_adjustment,display_order"),
             ]);
             items = Array.isArray(i) ? i : [];
             cats = (Array.isArray(c) ? c : []).filter(cat => items.some(it => it.category_id === cat.id));
@@ -520,6 +520,9 @@
             (Array.isArray(v) ? v : []).forEach(row => {
                 (variations[row.menu_item_id] ||= []).push(row);
             });
+            // Sizes follow the order set in the POS Menu Management. The JS sort is
+            // stable, so sizes an older POS saved all as 0 keep their entry order.
+            Object.values(variations).forEach(list => list.sort((a, b) => (a.display_order ?? 0) - (b.display_order ?? 0)));
             // reconcile saved cart with live menu + prices (drops out-of-stock)
             cart = cart.flatMap(cl => {
                 const live = items.find(it => it.id === cl.id);
