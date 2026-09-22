@@ -482,6 +482,16 @@
         // Solo Bowl / Double-with-rice sizes get a free Plain or Egg Fried Rice choice.
         const RICE_OPTIONS = ["Plain Rice", "Egg Fried Rice"];
         const hasRiceChoice = n => /^(solow?bowl|doublew(ith)?rice)$/.test(String(n).toLowerCase().replace(/[^a-z]/g, ""));
+        // Keep in sync with sizeRank() in the POS (src/lib/sizeOrder.ts): every dish
+        // lists Solo Bowl, Double w/ Rice, Double Ala Carte, then the 4–6 pax size.
+        const sizeRank = n => {
+            const k = String(n).toLowerCase().replace(/[^a-z0-9]/g, "");
+            if (/^solow?bowl$/.test(k)) return 0;
+            if (/^doublew(ith)?rice$/.test(k)) return 1;
+            if (/^dou?b?le(alacarte|norice)?$/.test(k)) return 2;
+            if (/4(to)?6|large|family/.test(k)) return 3;
+            return 4;
+        };
         const lineKey = c => [c.id, c.variation, c.rice].filter(Boolean).join("::");
         const lineLabel = c => c.variation ? c.name + " — " + c.variation + (c.rice ? ", " + c.rice : "") : c.name;
         const riceSummary = (id, vname) => cart.filter(c => c.id === id && c.variation === vname && c.rice)
@@ -520,9 +530,10 @@
             (Array.isArray(v) ? v : []).forEach(row => {
                 (variations[row.menu_item_id] ||= []).push(row);
             });
-            // Sizes follow the order set in the POS Menu Management. The JS sort is
-            // stable, so sizes an older POS saved all as 0 keep their entry order.
-            Object.values(variations).forEach(list => list.sort((a, b) => (a.display_order ?? 0) - (b.display_order ?? 0)));
+            // Other sizes go last in their Menu Management order (the JS sort is
+            // stable, so sizes an older POS saved all as 0 keep their entry order).
+            Object.values(variations).forEach(list => list.sort((a, b) =>
+                sizeRank(a.name) - sizeRank(b.name) || (a.display_order ?? 0) - (b.display_order ?? 0)));
             // reconcile saved cart with live menu + prices (drops out-of-stock)
             cart = cart.flatMap(cl => {
                 const live = items.find(it => it.id === cl.id);
