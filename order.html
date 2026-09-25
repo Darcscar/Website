@@ -376,6 +376,37 @@
             margin-top: 6px;
         }
 
+        /* ── Pre-order (view-only) ──────────────────────── */
+        .pre-note {
+            background: #fff;
+            border: 1.5px solid var(--gold);
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+        .pre-note .pre-title {
+            font-size: 0.68rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: #8B6B12; margin-bottom: 4px;
+        }
+        .pre-note p { font-size: 0.85rem; line-height: 1.5; }
+        .pre-note p + p { margin-top: 4px; color: #8a7a66; font-size: 0.8rem; }
+        .pre-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+        .pre-btn {
+            display: block; text-align: center;
+            padding: 12px; border-radius: 12px;
+            border: 1.5px solid var(--border); background: var(--cream);
+            color: var(--text-dark); text-decoration: none;
+            font-size: 0.86rem; font-weight: 600;
+        }
+        .pre-btn.messenger { background: #0084FF; border-color: #0084FF; color: #fff; }
+        .pretag {
+            font-size: 0.58rem; font-weight: 700;
+            letter-spacing: 0.06em; text-transform: uppercase;
+            color: #8B6B12; background: var(--light-gold);
+            padding: 4px 8px; border-radius: 999px; white-space: nowrap;
+        }
+
         /* ── Checkout ───────────────────────────────────── */
         .backlink { background:none; border:none; font:inherit; font-size:0.85rem; font-weight:600; color:#8a7a66; cursor:pointer; margin-bottom:14px; }
         h1.page { font-family:'Playfair Display', serif; font-size:1.4rem; margin-bottom:14px; color: var(--charcoal); }
@@ -492,13 +523,19 @@
             if (/4(to)?6|large|family/.test(k)) return 3;
             return 4;
         };
+        // Keep in sync with isPreorderCategory() in the POS (src/lib/preorder.ts):
+        // a category with "Pre-order" in its name is view-only — customers see the
+        // dishes and prices here but order through Messenger or a call, never the cart.
+        const isPreorderCat = cat => /pre[\s-]?order/i.test(String(cat?.name ?? ""));
+        const MESSENGER_URL = "https://m.me/pedroscuisine";
+        const FACEBOOK_URL = "https://www.facebook.com/pedroscuisine/";
         const lineKey = c => [c.id, c.variation, c.rice].filter(Boolean).join("::");
         const lineLabel = c => c.variation ? c.name + " — " + c.variation + (c.rice ? ", " + c.rice : "") : c.name;
         const riceSummary = (id, vname) => cart.filter(c => c.id === id && c.variation === vname && c.rice)
             .map(c => c.quantity + "× " + c.rice).join(", ");
 
         // ── State ────────────────────────────────────────
-        let items = [], cats = [], variations = {}, store = {};
+        let items = [], cats = [], variations = {}, store = {}, preorderCats = new Set();
         let step = "menu", activeCat = null, search = "", pickerId = null, ricePrompt = null;
         let form = { name:"", phone:"", type:"pickup", address:"", lat:null, lng:null, pay:"cod", ref:"", notes:"", hp:"" };
         window._f = form; // inline oninput handlers run in global scope
@@ -514,6 +551,7 @@
         const qtyFor = id => cart.filter(c => c.id === id).reduce((s,c) => s + c.quantity, 0);
         const lineQty = key => cart.find(c => lineKey(c) === key)?.quantity || 0;
         const varsFor = id => variations[id] || [];
+        const isPreorderItem = it => !!it && preorderCats.has(it.category_id);
 
         // ── Data ─────────────────────────────────────────
         const get = path => fetch(SB_URL + "/rest/v1/" + path, { headers: HEADERS }).then(r => r.json());
@@ -521,11 +559,12 @@
         async function fetchData() {
             const [i, c, v] = await Promise.all([
                 get("menu_items?select=*&available=is.true&order=name"),
-                get("menu_categories?select=id,name,sort_order&order=sort_order"),
+                get("menu_categories?select=id,name,description,sort_order&order=sort_order"),
                 get("menu_item_variations?select=menu_item_id,id,name,price_adjustment,display_order"),
             ]);
             items = Array.isArray(i) ? i : [];
             cats = (Array.isArray(c) ? c : []).filter(cat => items.some(it => it.category_id === cat.id));
+            preorderCats = new Set(cats.filter(isPreorderCat).map(cat => cat.id));
             // Keep in sync with sortDishes() in the POS (src/lib/dishOrder.ts): by category,
             // then the position set with "Arrange Dishes" in Menu Management, then A–Z.
             // Dishes without a position (0, or before the dish-order update) go last.
@@ -545,7 +584,7 @@
             // reconcile saved cart with live menu + prices (drops out-of-stock)
             cart = cart.flatMap(cl => {
                 const live = items.find(it => it.id === cl.id);
-                if (!live) return [];
+                if (!live || isPreorderItem(live)) return []; // gone, or now pre-order only
                 if (cl.variation) {
                     const vv = varsFor(cl.id).find(x => x.name === cl.variation);
                     if (!vv) return [];
@@ -601,14 +640,14 @@
         async function refreshMenu() {
             try {
                 const wasOpen = storeIsOpen();
-                const before = JSON.stringify(items.map(x => [x.id, x.price, x.name])) + "|" + JSON.stringify(cart);
+                const before = JSON.stringify(items.map(x => [x.id, x.price, x.name])) + "|" + JSON.stringify(cats.map(c => [c.id, c.name, c.description])) + "|" + JSON.stringify(cart);
                 await fetchData();
                 await refreshStore();
                 if (storeIsOpen() !== wasOpen) {
                     if (step !== "done" && !submitting) render();
                     return;
                 }
-                const after = JSON.stringify(items.map(x => [x.id, x.price, x.name])) + "|" + JSON.stringify(cart);
+                const after = JSON.stringify(items.map(x => [x.id, x.price, x.name])) + "|" + JSON.stringify(cats.map(c => [c.id, c.name, c.description])) + "|" + JSON.stringify(cart);
                 if (before === after) return;
                 const typing = document.activeElement && /INPUT|TEXTAREA/.test(document.activeElement.tagName);
                 if (step === "menu" && !pickerId && !catPickerOpen && !typing) render();
@@ -633,7 +672,7 @@
 
         // ── Cart ops ─────────────────────────────────────
         function addLine(line) {
-            if (!storeIsOpen()) return;
+            if (!storeIsOpen() || isPreorderItem(items.find(x => x.id === line.id))) return;
             const key = lineKey(line);
             const ex = cart.find(c => lineKey(c) === key);
             if (ex) ex.quantity += 1;
@@ -647,7 +686,7 @@
         window._tap = id => {
             const it = items.find(x => x.id === id);
             if (!it) return;
-            if (varsFor(id).length > 0) { pickerId = id; render(); }
+            if (isPreorderItem(it) || varsFor(id).length > 0) { pickerId = id; render(); }
             else if (storeIsOpen()) addLine({ id: it.id, name: it.name, price: Number(it.price) });
         };
         window._dec = key => decLine(key);
@@ -851,6 +890,26 @@
         // ── Rendering ────────────────────────────────────
         const app = () => document.getElementById("app");
 
+        // Pre-order dishes are ordered outside the site: Messenger, call, or the page
+        function contactHtml() {
+            const tel = String(store.store_phone || "").replace(/[^0-9+]/g, "");
+            return `<div class="pre-actions">
+                <a class="pre-btn messenger" href="${MESSENGER_URL}" target="_blank" rel="noopener">💬 Message us on Messenger</a>
+                ${tel ? `<a class="pre-btn" href="tel:${tel}">📞 Call us · ${esc(store.store_phone)}</a>` : ""}
+                <a class="pre-btn" href="${FACEBOOK_URL}" target="_blank" rel="noopener">Visit our Facebook page</a>
+            </div>`;
+        }
+
+        function preorderNoteHtml(cat) {
+            const desc = String(cat?.description || "").trim();
+            return `<div class="pre-note">
+                <div class="pre-title">Pre-order only</div>
+                ${desc ? `<p>${esc(desc)}</p>` : ""}
+                <p>These can't be added to the cart — message or call us to order.</p>
+                ${contactHtml()}
+            </div>`;
+        }
+
         function cardHtml(it, open) {
             const vs = varsFor(it.id);
             const hasVars = vs.length > 0;
@@ -860,8 +919,11 @@
                 ? `<img src="${esc(it.image)}" alt="${esc(it.name)}" loading="lazy" />`
                 : "";
             const badge = it.is_best_seller ? `<span class="badge">Best Seller</span>` : "";
+            const pre = isPreorderItem(it);
             let action;
-            if (!open) {
+            if (pre) {
+                action = `<span class="pretag">Pre-order</span>`;
+            } else if (!open) {
                 action = hasVars
                     ? `<button class="round ghost" onclick="_tap('${it.id}')" aria-label="See sizes for ${esc(it.name)}">Sizes</button>`
                     : "";
@@ -878,7 +940,9 @@
                          <button class="round" onclick="_tap('${it.id}')">+</button>
                        </div>`;
             }
-            const photoAttrs = open
+            const photoAttrs = pre
+                ? `role="button" aria-label="See ${esc(it.name)} details"`
+                : open
                 ? `role="button" aria-label="Add ${esc(it.name)}"`
                 : (hasVars ? `role="button" aria-label="See sizes for ${esc(it.name)}"` : "");
             return `<div class="card">
@@ -899,6 +963,7 @@
             return `<button class="cat-tile" onclick="_cat('${cat.id}')" aria-label="Browse ${esc(cat.name)}">
                 ${photo ? `<img src="${esc(photo)}" alt="" loading="lazy" />` : ""}
                 <span class="shade"></span>
+                ${isPreorderCat(cat) ? `<span class="badge">Pre-order</span>` : ""}
                 <span class="tlabel">
                     <span class="tname">${esc(cat.name)}</span><br/>
                     <span class="tcount">${inCat.length} dishes</span>
@@ -927,6 +992,7 @@
                             <span class="caret">▼</span>
                         </button>
                     </div>
+                    ${isPreorderCat(cat) ? preorderNoteHtml(cat) : ""}
                     <div class="grid">${list.map(it => cardHtml(it, open)).join("")}</div>`;
         }
 
@@ -950,6 +1016,22 @@
             if (!pickerId) return "";
             const it = items.find(x => x.id === pickerId);
             if (!it) return "";
+            if (isPreorderItem(it)) {
+                const vs = varsFor(it.id);
+                const rows = (vs.length ? vs.map(v => [v.name, v.price_adjustment]) : [["Price", it.price]])
+                    .map(([name, price]) => `<div class="vrow">
+                        <div class="vname">${esc(name)}</div><div class="vprice">${peso(price)}</div>
+                    </div>`).join("");
+                return `<div class="overlay" onclick="_closePicker()"></div>
+                    <div class="sheet" style="max-height:85dvh;overflow-y:auto">
+                        <button class="close" onclick="_closePicker()">✕</button>
+                        <h3>${esc(it.name)}</h3>
+                        ${it.description ? `<p class="muted" style="margin:-6px 0 12px">${esc(it.description)}</p>` : ""}
+                        ${rows}
+                        ${preorderNoteHtml(cats.find(c => c.id === it.category_id))}
+                        <button class="donebtn" onclick="_closePicker()">Close</button>
+                    </div>`;
+            }
             const open = storeIsOpen();
             const ctrl = vname => {
                 const args = `'${it.id}','${esc(vname)}'`;
